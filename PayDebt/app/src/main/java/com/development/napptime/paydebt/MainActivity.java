@@ -78,7 +78,11 @@ public class MainActivity extends Activity
                 fragment = new About();
                 mTitle = "About";
                 break;
-
+            case 5:
+                // About
+                fragment = new MoneyPot();
+                mTitle = "Money Pot";
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

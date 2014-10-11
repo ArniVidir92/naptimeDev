@@ -7,9 +7,10 @@
     <string name="title_section3">My Debts</string>
     <string name="title_section4">Calculator</string>
     <string name="title_section5">About</string>
+    <string name="title_section6">Money Pot</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="action_example">+</string>
     <string name="action_settings">Settings</string>
 
 </resources>
