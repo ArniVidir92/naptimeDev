@@ -56,14 +56,27 @@ public class MainActivity extends Activity
             case 0:
                 // Contacts
                 fragment = new Contacts();
+                mTitle = "Contacts";
                 break;
             case 1:
                 // Favorites
                 fragment = new Favorites();
+                mTitle = "Favorites";
                 break;
             case 2:
                 // MyDebts
                 fragment = new MyDebts();
+                mTitle = "My Debts";
+                break;
+            case 3:
+                // Calculator
+                fragment = new Calculator();
+                mTitle = "Calculator";
+                break;
+            case 4:
+                // About
+                fragment = new About();
+                mTitle = "About";
                 break;
 
         }
