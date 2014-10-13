@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,9 +40,28 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //initialize helper
         dbHelper = new DbHelper(this);
 
+        //get database object
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+
+        //add a demo entry
+        /*ContentValues contentValues = new ContentValues();
+        contentValues.put("name","lexi bakari");
+        contentValues.put("description","fokk mikill peningur");
+        long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
+        Message.message(this, "Entry: "+id);*/
+
+
+        //read from database
+        String[] columns = {"name"};
+        Cursor cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
+        while(cursor.moveToNext())
+            Message.message(this,""+cursor.getString(0));
+
+
 
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -63,6 +84,7 @@ public class MainActivity extends Activity
                 // Contacts
                 fragment = new Contacts();
                 mTitle = getString(R.string.title_section1);
+
                 break;
             case 1:
                 // Favorites
