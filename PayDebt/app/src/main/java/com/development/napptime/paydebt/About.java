@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by arni on 10/11/14.
+ * Created by Napptime on 10/11/14.
  */
-public class MyDebts extends Fragment{
+public class About extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lay_mydebts, container, false);
+        return inflater.inflate(R.layout.lay_about, container, false);
     }
 }

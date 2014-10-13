@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 /**
  * Created by arni on 10/11/14.
  */
-public class MyDebts extends Fragment{
+public class MoneyPot extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lay_mydebts, container, false);
+        return inflater.inflate(R.layout.lay_moneypot, container, false);
     }
 }

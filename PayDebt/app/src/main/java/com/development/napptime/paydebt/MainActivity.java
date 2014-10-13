@@ -56,34 +56,37 @@ public class MainActivity extends Activity
             case 0:
                 // Contacts
                 fragment = new Contacts();
+                mTitle = getString(R.string.title_section1);
                 break;
             case 1:
                 // Favorites
                 fragment = new Favorites();
+                mTitle = getString(R.string.title_section2);
                 break;
             case 2:
                 // MyDebts
                 fragment = new MyDebts();
+                mTitle = getString(R.string.title_section3);
                 break;
-
+            case 3:
+                // Calculator
+                fragment = new Calculator();
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 4:
+                // About
+                fragment = new About();
+                mTitle = getString(R.string.title_section5);
+                break;
+            case 5:
+                // About
+                fragment = new MoneyPot();
+                mTitle = getString(R.string.title_section6);
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
     }
 
     public void restoreActionBar() {
@@ -113,10 +116,7 @@ public class MainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
 }
