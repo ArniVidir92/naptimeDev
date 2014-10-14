@@ -40,6 +40,7 @@ class DbHelper extends SQLiteOpenHelper
 
 
 
+
     //Called when database is created for the first time, create tables and initial data
     @Override
     public void onCreate(SQLiteDatabase db)
