@@ -3,10 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PayDebt.iml" filepath="$PROJECT_DIR$/PayDebt.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/PayDebt.iml" filepath="$PROJECT_DIR$/PayDebt.iml" />
       <module fileurl="file://$PROJECT_DIR$/PayDebt.iml" filepath="$PROJECT_DIR$/PayDebt.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+=======
+>>>>>>> origin/dev
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

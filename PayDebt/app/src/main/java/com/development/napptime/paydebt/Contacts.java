@@ -16,11 +16,14 @@ import android.view.ViewGroup;
 public class Contacts extends Fragment {
 
     private String _name;
-    DbHelper db = new DbHelper(getActivity());
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        DbHelper db = new DbHelper(getActivity());
+        SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
         return inflater.inflate(R.layout.lay_contacts, container, false);
+
 
     }
 
@@ -29,6 +32,6 @@ public class Contacts extends Fragment {
         super.onAttach(activity);
     }
 
-    SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
+
 
 }
