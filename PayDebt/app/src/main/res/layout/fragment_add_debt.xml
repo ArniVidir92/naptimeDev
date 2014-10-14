@@ -12,13 +12,12 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -33,6 +32,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:inputType="text"
                     android:layout_height="40dp"
                     android:textColor="#FFFFFF"
                     android:layout_gravity="center"
@@ -44,8 +44,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -60,6 +59,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:inputType="number"
                     android:textColor="#FFFFFF"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -71,8 +71,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -99,8 +98,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -132,8 +130,7 @@
                 android:text="@string/desc"
                 android:textColor="#FFFFFF"
                 android:id="@+id/textViewDesc"
-                android:layout_gravity="center"
-                android:layout_weight="1"/>
+                android:layout_gravity="center"/>
 
             <EditText
                 android:layout_width="fill_parent"
@@ -141,19 +138,17 @@
                 android:inputType="textMultiLine"
                 android:lines="15"
                 android:minLines="2"
-                android:gravity="top|left"
+                android:gravity="top|start"
                 android:maxLines="15"
                 android:maxLength="255"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:id="@+id/editTextDesc"
-                android:layout_weight="1" />
+                android:id="@+id/editTextDesc" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:paddingTop="15dp">
 
 
@@ -178,10 +173,9 @@
             </LinearLayout>
 
             <Button
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:layout_margin="10dp"/>
         </LinearLayout>
