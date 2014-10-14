@@ -12,6 +12,8 @@
     <string name="name">Name</string>
     <string name="date">Date</string>
     <string name="due">Due</string>
+    <string name="desc">Description (max 255 chars)</string>
+    <string name="reminder">Reminder</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">+</string>

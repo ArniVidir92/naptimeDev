@@ -3,8 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
-    android:background="#333333">
+    android:padding="15dp">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -126,6 +125,57 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/desc"
+                android:textColor="#FFFFFF"
+                android:id="@+id/textViewDesc"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#FFFFFF"
+                android:inputType="textMultiLine"
+                android:lines="15"
+                android:minLines="2"
+                android:gravity="top|left"
+                android:maxLines="15"
+                android:maxLength="255"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:id="@+id/editTextDesc"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:paddingTop="15dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/reminder"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/textViewReminder"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBoxReminder"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
 
             <Button
                 android:text="Confirm"
@@ -133,7 +183,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
-                android:layout_margin="1dp"/>
+                android:layout_margin="10dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
