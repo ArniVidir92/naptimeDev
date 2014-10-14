@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/sports_array">
             </com.development.napptime.paydebt.NonScrollListView>
+
             <Button
                 android:text="@string/adddebt"
                 android:layout_width="fill_parent"

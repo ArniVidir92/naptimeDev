@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.view.ViewGroup;
+
 
 
 public class MainActivity extends Activity
@@ -163,3 +166,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 }
+
+
+
+
+
