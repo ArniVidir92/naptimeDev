@@ -13,10 +13,24 @@
     <string name="date">Date</string>
     <string name="due">Due</string>
     <string name="desc">Description (max 255 chars)</string>
+    <string name="debts">Debts</string>
+    <string name="adddebt">Add debt</string>
     <string name="reminder">Reminder</string>
+    <string name="confirm">Confirm</string>
+    <string name="favorite">Favorite</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">+</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="sports_array">
+        <item>Shuttle Badminton</item>
+        <item>Tennis</item>
+        <item>FootBall</item>
+        <item>Basket Ball</item>
+        <item>Table Tennis</item>
+        <item>Chess</item>
+        <item>Hockey</item>
+    </string-array>
 
 </resources>
