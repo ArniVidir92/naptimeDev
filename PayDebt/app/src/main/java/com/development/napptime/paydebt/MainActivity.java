@@ -111,6 +111,11 @@ public class MainActivity extends Activity
                 fragment = new MoneyPot();
                 mTitle = getString(R.string.title_section6);
                 break;
+            case 6:
+                // About
+                fragment = new AddDebt();
+                mTitle = getString(R.string.title_section7);
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
