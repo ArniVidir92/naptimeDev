@@ -66,7 +66,7 @@ public class AddDebt extends Fragment{
         // Get text from due field
         EditText dueET = (EditText) view.findViewById(R.id.editTextDue);
         int due = Integer.parseInt(dueET.getText().toString());
-        // Get text from descr field
+        // Get text from description field
         EditText descriptionET = (EditText) view.findViewById(R.id.editTextDesc);
         String description = descriptionET.getText().toString();
         // Find the reminder checkbox
