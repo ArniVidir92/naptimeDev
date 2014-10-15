@@ -42,17 +42,19 @@ public class MainActivity extends Activity
         //add a demo entry
         /*
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name","lexi bakari");
+        contentValues.put("name","arni blabalbal");
         contentValues.put("description","fokk mikill peningur");
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
         Message.message(this, "Entry: "+id);*/
 
 
         //read from database
+        /*
         String[] columns = {"name"};
         Cursor cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
         while(cursor.moveToNext())
             Message.message(this,""+cursor.getString(0));
+        */
 
 
 
@@ -100,12 +102,12 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section5);
                 break;
             case 5:
-                // About
+                // MoneyPot
                 fragment = new MoneyPot();
                 mTitle = getString(R.string.title_section6);
                 break;
             case 6:
-                // About
+                // AddDebt
                 fragment = new AddDebt();
                 mTitle = getString(R.string.title_section7);
                 break;
