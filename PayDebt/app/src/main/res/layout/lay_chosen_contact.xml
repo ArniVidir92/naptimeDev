@@ -54,8 +54,7 @@
             <com.development.napptime.paydebt.NonScrollListView
                 android:id="@+id/lv_nonscroll_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/sports_array">
+                android:layout_height="wrap_content">
             </com.development.napptime.paydebt.NonScrollListView>
 
             <Button

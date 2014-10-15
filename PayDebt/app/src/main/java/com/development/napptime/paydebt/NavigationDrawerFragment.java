@@ -258,7 +258,6 @@ public class NavigationDrawerFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             Fragment fragment = null;
             fragment = new AddContact();
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, fragment)
                     .commit();
