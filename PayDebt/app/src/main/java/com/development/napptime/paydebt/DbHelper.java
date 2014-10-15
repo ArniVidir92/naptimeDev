@@ -2,10 +2,13 @@ package com.development.napptime.paydebt;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -28,8 +31,11 @@ class DbHelper extends SQLiteOpenHelper
     private static final String FAV = "favorite";
     */
     private static final int DATABASE_VERSION = 4 ;
-    private Context context;
 
+    private DbHelper DbHelper;
+    private SQLiteDatabase db;
+
+    private Context context;
 
     DbHelper(Context context)
     {
@@ -50,7 +56,7 @@ class DbHelper extends SQLiteOpenHelper
         db.execSQL(query);
 
         //Create table for debts
-        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT, _contact_id INTEGER, name VARCHAR(255), description VARCHAR(255), reminder INTEGER, date INTEGER, due INTEGER, amount REAL, object VARCHER(255) );";
+        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT, _contact_id INTEGER, name VARCHAR(255), description VARCHAR(255), reminder INTEGER, date INTEGER, due INTEGER, amount REAL, object VARCHAR(255) );";
         db.execSQL(query);
 
         //notify user
