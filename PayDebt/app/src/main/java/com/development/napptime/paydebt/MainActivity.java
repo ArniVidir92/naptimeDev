@@ -109,10 +109,16 @@ public class MainActivity extends Activity
                 fragment = new AddDebt();
                 mTitle = getString(R.string.title_section7);
                 break;
+            case 7:
+                // About
+                fragment = new ChosenContact();
+                mTitle = getString(R.string.title_section8);
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
     }
 
     public void restoreActionBar() {

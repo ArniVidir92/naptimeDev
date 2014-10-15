@@ -42,8 +42,27 @@
                 android:id="@+id/editTextDesc" />
 
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/debts"
+                android:textColor="#FFFFFF"
+                android:id="@+id/textViewDebts"
+                android:layout_gravity="center"/>
 
-
+            <com.development.napptime.paydebt.NonScrollListView
+                android:id="@+id/lv_nonscroll_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/sports_array">
+            </com.development.napptime.paydebt.NonScrollListView>
+            <Button
+                android:text="@string/adddebt"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#FFFFFF"
+                android:layout_margin="10dp"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -72,28 +91,10 @@
 
             </LinearLayout>
 
-            <Button
-                android:text="@string/adddebt"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textColor="#FFFFFF"
-                android:layout_margin="10dp"/>
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/debts"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textViewDebts"
-        android:layout_gravity="center"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:entries="@array/sports_array"
-        android:layout_weight="1"/>
+
+
 
 </LinearLayout>
