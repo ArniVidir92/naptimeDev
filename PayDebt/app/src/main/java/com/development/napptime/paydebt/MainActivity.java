@@ -45,11 +45,10 @@ public class MainActivity extends Activity
         //add a demo entry
         /*
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name","arni blabalbal");
+        contentValues.put("name","yo");
         contentValues.put("description","fokk mikill peningur");
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
         Message.message(this, "Entry: "+id);*/
-
 
         //read from database
         /*
@@ -152,6 +151,7 @@ public class MainActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }

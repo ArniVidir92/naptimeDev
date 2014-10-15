@@ -48,7 +48,6 @@ public class Contacts extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
 
-
         return view;
     }
     @Override
