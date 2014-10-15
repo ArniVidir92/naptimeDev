@@ -23,33 +23,50 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by arni on 10/11/14.
+ * Created by napptime on 10/11/14.
+ *
+ * AddDebt class serves the purpose of adding a debt (and its info) to the sql database and
+ * provides a user friendly form to do so.
  */
+
+
+
 public class AddDebt extends Fragment{
 
+    //Instance variables
 
+    //Button, adds debts to database when used
     private Button addDebt = null;
+
+    //Our layouts view
     private View view = null;
 
+    //Variable for which datePicker is used
     private String dateOrDue;
 
+    //Variable for our calendar
     final Calendar c = Calendar.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.fragment_add_debt, container, false);
 
+        //Gets our button and the date and due fields
         addDebt = (Button) view.findViewById(R.id.buttonAddDebt);
         EditText dateET = (EditText) view.findViewById(R.id.editTextDate);
         EditText dueET = (EditText) view.findViewById(R.id.editTextDue);
 
+        //Listener; catches when the user clicks the button
         addDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addDebtToDatabase(v);
             }
         });
+
+        //Listener; catches when the user clicks the field
         dateET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +74,7 @@ public class AddDebt extends Fragment{
             }
         });
 
+        //Listener; catches when the user clicks the field
         dueET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +85,7 @@ public class AddDebt extends Fragment{
         return view;
     }
 
+    //Set the selected date
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
@@ -77,16 +96,19 @@ public class AddDebt extends Fragment{
         }
     };
 
+    //Sets our dateOrDue variable to the corresponding field
     public void clickDate(View view){
         dateOrDue = getString(R.string.AddDebt_date);
         new DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    //Sets our dateOrDue variable to the corresponding field
     public void clickDueDate(View view){
         dateOrDue = getString(R.string.AddDebt_Due);
         new DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    //Fetches the datePicker value and puts it into the corresponding field
     public void setCurrentDateOnViewDate(){
         String dateFormat = getString(R.string.AddDebt_dateFormat);
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.UK);
@@ -106,6 +128,7 @@ public class AddDebt extends Fragment{
         super.onAttach(activity);
     }
 
+    //Converts date to integer if it's not empty
     public static int dateToInt(String date){
         if(date.equals(""))
             return -1;
@@ -116,6 +139,7 @@ public class AddDebt extends Fragment{
         return Integer.parseInt(dayStr + monthStr + yearStr);
     }
 
+    //Converts string to double if it's not empty
     public static double stringToDouble(String str){
         if(str.equals(""))
             return -1;
@@ -123,6 +147,7 @@ public class AddDebt extends Fragment{
         return Double.parseDouble(str);
     }
 
+    //Adds debt information to the database
     public void addDebtToDatabase(View v){
         // Get text from name field
         EditText nameET = (EditText) view.findViewById(R.id.editName);
@@ -146,8 +171,7 @@ public class AddDebt extends Fragment{
         int dbDate = dateToInt(date);
         int dbDue = dateToInt(due);
 
-
-
+        //Sets our reminder to 1, or 0 depending on context
         int reminder;
         if(reminderCB.isChecked()){
             reminder = 1;
@@ -156,6 +180,8 @@ public class AddDebt extends Fragment{
             reminder = 0;
         }
 
+        //Initialize DbHelper and creates a sql database object and puts it into the
+        //database
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
