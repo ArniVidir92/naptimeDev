@@ -9,6 +9,7 @@
     <string name="title_section5">About</string>
     <string name="title_section6">Money Pot</string>
     <string name="title_section7">Add Debt</string>
+    <string name="title_section8">Chosen Contact</string>
     <string name="amount">Amount</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
@@ -26,6 +27,14 @@
     <string name="AddDebt_dateFormat">dd-MM-yyyy</string>
     <string name="AddDebt_date">date</string>
     <string name="AddDebt_Due">due</string>
+    <string name="contacts_header">Contacts</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="contactName">Name</string>
+    <string name="bankAcc">Bank account</string>
+    <string name="contactDesc">Other info</string>
+    <string name="Favorite">Favorite</string>
+    <string name="AddContact">Add contact</string>
+    <string name="newContact">Add contact</string>
 
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>

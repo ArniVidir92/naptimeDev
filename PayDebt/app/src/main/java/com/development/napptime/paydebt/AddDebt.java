@@ -96,7 +96,7 @@ public class AddDebt extends Fragment{
         if(dateOrDue.equals(getString(R.string.AddDebt_date))){
             dateET.setText(sdf.format(c.getTime()));
         }
-        else if(dateOrDue.equals(R.string.AddDebt_Due)){
+        else if(dateOrDue.equals(getString(R.string.AddDebt_Due))){
             dueET.setText(sdf.format(c.getTime()));
         }
     }

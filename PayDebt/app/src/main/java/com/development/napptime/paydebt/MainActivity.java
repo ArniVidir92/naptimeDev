@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.view.ViewGroup;
+
 
 
 public class MainActivity extends Activity
@@ -42,17 +45,18 @@ public class MainActivity extends Activity
         //add a demo entry
         /*
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name","lexi bakari");
+        contentValues.put("name","yo");
         contentValues.put("description","fokk mikill peningur");
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
         Message.message(this, "Entry: "+id);*/
 
-
         //read from database
+        /*
         String[] columns = {"name"};
         Cursor cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
         while(cursor.moveToNext())
             Message.message(this,""+cursor.getString(0));
+        */
 
 
 
@@ -100,19 +104,25 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section5);
                 break;
             case 5:
-                // About
+                // MoneyPot
                 fragment = new MoneyPot();
                 mTitle = getString(R.string.title_section6);
                 break;
             case 6:
-                // About
+                // AddDebt
                 fragment = new AddDebt();
                 mTitle = getString(R.string.title_section7);
+                break;
+            case 7:
+                // About
+                fragment = new ChosenContact();
+                mTitle = getString(R.string.title_section8);
                 break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
     }
 
     public void restoreActionBar() {
@@ -141,8 +151,23 @@ public class MainActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
+    public void changeFragmentToAddDebt()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new AddDebt();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
 }
+
+
+
+
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="35sp"
+                android:layout_marginBottom="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:text="@string/newContact"
+                android:id="@+id/textNewContact"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/contactName"
+                    android:id="@+id/textContactName"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="text"
+                    android:layout_height="40dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputName"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/phoneNumber"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/contactPhoneNumber"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputContactPhoneNumber"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/contactDesc"
+                android:textColor="#FFFFFF"
+                android:id="@+id/contactDesc"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:textColor="#FFFFFF"
+                android:inputType="textMultiLine"
+                android:lines="10"
+                android:minLines="4"
+                android:gravity="top|start"
+                android:maxLines="10"
+                android:maxLength="255"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:id="@+id/contactTextDesc" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/Favorite"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/contactViewReminder"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBoxFavorite"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:text="@string/AddContact"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#FFFFFF"
+                android:id="@+id/addContactToDB"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

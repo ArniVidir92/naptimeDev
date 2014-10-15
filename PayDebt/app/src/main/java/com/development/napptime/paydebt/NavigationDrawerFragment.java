@@ -4,6 +4,7 @@ package com.development.napptime.paydebt;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -108,7 +109,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section4),
                         getString(R.string.title_section5),
                         getString(R.string.title_section6),
-                        getString(R.string.title_section7)
+                        getString(R.string.title_section7),
+                        getString(R.string.title_section8)
 
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -253,8 +255,13 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_example) {
+            FragmentManager fragmentManager = getFragmentManager();
+            Fragment fragment = null;
+            fragment = new AddContact();
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
-            return true;
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
         }
 
         return super.onOptionsItemSelected(item);

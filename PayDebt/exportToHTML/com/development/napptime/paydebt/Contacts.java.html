@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Contacts.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Contacts.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+ 
+</span><span class="s0">import </span><span class="s1">android.app.Activity; 
+</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+</span><span class="s0">import </span><span class="s1">android.database.Cursor; 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+ 
+ 
+</span><span class="s2">/** 
+ * Created by arni on 10/11/14. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Contacts </span><span class="s0">extends </span><span class="s1">Fragment { 
+ 
+    DbHelper dbhelper; 
+    SQLiteDatabase db; 
+ 
+    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, 
+                             Bundle savedInstanceState) { 
+ 
+        dbhelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
+        db = dbhelper.getWritableDatabase(); 
+ 
+        String name; 
+ 
+        </span><span class="s0">return </span><span class="s1">inflater.inflate(R.layout.lay_contacts, container, </span><span class="s0">false</span><span class="s1">); 
+ 
+    } 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
+        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
+    } 
+} 
+</span></pre>
+</body>
+</html>
