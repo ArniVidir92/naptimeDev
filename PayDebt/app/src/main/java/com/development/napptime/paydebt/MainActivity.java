@@ -153,4 +153,13 @@ public class MainActivity extends Activity
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
+    public void changeFragmentToAddDebt()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new AddDebt();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
 }
