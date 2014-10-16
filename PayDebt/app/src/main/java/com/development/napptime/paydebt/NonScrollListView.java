@@ -5,6 +5,13 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+/**
+ * Created by napptime on 10/11/14.
+ *
+ * The class NonScrollListView defines a list view that is nonscrollable and matches its height with
+ * the height of the children nodes.
+ */
+
 public class NonScrollListView extends ListView {
 
     public NonScrollListView(Context context) {

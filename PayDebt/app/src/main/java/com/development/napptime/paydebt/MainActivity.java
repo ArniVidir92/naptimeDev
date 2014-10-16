@@ -15,7 +15,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+/**
+ * Created by Napptime on 10/13/14.
+ * The main Activity of the application. This is the homescreen of the application and acts as a
+ * fragment manager for the rest of the application.
+ *
+ */
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -125,6 +130,7 @@ public class MainActivity extends Activity
 
     }
 
+    // Restores the ActionBar
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -156,6 +162,7 @@ public class MainActivity extends Activity
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
+    // Changes the fragment so we can add a debt to a specific contact
     public void changeFragmentToAddDebt()
     {
         FragmentManager fragmentManager = getFragmentManager();

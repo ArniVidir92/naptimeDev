@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>ChosenContact.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+ChosenContact.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+ 
+</span><span class="s0">import </span><span class="s1">android.app.Activity; 
+</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+</span><span class="s0">import </span><span class="s1">android.app.FragmentManager; 
+</span><span class="s0">import </span><span class="s1">android.app.FragmentTransaction; 
+</span><span class="s0">import </span><span class="s1">android.content.Context; 
+</span><span class="s0">import </span><span class="s1">android.database.Cursor; 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.util.Log; 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter; 
+</span><span class="s0">import </span><span class="s1">android.widget.Button; 
+</span><span class="s0">import </span><span class="s1">android.widget.ListView; 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.List; 
+ 
+ 
+</span><span class="s2">/** 
+ * Created by napptime on 10/11/14. 
+ *  
+ * ChosenContact class is a fragment that serves the purpose of displaying contact information and 
+ * an overview of all the money he ows you. Provides a nice user friendly layout. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">ChosenContact </span><span class="s0">extends </span><span class="s1">Fragment { 
+ 
+    </span><span class="s2">//Instance variables</span><span class="s1"> 
+ 
+    </span><span class="s2">//Button that swaps the current fragment for</span><span class="s1"> 
+    </span><span class="s2">//the fragment that adds debts</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Button addDebt = </span><span class="s0">null</span><span class="s1">; 
+ 
+    </span><span class="s2">//Variables for our database</span><span class="s1"> 
+    DbHelper dbhelper; 
+    SQLiteDatabase db; 
+ 
+    </span><span class="s2">//Our layouts view</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
+ 
+    </span><span class="s2">//Our layouts list for debts</span><span class="s1"> 
+    ListView listView; 
+ 
+    </span><span class="s2">//String and double for debt name and amount</span><span class="s1"> 
+    String name; 
+    </span><span class="s0">double </span><span class="s1">amount; 
+ 
+    </span><span class="s2">//Database cursor</span><span class="s1"> 
+    Cursor cursor; 
+ 
+    </span><span class="s2">//Initialize a list of strings</span><span class="s1"> 
+    List&lt;String&gt; listItemsName=</span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;(); 
+ 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, 
+                             Bundle savedInstanceState) { 
+ 
+        </span><span class="s2">//inflate the fragment to create the view</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.lay_chosen_contact, container, </span><span class="s0">false</span><span class="s1">); 
+ 
+        </span><span class="s2">//Gets our button and sets a listener to catch when user clicks it</span><span class="s1"> 
+        addDebt = (Button) view.findViewById(R.id.buttonAddDebt); 
+        addDebt.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                addDebt(v); 
+            } 
+        }); 
+ 
+        </span><span class="s2">//Initializes the database helper with the fragment's parent activity's context</span><span class="s1"> 
+        dbhelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
+        db = dbhelper.getWritableDatabase(); 
+         
+        </span><span class="s2">//Denotes the columns that we want to fetch from the database</span><span class="s1"> 
+        String[] columns = {</span><span class="s3">&quot;name&quot;</span><span class="s1">, </span><span class="s3">&quot;amount&quot;</span><span class="s1">}; 
+        cursor = db.query(</span><span class="s3">&quot;DEBTS&quot;</span><span class="s1">,columns,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">); 
+ 
+        </span><span class="s2">// Moves through each row of the db and adds the name and amount of each debt to the listItemsName</span><span class="s1"> 
+        </span><span class="s0">while</span><span class="s1">(cursor.moveToNext()) { 
+            name = cursor.getString(</span><span class="s4">0</span><span class="s1">); 
+            amount = cursor.getDouble(</span><span class="s4">1</span><span class="s1">); 
+ 
+            listItemsName.add(name + </span><span class="s3">&quot;:   &quot; </span><span class="s1">+ amount); 
+        } 
+ 
+        </span><span class="s2">//Gets the list view from the layout</span><span class="s1"> 
+        listView = (ListView) view.findViewById(R.id.lv_nonscroll_list); 
+ 
+        </span><span class="s2">//Adapts the listItems to our list view using lay_chosen_contact_row</span><span class="s1"> 
+        ArrayAdapter&lt;String&gt; adapter = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;String&gt;(getActivity(), R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName); 
+        listView.setAdapter(adapter); 
+ 
+        </span><span class="s0">return </span><span class="s1">view; 
+    } 
+ 
+    </span><span class="s2">// Adds a new debt to the chosen contact</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addDebt(View v) 
+    { 
+        ((MainActivity)getActivity()).changeFragmentToAddDebt(); 
+        Log.d(</span><span class="s3">&quot;Villa&quot;</span><span class="s1">,</span><span class="s3">&quot;Hallodrasl&quot;</span><span class="s1">); 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
+        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
+    } 
+ 
+ 
+ 
+} 
+</span></pre>
+</body>
+</html>

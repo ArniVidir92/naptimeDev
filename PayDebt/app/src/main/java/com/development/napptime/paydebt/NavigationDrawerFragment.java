@@ -24,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
+ * Is a default fragment that we started with when we started the project.
+ *
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.

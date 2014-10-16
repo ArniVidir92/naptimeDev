@@ -10,7 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * Created by arni on 10/11/14.
+ * Created by napptime on 10/11/14.
+ *
  */
 public class MyDebts extends Fragment{
     @Override

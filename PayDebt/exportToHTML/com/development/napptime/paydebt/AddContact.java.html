@@ -86,6 +86,7 @@ AddContact.java</FONT>
         EditText contactName = (EditText) view.findViewById(R.id.inputName); 
         String name = contactName.getText().toString(); 
  
+        </span><span class="s2">// Initialize dbHelper and adds the contacts name to the database.</span><span class="s1"> 
         DbHelper dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
         ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues(); 

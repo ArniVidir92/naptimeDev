@@ -192,5 +192,6 @@ public class AddDebt extends Fragment{
         if(dbDue != -1){contentValues.put("due",dbDue);}
         if(dbAmount != -1){contentValues.put("amount", dbAmount);}
         contentValues.put("reminder", reminder);
+        long id = sqLiteDatabase.insert("DEBTS",null,contentValues);
     }
 }

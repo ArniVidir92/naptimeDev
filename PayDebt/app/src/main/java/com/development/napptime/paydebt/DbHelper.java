@@ -18,6 +18,7 @@ import java.util.List;
 
 class DbHelper extends SQLiteOpenHelper
 {
+    // Initializing the name of the database as well as the name of the tables.
     private static final String DATABASE_NAME = "napptimedb";
     private static final String TABLE_NAME_C = "CONTACTS";
     private static final String TABLE_NAME_D = "DEBTS";
@@ -32,9 +33,7 @@ class DbHelper extends SQLiteOpenHelper
     */
     private static final int DATABASE_VERSION = 4 ;
 
-    private DbHelper DbHelper;
-    private SQLiteDatabase db;
-
+    // Used as the context of the MainActivity
     private Context context;
 
     DbHelper(Context context)

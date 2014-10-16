@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by arni on 10/11/14.
+ * Created by napptime on 10/11/14.
+ *
  */
 public class Calculator extends Fragment {
     @Override

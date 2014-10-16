@@ -23,6 +23,9 @@ import java.util.List;
 
 /**
  * Created by napptime on 10/11/14.
+ *
+ * ChosenContact class is a fragment that serves the purpose of displaying contact information and
+ * an overview of all the money he ows you. Provides a nice user friendly layout.
  */
 public class ChosenContact extends Fragment {
 
@@ -76,6 +79,7 @@ public class ChosenContact extends Fragment {
         String[] columns = {"name", "amount"};
         cursor = db.query("DEBTS",columns,null,null,null,null,null);
 
+        // Moves through each row of the db and adds the name and amount of each debt to the listItemsName
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             amount = cursor.getDouble(1);
@@ -83,12 +87,12 @@ public class ChosenContact extends Fragment {
             listItemsName.add(name + ":   " + amount);
         }
 
+        //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
 
+        //Adapts the listItems to our list view using lay_chosen_contact_row
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
-
         listView.setAdapter(adapter);
-
 
         return view;
     }

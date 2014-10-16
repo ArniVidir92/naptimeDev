@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>activity_main.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); font-weight: bold; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+activity_main.xml</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="ln">1    </span></a><span class="s0">&lt;!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. --&gt;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a>&lt;</span><span class="s2">android.support.v4.widget.DrawerLayout</span><span class="s1"> 
+<a name="l3"><span class="ln">3    </span></a>    </span><span class="s3">xmlns:android=</span><span class="s4">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="s1"> 
+<a name="l4"><span class="ln">4    </span></a>    </span><span class="s3">xmlns:tools=</span><span class="s4">&quot;http://schemas.android.com/tools&quot;</span><span class="s1"> 
+<a name="l5"><span class="ln">5    </span></a>    </span><span class="s3">android:id=</span><span class="s4">&quot;@+id/drawer_layout&quot;</span><span class="s1"> 
+<a name="l6"><span class="ln">6    </span></a>    </span><span class="s3">android:layout_width=</span><span class="s4">&quot;match_parent&quot;</span><span class="s1"> 
+<a name="l7"><span class="ln">7    </span></a>    </span><span class="s3">android:layout_height=</span><span class="s4">&quot;match_parent&quot;</span><span class="s1"> 
+<a name="l8"><span class="ln">8    </span></a>    </span><span class="s3">tools:context=</span><span class="s4">&quot;.MainActivity&quot;</span><span class="s1">&gt; 
+<a name="l9"><span class="ln">9    </span></a> 
+<a name="l10"><span class="ln">10   </span></a>    </span><span class="s0">&lt;!-- As the main content view, the view below consumes the entire 
+<a name="l11"><span class="ln">11   </span></a>         space available using match_parent in both dimensions. --&gt;</span><span class="s1"> 
+<a name="l12"><span class="ln">12   </span></a>    &lt;</span><span class="s2">FrameLayout</span><span class="s1"> 
+<a name="l13"><span class="ln">13   </span></a>        </span><span class="s3">android:id=</span><span class="s4">&quot;@+id/container&quot;</span><span class="s1"> 
+<a name="l14"><span class="ln">14   </span></a>        </span><span class="s3">android:layout_width=</span><span class="s4">&quot;match_parent&quot;</span><span class="s1"> 
+<a name="l15"><span class="ln">15   </span></a>        </span><span class="s3">android:layout_height=</span><span class="s4">&quot;match_parent&quot; </span><span class="s1">/&gt; 
+<a name="l16"><span class="ln">16   </span></a> 
+<a name="l17"><span class="ln">17   </span></a>    </span><span class="s0">&lt;!-- android:layout_gravity=&quot;start&quot; tells DrawerLayout to treat 
+<a name="l18"><span class="ln">18   </span></a>         this as a sliding drawer on the left side for left-to-right 
+<a name="l19"><span class="ln">19   </span></a>         languages and on the right side for right-to-left languages. 
+<a name="l20"><span class="ln">20   </span></a>         If you're not building against API 17 or higher, use 
+<a name="l21"><span class="ln">21   </span></a>         android:layout_gravity=&quot;left&quot; instead. --&gt;</span><span class="s1"> 
+<a name="l22"><span class="ln">22   </span></a>    </span><span class="s0">&lt;!-- The drawer is given a fixed width in dp and extends the full height of 
+<a name="l23"><span class="ln">23   </span></a>         the container. --&gt;</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a>    &lt;</span><span class="s2">fragment </span><span class="s3">android:id=</span><span class="s4">&quot;@+id/navigation_drawer&quot;</span><span class="s1"> 
+<a name="l25"><span class="ln">25   </span></a>        </span><span class="s3">android:layout_width=</span><span class="s4">&quot;@dimen/navigation_drawer_width&quot;</span><span class="s1"> 
+<a name="l26"><span class="ln">26   </span></a>        </span><span class="s3">android:layout_height=</span><span class="s4">&quot;match_parent&quot;</span><span class="s1"> 
+<a name="l27"><span class="ln">27   </span></a>        </span><span class="s3">android:layout_gravity=</span><span class="s4">&quot;start&quot;</span><span class="s1"> 
+<a name="l28"><span class="ln">28   </span></a>        </span><span class="s3">android:name=</span><span class="s4">&quot;com.development.napptime.paydebt.NavigationDrawerFragment&quot;</span><span class="s1"> 
+<a name="l29"><span class="ln">29   </span></a>        </span><span class="s3">tools:layout=</span><span class="s4">&quot;@layout/fragment_navigation_drawer&quot; </span><span class="s1">/&gt; 
+<a name="l30"><span class="ln">30   </span></a> 
+<a name="l31"><span class="ln">31   </span></a>&lt;/</span><span class="s2">android.support.v4.widget.DrawerLayout</span><span class="s1">&gt; 
+<a name="l32"><span class="ln">32   </span></a></span></pre>
+</body>
+</html>

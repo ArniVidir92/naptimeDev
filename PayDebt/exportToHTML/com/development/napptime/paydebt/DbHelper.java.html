@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>DbHelper.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+DbHelper.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
+</span><span class="s0">import </span><span class="s1">android.content.Context; 
+</span><span class="s0">import </span><span class="s1">android.database.Cursor; 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteOpenHelper; 
+ 
+</span><span class="s0">import </span><span class="s1">java.sql.SQLException; 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.List; 
+ 
+</span><span class="s2">/** 
+ * Created by Napptime on 10/13/14. 
+ * A helper that extends the default SQLiteOpenHelper 
+ */</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">DbHelper </span><span class="s0">extends </span><span class="s1">SQLiteOpenHelper 
+{ 
+    </span><span class="s2">// Initializing the name of the database as well as the name of the tables.</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String DATABASE_NAME = </span><span class="s3">&quot;napptimedb&quot;</span><span class="s1">; 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_NAME_C = </span><span class="s3">&quot;CONTACTS&quot;</span><span class="s1">; 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_NAME_D = </span><span class="s3">&quot;DEBTS&quot;</span><span class="s1">; 
+    </span><span class="s2">/* 
+    private static final String UID = &quot;_contact_id&quot;; 
+    private static final String DID = &quot;_dept_id&quot; ; 
+    private static final String NAME = &quot;name&quot;; 
+    private static final String DESC = &quot;description&quot;; 
+    private static final String DATE = &quot;date&quot;; 
+    private static final String DUE = &quot;due&quot;; 
+    private static final String FAV = &quot;favorite&quot;; 
+    */</span><span class="s1"> 
+    </span><span class="s0">private static final int </span><span class="s1">DATABASE_VERSION = </span><span class="s4">4 </span><span class="s1">; 
+ 
+    </span><span class="s2">// Used as the context of the MainActivity</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Context context; 
+ 
+    DbHelper(Context context) 
+    { 
+        </span><span class="s0">super</span><span class="s1">(context, DATABASE_NAME, </span><span class="s0">null</span><span class="s1">, DATABASE_VERSION); 
+        </span><span class="s0">this</span><span class="s1">.context = context; 
+        Message.message(context, </span><span class="s3">&quot;Constructor called&quot;</span><span class="s1">); 
+    } 
+ 
+ 
+ 
+ 
+    </span><span class="s2">//Called when database is created for the first time, create tables and initial data</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onCreate(SQLiteDatabase db) 
+    { 
+        </span><span class="s2">//Create table for contacts</span><span class="s1"> 
+        String query = </span><span class="s3">&quot;CREATE TABLE &quot;</span><span class="s1">+TABLE_NAME_C+</span><span class="s3">&quot; (_contact_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), description VARCHAR(255), favorite INTEGER );&quot;</span><span class="s1">; 
+        db.execSQL(query); 
+ 
+        </span><span class="s2">//Create table for debts</span><span class="s1"> 
+        query = </span><span class="s3">&quot;CREATE TABLE &quot;</span><span class="s1">+TABLE_NAME_D+</span><span class="s3">&quot; (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT, _contact_id INTEGER, name VARCHAR(255), description VARCHAR(255), reminder INTEGER, date INTEGER, due INTEGER, amount REAL, object VARCHAR(255) );&quot;</span><span class="s1">; 
+        db.execSQL(query); 
+ 
+        </span><span class="s2">//notify user</span><span class="s1"> 
+        Message.message(context, </span><span class="s3">&quot;onCreate called&quot;</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s2">//Called when database to drop,add tables or any upgrades to the new  schema version</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onUpgrade(SQLiteDatabase db, </span><span class="s0">int </span><span class="s1">oldVersion, </span><span class="s0">int </span><span class="s1">newVersion) 
+    { 
+        </span><span class="s2">//Delete table contacts</span><span class="s1"> 
+        String query = </span><span class="s3">&quot;DROP TABLE IF EXISTS CONTACTS&quot;</span><span class="s1">; 
+        db.execSQL(query); 
+        </span><span class="s2">//Delete table debts</span><span class="s1"> 
+        query = </span><span class="s3">&quot;DROP TABLE IF EXISTS DEBTS&quot;</span><span class="s1">; 
+        db.execSQL(query); 
+ 
+        </span><span class="s2">//create new tables</span><span class="s1"> 
+        onCreate(db); 
+ 
+        </span><span class="s2">//notify user</span><span class="s1"> 
+        Message.message(context,</span><span class="s3">&quot;onUpgrade Called&quot;</span><span class="s1">); 
+    } 
+} 
+</span></pre>
+</body>
+</html>

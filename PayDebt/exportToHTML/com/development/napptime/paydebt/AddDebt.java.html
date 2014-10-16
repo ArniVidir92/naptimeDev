@@ -19,202 +19,203 @@ AddDebt.java</FONT>
 </center></TD></TR></TABLE>
 <pre>
 
-<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
- 
-</span><span class="s0">import </span><span class="s1">android.app.Activity; 
-</span><span class="s0">import </span><span class="s1">android.app.DatePickerDialog; 
-</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
-</span><span class="s0">import </span><span class="s1">android.app.TimePickerDialog; 
-</span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
-</span><span class="s0">import </span><span class="s1">android.content.Context; 
-</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
-</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
-</span><span class="s0">import </span><span class="s1">android.util.Log; 
-</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
-</span><span class="s0">import </span><span class="s1">android.view.View; 
-</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
-</span><span class="s0">import </span><span class="s1">android.widget.Button; 
-</span><span class="s0">import </span><span class="s1">android.widget.CheckBox; 
-</span><span class="s0">import </span><span class="s1">android.widget.DatePicker; 
-</span><span class="s0">import </span><span class="s1">android.widget.EditText; 
-</span><span class="s0">import </span><span class="s1">android.widget.TextView; 
- 
-</span><span class="s0">import </span><span class="s1">java.text.SimpleDateFormat; 
-</span><span class="s0">import </span><span class="s1">java.util.Calendar; 
-</span><span class="s0">import </span><span class="s1">java.util.Locale; 
- 
-</span><span class="s2">/** 
- * Created by napptime on 10/11/14. 
- * 
- * AddDebt class serves the purpose of adding a debt (and its info) to the sql database and 
- * provides a user friendly form to do so. 
- */</span><span class="s1"> 
- 
- 
- 
-</span><span class="s0">public class </span><span class="s1">AddDebt </span><span class="s0">extends </span><span class="s1">Fragment{ 
- 
-    </span><span class="s2">//Instance variables</span><span class="s1"> 
- 
-    </span><span class="s2">//Button, adds debts to database when used</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">Button addDebt = </span><span class="s0">null</span><span class="s1">; 
- 
-    </span><span class="s2">//Our layouts view</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
- 
-    </span><span class="s2">//Variable for which datePicker is used</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">String dateOrDue; 
- 
-    </span><span class="s2">//Variable for our calendar</span><span class="s1"> 
-    </span><span class="s0">final </span><span class="s1">Calendar c = Calendar.getInstance(); 
- 
-    @Override 
-    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
- 
-        </span><span class="s2">//inflate the fragment to create the view</span><span class="s1"> 
-        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.fragment_add_debt, container, </span><span class="s0">false</span><span class="s1">); 
- 
-        </span><span class="s2">//Gets our button and the date and due fields</span><span class="s1"> 
-        addDebt = (Button) view.findViewById(R.id.buttonAddDebt); 
-        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
-        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
- 
-        </span><span class="s2">//Listener; catches when the user clicks the button</span><span class="s1"> 
-        addDebt.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
-            @Override 
-            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
-                addDebtToDatabase(v); 
-            } 
-        }); 
- 
-        </span><span class="s2">//Listener; catches when the user clicks the field</span><span class="s1"> 
-        dateET.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
-            @Override 
-            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
-                clickDate(v); 
-            } 
-        }); 
- 
-        </span><span class="s2">//Listener; catches when the user clicks the field</span><span class="s1"> 
-        dueET.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
-            @Override 
-            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
-                clickDueDate(v); 
-            } 
-        }); 
- 
-        </span><span class="s0">return </span><span class="s1">view; 
-    } 
- 
-    </span><span class="s2">//Set the selected date</span><span class="s1"> 
-    DatePickerDialog.OnDateSetListener date = </span><span class="s0">new </span><span class="s1">DatePickerDialog.OnDateSetListener(){ 
-        @Override 
-        </span><span class="s0">public void </span><span class="s1">onDateSet(DatePicker view, </span><span class="s0">int </span><span class="s1">year, </span><span class="s0">int </span><span class="s1">monthOfYear, </span><span class="s0">int </span><span class="s1">dayOfMonth){ 
-            c.set(Calendar.YEAR, year); 
-            c.set(Calendar.MONTH, monthOfYear); 
-            c.set(Calendar.DAY_OF_MONTH, dayOfMonth); 
-            setCurrentDateOnViewDate(); 
-        } 
-    }; 
- 
-    </span><span class="s2">//Sets our dateOrDue variable to the corresponding field</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">clickDate(View view){ 
-        dateOrDue = getString(R.string.AddDebt_date); 
-        </span><span class="s0">new </span><span class="s1">DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show(); 
-    } 
- 
-    </span><span class="s2">//Sets our dateOrDue variable to the corresponding field</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">clickDueDate(View view){ 
-        dateOrDue = getString(R.string.AddDebt_Due); 
-        </span><span class="s0">new </span><span class="s1">DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show(); 
-    } 
- 
-    </span><span class="s2">//Fetches the datePicker value and puts it into the corresponding field</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">setCurrentDateOnViewDate(){ 
-        String dateFormat = getString(R.string.AddDebt_dateFormat); 
-        SimpleDateFormat sdf = </span><span class="s0">new </span><span class="s1">SimpleDateFormat(dateFormat, Locale.UK); 
- 
-        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
-        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
-        </span><span class="s0">if</span><span class="s1">(dateOrDue.equals(getString(R.string.AddDebt_date))){ 
-            dateET.setText(sdf.format(c.getTime())); 
-        } 
-        </span><span class="s0">else if</span><span class="s1">(dateOrDue.equals(getString(R.string.AddDebt_Due))){ 
-            dueET.setText(sdf.format(c.getTime())); 
-        } 
-    } 
- 
-    @Override 
-    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
-        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
-    } 
- 
-    </span><span class="s2">//Converts date to integer if it's not empty</span><span class="s1"> 
-    </span><span class="s0">public static int </span><span class="s1">dateToInt(String date){ 
-        </span><span class="s0">if</span><span class="s1">(date.equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) 
-            </span><span class="s0">return </span><span class="s1">-</span><span class="s4">1</span><span class="s1">; 
-        String dayStr = date.substring(</span><span class="s4">0</span><span class="s1">,</span><span class="s4">2</span><span class="s1">); 
-        String monthStr = date.substring(</span><span class="s4">3</span><span class="s1">,</span><span class="s4">5</span><span class="s1">); 
-        String yearStr = date.substring(</span><span class="s4">6</span><span class="s1">,</span><span class="s4">10</span><span class="s1">); 
- 
-        </span><span class="s0">return </span><span class="s1">Integer.parseInt(dayStr + monthStr + yearStr); 
-    } 
- 
-    </span><span class="s2">//Converts string to double if it's not empty</span><span class="s1"> 
-    </span><span class="s0">public static double </span><span class="s1">stringToDouble(String str){ 
-        </span><span class="s0">if</span><span class="s1">(str.equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) 
-            </span><span class="s0">return </span><span class="s1">-</span><span class="s4">1</span><span class="s1">; 
- 
-        </span><span class="s0">return </span><span class="s1">Double.parseDouble(str); 
-    } 
- 
-    </span><span class="s2">//Adds debt information to the database</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">addDebtToDatabase(View v){ 
-        </span><span class="s2">// Get text from name field</span><span class="s1"> 
-        EditText nameET = (EditText) view.findViewById(R.id.editName); 
-        String name = nameET.getText().toString(); 
-        </span><span class="s2">// Get amount from EditText box</span><span class="s1"> 
-        EditText amountET = (EditText) view.findViewById(R.id.editTextAmount); 
-        String amount = amountET.getText().toString(); 
-        </span><span class="s2">// Get text from date field</span><span class="s1"> 
-        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
-        String date = dateET.getText().toString(); 
-        </span><span class="s2">// Get text from due field</span><span class="s1"> 
-        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
-        String due = dueET.getText().toString(); 
-        </span><span class="s2">// Get text from description field</span><span class="s1"> 
-        EditText descriptionET = (EditText) view.findViewById(R.id.editTextDesc); 
-        String description = descriptionET.getText().toString(); 
-        </span><span class="s2">// Find the reminder checkbox</span><span class="s1"> 
-        CheckBox reminderCB = (CheckBox) view.findViewById(R.id.checkBoxReminder); 
- 
-        </span><span class="s0">double </span><span class="s1">dbAmount = stringToDouble(amount); 
-        </span><span class="s0">int </span><span class="s1">dbDate = dateToInt(date); 
-        </span><span class="s0">int </span><span class="s1">dbDue = dateToInt(due); 
- 
-        </span><span class="s2">//Sets our reminder to 1, or 0 depending on context</span><span class="s1"> 
-        </span><span class="s0">int </span><span class="s1">reminder; 
-        </span><span class="s0">if</span><span class="s1">(reminderCB.isChecked()){ 
-            reminder = </span><span class="s4">1</span><span class="s1">; 
-        } 
-        </span><span class="s0">else</span><span class="s1">{ 
-            reminder = </span><span class="s4">0</span><span class="s1">; 
-        } 
- 
-        </span><span class="s2">//Initialize DbHelper and creates a sql database object and puts it into the</span><span class="s1"> 
-        </span><span class="s2">//database</span><span class="s1"> 
-        DbHelper dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
-        ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues(); 
-        contentValues.put(</span><span class="s3">&quot;_contact_id&quot;</span><span class="s1">,</span><span class="s4">1</span><span class="s1">); 
-        contentValues.put(</span><span class="s3">&quot;name&quot;</span><span class="s1">,name); 
-        contentValues.put(</span><span class="s3">&quot;description&quot;</span><span class="s1">,description); 
-        </span><span class="s0">if</span><span class="s1">(dbDate != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;date&quot;</span><span class="s1">,dbDate);} 
-        </span><span class="s0">if</span><span class="s1">(dbDue != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;due&quot;</span><span class="s1">,dbDue);} 
-        </span><span class="s0">if</span><span class="s1">(dbAmount != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;amount&quot;</span><span class="s1">, dbAmount);} 
-        contentValues.put(</span><span class="s3">&quot;reminder&quot;</span><span class="s1">, reminder); 
-    } 
-} 
-</span></pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity; 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.app.DatePickerDialog; 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.app.TimePickerDialog; 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.content.Context; 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.util.Log; 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">android.view.View; 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">import </span><span class="s1">android.widget.Button; 
+<a name="l16"><span class="ln">16   </span></a></span><span class="s0">import </span><span class="s1">android.widget.CheckBox; 
+<a name="l17"><span class="ln">17   </span></a></span><span class="s0">import </span><span class="s1">android.widget.DatePicker; 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s0">import </span><span class="s1">android.widget.EditText; 
+<a name="l19"><span class="ln">19   </span></a></span><span class="s0">import </span><span class="s1">android.widget.TextView; 
+<a name="l20"><span class="ln">20   </span></a> 
+<a name="l21"><span class="ln">21   </span></a></span><span class="s0">import </span><span class="s1">java.text.SimpleDateFormat; 
+<a name="l22"><span class="ln">22   </span></a></span><span class="s0">import </span><span class="s1">java.util.Calendar; 
+<a name="l23"><span class="ln">23   </span></a></span><span class="s0">import </span><span class="s1">java.util.Locale; 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a></span><span class="s2">/** 
+<a name="l26"><span class="ln">26   </span></a> * Created by napptime on 10/11/14. 
+<a name="l27"><span class="ln">27   </span></a> * 
+<a name="l28"><span class="ln">28   </span></a> * AddDebt class serves the purpose of adding a debt (and its info) to the sql database and 
+<a name="l29"><span class="ln">29   </span></a> * provides a user friendly form to do so. 
+<a name="l30"><span class="ln">30   </span></a> */</span><span class="s1"> 
+<a name="l31"><span class="ln">31   </span></a> 
+<a name="l32"><span class="ln">32   </span></a> 
+<a name="l33"><span class="ln">33   </span></a> 
+<a name="l34"><span class="ln">34   </span></a></span><span class="s0">public class </span><span class="s1">AddDebt </span><span class="s0">extends </span><span class="s1">Fragment{ 
+<a name="l35"><span class="ln">35   </span></a> 
+<a name="l36"><span class="ln">36   </span></a>    </span><span class="s2">//Instance variables</span><span class="s1"> 
+<a name="l37"><span class="ln">37   </span></a> 
+<a name="l38"><span class="ln">38   </span></a>    </span><span class="s2">//Button, adds debts to database when used</span><span class="s1"> 
+<a name="l39"><span class="ln">39   </span></a>    </span><span class="s0">private </span><span class="s1">Button addDebt = </span><span class="s0">null</span><span class="s1">; 
+<a name="l40"><span class="ln">40   </span></a> 
+<a name="l41"><span class="ln">41   </span></a>    </span><span class="s2">//Our layouts view</span><span class="s1"> 
+<a name="l42"><span class="ln">42   </span></a>    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
+<a name="l43"><span class="ln">43   </span></a> 
+<a name="l44"><span class="ln">44   </span></a>    </span><span class="s2">//Variable for which datePicker is used</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a>    </span><span class="s0">private </span><span class="s1">String dateOrDue; 
+<a name="l46"><span class="ln">46   </span></a> 
+<a name="l47"><span class="ln">47   </span></a>    </span><span class="s2">//Variable for our calendar</span><span class="s1"> 
+<a name="l48"><span class="ln">48   </span></a>    </span><span class="s0">final </span><span class="s1">Calendar c = Calendar.getInstance(); 
+<a name="l49"><span class="ln">49   </span></a> 
+<a name="l50"><span class="ln">50   </span></a>    @Override 
+<a name="l51"><span class="ln">51   </span></a>    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+<a name="l52"><span class="ln">52   </span></a> 
+<a name="l53"><span class="ln">53   </span></a>        </span><span class="s2">//inflate the fragment to create the view</span><span class="s1"> 
+<a name="l54"><span class="ln">54   </span></a>        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.fragment_add_debt, container, </span><span class="s0">false</span><span class="s1">); 
+<a name="l55"><span class="ln">55   </span></a> 
+<a name="l56"><span class="ln">56   </span></a>        </span><span class="s2">//Gets our button and the date and due fields</span><span class="s1"> 
+<a name="l57"><span class="ln">57   </span></a>        addDebt = (Button) view.findViewById(R.id.buttonAddDebt); 
+<a name="l58"><span class="ln">58   </span></a>        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
+<a name="l59"><span class="ln">59   </span></a>        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
+<a name="l60"><span class="ln">60   </span></a> 
+<a name="l61"><span class="ln">61   </span></a>        </span><span class="s2">//Listener; catches when the user clicks the button</span><span class="s1"> 
+<a name="l62"><span class="ln">62   </span></a>        addDebt.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l63"><span class="ln">63   </span></a>            @Override 
+<a name="l64"><span class="ln">64   </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+<a name="l65"><span class="ln">65   </span></a>                addDebtToDatabase(v); 
+<a name="l66"><span class="ln">66   </span></a>            } 
+<a name="l67"><span class="ln">67   </span></a>        }); 
+<a name="l68"><span class="ln">68   </span></a> 
+<a name="l69"><span class="ln">69   </span></a>        </span><span class="s2">//Listener; catches when the user clicks the field</span><span class="s1"> 
+<a name="l70"><span class="ln">70   </span></a>        dateET.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l71"><span class="ln">71   </span></a>            @Override 
+<a name="l72"><span class="ln">72   </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+<a name="l73"><span class="ln">73   </span></a>                clickDate(v); 
+<a name="l74"><span class="ln">74   </span></a>            } 
+<a name="l75"><span class="ln">75   </span></a>        }); 
+<a name="l76"><span class="ln">76   </span></a> 
+<a name="l77"><span class="ln">77   </span></a>        </span><span class="s2">//Listener; catches when the user clicks the field</span><span class="s1"> 
+<a name="l78"><span class="ln">78   </span></a>        dueET.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l79"><span class="ln">79   </span></a>            @Override 
+<a name="l80"><span class="ln">80   </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+<a name="l81"><span class="ln">81   </span></a>                clickDueDate(v); 
+<a name="l82"><span class="ln">82   </span></a>            } 
+<a name="l83"><span class="ln">83   </span></a>        }); 
+<a name="l84"><span class="ln">84   </span></a> 
+<a name="l85"><span class="ln">85   </span></a>        </span><span class="s0">return </span><span class="s1">view; 
+<a name="l86"><span class="ln">86   </span></a>    } 
+<a name="l87"><span class="ln">87   </span></a> 
+<a name="l88"><span class="ln">88   </span></a>    </span><span class="s2">//Set the selected date</span><span class="s1"> 
+<a name="l89"><span class="ln">89   </span></a>    DatePickerDialog.OnDateSetListener date = </span><span class="s0">new </span><span class="s1">DatePickerDialog.OnDateSetListener(){ 
+<a name="l90"><span class="ln">90   </span></a>        @Override 
+<a name="l91"><span class="ln">91   </span></a>        </span><span class="s0">public void </span><span class="s1">onDateSet(DatePicker view, </span><span class="s0">int </span><span class="s1">year, </span><span class="s0">int </span><span class="s1">monthOfYear, </span><span class="s0">int </span><span class="s1">dayOfMonth){ 
+<a name="l92"><span class="ln">92   </span></a>            c.set(Calendar.YEAR, year); 
+<a name="l93"><span class="ln">93   </span></a>            c.set(Calendar.MONTH, monthOfYear); 
+<a name="l94"><span class="ln">94   </span></a>            c.set(Calendar.DAY_OF_MONTH, dayOfMonth); 
+<a name="l95"><span class="ln">95   </span></a>            setCurrentDateOnViewDate(); 
+<a name="l96"><span class="ln">96   </span></a>        } 
+<a name="l97"><span class="ln">97   </span></a>    }; 
+<a name="l98"><span class="ln">98   </span></a> 
+<a name="l99"><span class="ln">99   </span></a>    </span><span class="s2">//Sets our dateOrDue variable to the corresponding field</span><span class="s1"> 
+<a name="l100"><span class="ln">100  </span></a>    </span><span class="s0">public void </span><span class="s1">clickDate(View view){ 
+<a name="l101"><span class="ln">101  </span></a>        dateOrDue = getString(R.string.AddDebt_date); 
+<a name="l102"><span class="ln">102  </span></a>        </span><span class="s0">new </span><span class="s1">DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show(); 
+<a name="l103"><span class="ln">103  </span></a>    } 
+<a name="l104"><span class="ln">104  </span></a> 
+<a name="l105"><span class="ln">105  </span></a>    </span><span class="s2">//Sets our dateOrDue variable to the corresponding field</span><span class="s1"> 
+<a name="l106"><span class="ln">106  </span></a>    </span><span class="s0">public void </span><span class="s1">clickDueDate(View view){ 
+<a name="l107"><span class="ln">107  </span></a>        dateOrDue = getString(R.string.AddDebt_Due); 
+<a name="l108"><span class="ln">108  </span></a>        </span><span class="s0">new </span><span class="s1">DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show(); 
+<a name="l109"><span class="ln">109  </span></a>    } 
+<a name="l110"><span class="ln">110  </span></a> 
+<a name="l111"><span class="ln">111  </span></a>    </span><span class="s2">//Fetches the datePicker value and puts it into the corresponding field</span><span class="s1"> 
+<a name="l112"><span class="ln">112  </span></a>    </span><span class="s0">public void </span><span class="s1">setCurrentDateOnViewDate(){ 
+<a name="l113"><span class="ln">113  </span></a>        String dateFormat = getString(R.string.AddDebt_dateFormat); 
+<a name="l114"><span class="ln">114  </span></a>        SimpleDateFormat sdf = </span><span class="s0">new </span><span class="s1">SimpleDateFormat(dateFormat, Locale.UK); 
+<a name="l115"><span class="ln">115  </span></a> 
+<a name="l116"><span class="ln">116  </span></a>        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
+<a name="l117"><span class="ln">117  </span></a>        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
+<a name="l118"><span class="ln">118  </span></a>        </span><span class="s0">if</span><span class="s1">(dateOrDue.equals(getString(R.string.AddDebt_date))){ 
+<a name="l119"><span class="ln">119  </span></a>            dateET.setText(sdf.format(c.getTime())); 
+<a name="l120"><span class="ln">120  </span></a>        } 
+<a name="l121"><span class="ln">121  </span></a>        </span><span class="s0">else if</span><span class="s1">(dateOrDue.equals(getString(R.string.AddDebt_Due))){ 
+<a name="l122"><span class="ln">122  </span></a>            dueET.setText(sdf.format(c.getTime())); 
+<a name="l123"><span class="ln">123  </span></a>        } 
+<a name="l124"><span class="ln">124  </span></a>    } 
+<a name="l125"><span class="ln">125  </span></a> 
+<a name="l126"><span class="ln">126  </span></a>    @Override 
+<a name="l127"><span class="ln">127  </span></a>    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
+<a name="l128"><span class="ln">128  </span></a>        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
+<a name="l129"><span class="ln">129  </span></a>    } 
+<a name="l130"><span class="ln">130  </span></a> 
+<a name="l131"><span class="ln">131  </span></a>    </span><span class="s2">//Converts date to integer if it's not empty</span><span class="s1"> 
+<a name="l132"><span class="ln">132  </span></a>    </span><span class="s0">public static int </span><span class="s1">dateToInt(String date){ 
+<a name="l133"><span class="ln">133  </span></a>        </span><span class="s0">if</span><span class="s1">(date.equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) 
+<a name="l134"><span class="ln">134  </span></a>            </span><span class="s0">return </span><span class="s1">-</span><span class="s4">1</span><span class="s1">; 
+<a name="l135"><span class="ln">135  </span></a>        String dayStr = date.substring(</span><span class="s4">0</span><span class="s1">,</span><span class="s4">2</span><span class="s1">); 
+<a name="l136"><span class="ln">136  </span></a>        String monthStr = date.substring(</span><span class="s4">3</span><span class="s1">,</span><span class="s4">5</span><span class="s1">); 
+<a name="l137"><span class="ln">137  </span></a>        String yearStr = date.substring(</span><span class="s4">6</span><span class="s1">,</span><span class="s4">10</span><span class="s1">); 
+<a name="l138"><span class="ln">138  </span></a> 
+<a name="l139"><span class="ln">139  </span></a>        </span><span class="s0">return </span><span class="s1">Integer.parseInt(dayStr + monthStr + yearStr); 
+<a name="l140"><span class="ln">140  </span></a>    } 
+<a name="l141"><span class="ln">141  </span></a> 
+<a name="l142"><span class="ln">142  </span></a>    </span><span class="s2">//Converts string to double if it's not empty</span><span class="s1"> 
+<a name="l143"><span class="ln">143  </span></a>    </span><span class="s0">public static double </span><span class="s1">stringToDouble(String str){ 
+<a name="l144"><span class="ln">144  </span></a>        </span><span class="s0">if</span><span class="s1">(str.equals(</span><span class="s3">&quot;&quot;</span><span class="s1">)) 
+<a name="l145"><span class="ln">145  </span></a>            </span><span class="s0">return </span><span class="s1">-</span><span class="s4">1</span><span class="s1">; 
+<a name="l146"><span class="ln">146  </span></a> 
+<a name="l147"><span class="ln">147  </span></a>        </span><span class="s0">return </span><span class="s1">Double.parseDouble(str); 
+<a name="l148"><span class="ln">148  </span></a>    } 
+<a name="l149"><span class="ln">149  </span></a> 
+<a name="l150"><span class="ln">150  </span></a>    </span><span class="s2">//Adds debt information to the database</span><span class="s1"> 
+<a name="l151"><span class="ln">151  </span></a>    </span><span class="s0">public void </span><span class="s1">addDebtToDatabase(View v){ 
+<a name="l152"><span class="ln">152  </span></a>        </span><span class="s2">// Get text from name field</span><span class="s1"> 
+<a name="l153"><span class="ln">153  </span></a>        EditText nameET = (EditText) view.findViewById(R.id.editName); 
+<a name="l154"><span class="ln">154  </span></a>        String name = nameET.getText().toString(); 
+<a name="l155"><span class="ln">155  </span></a>        </span><span class="s2">// Get amount from EditText box</span><span class="s1"> 
+<a name="l156"><span class="ln">156  </span></a>        EditText amountET = (EditText) view.findViewById(R.id.editTextAmount); 
+<a name="l157"><span class="ln">157  </span></a>        String amount = amountET.getText().toString(); 
+<a name="l158"><span class="ln">158  </span></a>        </span><span class="s2">// Get text from date field</span><span class="s1"> 
+<a name="l159"><span class="ln">159  </span></a>        EditText dateET = (EditText) view.findViewById(R.id.editTextDate); 
+<a name="l160"><span class="ln">160  </span></a>        String date = dateET.getText().toString(); 
+<a name="l161"><span class="ln">161  </span></a>        </span><span class="s2">// Get text from due field</span><span class="s1"> 
+<a name="l162"><span class="ln">162  </span></a>        EditText dueET = (EditText) view.findViewById(R.id.editTextDue); 
+<a name="l163"><span class="ln">163  </span></a>        String due = dueET.getText().toString(); 
+<a name="l164"><span class="ln">164  </span></a>        </span><span class="s2">// Get text from description field</span><span class="s1"> 
+<a name="l165"><span class="ln">165  </span></a>        EditText descriptionET = (EditText) view.findViewById(R.id.editTextDesc); 
+<a name="l166"><span class="ln">166  </span></a>        String description = descriptionET.getText().toString(); 
+<a name="l167"><span class="ln">167  </span></a>        </span><span class="s2">// Find the reminder checkbox</span><span class="s1"> 
+<a name="l168"><span class="ln">168  </span></a>        CheckBox reminderCB = (CheckBox) view.findViewById(R.id.checkBoxReminder); 
+<a name="l169"><span class="ln">169  </span></a> 
+<a name="l170"><span class="ln">170  </span></a>        </span><span class="s0">double </span><span class="s1">dbAmount = stringToDouble(amount); 
+<a name="l171"><span class="ln">171  </span></a>        </span><span class="s0">int </span><span class="s1">dbDate = dateToInt(date); 
+<a name="l172"><span class="ln">172  </span></a>        </span><span class="s0">int </span><span class="s1">dbDue = dateToInt(due); 
+<a name="l173"><span class="ln">173  </span></a> 
+<a name="l174"><span class="ln">174  </span></a>        </span><span class="s2">//Sets our reminder to 1, or 0 depending on context</span><span class="s1"> 
+<a name="l175"><span class="ln">175  </span></a>        </span><span class="s0">int </span><span class="s1">reminder; 
+<a name="l176"><span class="ln">176  </span></a>        </span><span class="s0">if</span><span class="s1">(reminderCB.isChecked()){ 
+<a name="l177"><span class="ln">177  </span></a>            reminder = </span><span class="s4">1</span><span class="s1">; 
+<a name="l178"><span class="ln">178  </span></a>        } 
+<a name="l179"><span class="ln">179  </span></a>        </span><span class="s0">else</span><span class="s1">{ 
+<a name="l180"><span class="ln">180  </span></a>            reminder = </span><span class="s4">0</span><span class="s1">; 
+<a name="l181"><span class="ln">181  </span></a>        } 
+<a name="l182"><span class="ln">182  </span></a> 
+<a name="l183"><span class="ln">183  </span></a>        </span><span class="s2">//Initialize DbHelper and creates a sql database object and puts it into the</span><span class="s1"> 
+<a name="l184"><span class="ln">184  </span></a>        </span><span class="s2">//database</span><span class="s1"> 
+<a name="l185"><span class="ln">185  </span></a>        DbHelper dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
+<a name="l186"><span class="ln">186  </span></a>        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
+<a name="l187"><span class="ln">187  </span></a>        ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues(); 
+<a name="l188"><span class="ln">188  </span></a>        contentValues.put(</span><span class="s3">&quot;_contact_id&quot;</span><span class="s1">,</span><span class="s4">1</span><span class="s1">); 
+<a name="l189"><span class="ln">189  </span></a>        contentValues.put(</span><span class="s3">&quot;name&quot;</span><span class="s1">,name); 
+<a name="l190"><span class="ln">190  </span></a>        contentValues.put(</span><span class="s3">&quot;description&quot;</span><span class="s1">,description); 
+<a name="l191"><span class="ln">191  </span></a>        </span><span class="s0">if</span><span class="s1">(dbDate != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;date&quot;</span><span class="s1">,dbDate);} 
+<a name="l192"><span class="ln">192  </span></a>        </span><span class="s0">if</span><span class="s1">(dbDue != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;due&quot;</span><span class="s1">,dbDue);} 
+<a name="l193"><span class="ln">193  </span></a>        </span><span class="s0">if</span><span class="s1">(dbAmount != -</span><span class="s4">1</span><span class="s1">){contentValues.put(</span><span class="s3">&quot;amount&quot;</span><span class="s1">, dbAmount);} 
+<a name="l194"><span class="ln">194  </span></a>        contentValues.put(</span><span class="s3">&quot;reminder&quot;</span><span class="s1">, reminder); 
+<a name="l195"><span class="ln">195  </span></a>        </span><span class="s0">long </span><span class="s1">id = sqLiteDatabase.insert(</span><span class="s3">&quot;DEBTS&quot;</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,contentValues); 
+<a name="l196"><span class="ln">196  </span></a>    } 
+<a name="l197"><span class="ln">197  </span></a>} 
+<a name="l198"><span class="ln">198  </span></a></span></pre>
 </body>
 </html>
