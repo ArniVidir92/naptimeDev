@@ -52,8 +52,10 @@ public class MainActivity extends Activity
         ContentValues contentValues = new ContentValues();
         contentValues.put("name","yo");
         contentValues.put("description","fokk mikill peningur");
+        contentValues.put("favorite", 1);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
-        Message.message(this, "Entry: "+id);*/
+        Message.message(this, "Entry: "+id);
+        */
 
         //read from database
         /*
