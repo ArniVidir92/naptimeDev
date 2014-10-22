@@ -91,7 +91,8 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/editTextDate"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"/>
 
 
             </LinearLayout>
@@ -118,7 +119,8 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/editTextDue"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"/>
 
 
             </LinearLayout>
