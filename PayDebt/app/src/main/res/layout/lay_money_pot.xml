@@ -21,23 +21,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/Money_Pot"
+                android:text="@string/Money_Pot_Name"
                 android:textColor="#FFFFFF"
-                android:id="@+id/moneyPotDesc"
+                android:id="@+id/moneyPotName"
                 android:layout_gravity="center"/>
 
-            <EditText
+            <TextView
                 android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Money_Pot_Desc"
                 android:textColor="#FFFFFF"
-                android:inputType="textMultiLine"
-                android:lines="15"
-                android:minLines="2"
-                android:gravity="top|start"
-                android:maxLines="15"
-                android:maxLength="255"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:id="@+id/tripDesc" />
+                android:id="@+id/moneyPotDsc"
+                android:layout_gravity="center"/>
 
 
             <TextView
@@ -54,14 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </com.development.napptime.paydebt.NonScrollListView>
-
-            <Button
-                android:text="@string/addMoneyPotDebt"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textColor="#FFFFFF"
-                android:layout_margin="10dp"
-                android:id="@+id/buttonAddDebt"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -105,6 +93,14 @@
                      android:layout_gravity="center"
                      android:textAlignment="center" />
             </LinearLayout>
+
+            <Button
+                android:text="@string/addMoneyPotDebt"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#FFFFFF"
+                android:layout_margin="10dp"
+                android:id="@+id/buttonAddDebt"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,23 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp">
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
+        android:layout_height="fill_parent">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/name"
+                    android:id="@+id/moneyPotDebt"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="text"
+                    android:layout_height="40dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputName"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/amount"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/amount"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputAmount"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -25,7 +75,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/desc"
                 android:textColor="#FFFFFF"
-                android:id="@+id/textViewDesc"
+                android:id="@+id/entryDesc"
                 android:layout_gravity="center"/>
 
             <EditText
@@ -39,62 +89,15 @@
                 android:maxLength="255"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:id="@+id/editTextDesc" />
+                android:id="@+id/inputDesc" />
 
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/debts"
-                android:textColor="#FFFFFF"
-                android:id="@+id/textViewDebts"
-                android:layout_gravity="center"/>
-
-            <com.development.napptime.paydebt.NonScrollListView
-                android:id="@+id/lv_nonscroll_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/sports_array">
-            </com.development.napptime.paydebt.NonScrollListView>
             <Button
-                android:text="@string/adddebt"
+                android:text="@string/confirm"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textColor="#FFFFFF"
+                android:id="@+id/buttonAddEntry"
                 android:layout_margin="10dp"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
-
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/favorite"
-                    android:textColor="#FFFFFF"
-                    android:id="@+id/textViewFavorite"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"/>
-
-                <CheckBox
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkBoxFavorite"
-                    android:layout_weight="1"/>
-
-
-
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
-
-
-
 </LinearLayout>
