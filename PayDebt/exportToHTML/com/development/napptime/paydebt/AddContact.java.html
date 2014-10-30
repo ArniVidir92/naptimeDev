@@ -18,82 +18,82 @@ AddContact.java</FONT>
 </center></TD></TR></TABLE>
 <pre>
 
-<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
- 
-</span><span class="s0">import </span><span class="s1">android.app.Activity; 
-</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
-</span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
-</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
-</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
-</span><span class="s0">import </span><span class="s1">android.util.Log; 
-</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
-</span><span class="s0">import </span><span class="s1">android.view.View; 
-</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
-</span><span class="s0">import </span><span class="s1">android.widget.Button; 
-</span><span class="s0">import </span><span class="s1">android.widget.EditText; 
- 
-</span><span class="s2">/** 
- * Created by napptime on 12/11/14. 
- * The AddContact class serves the purpose of adding a contact to our sql database and 
- * provides a user friendly form to do so. 
- */</span><span class="s1"> 
- 
-</span><span class="s0">public class </span><span class="s1">AddContact </span><span class="s0">extends </span><span class="s1">Fragment{ 
- 
-    </span><span class="s2">//Instance variables</span><span class="s1"> 
- 
-    </span><span class="s2">//Button for adding contact to sql database</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">Button addContact = </span><span class="s0">null</span><span class="s1">; 
- 
-    </span><span class="s2">//Our layouts view</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
- 
-    @Override 
-    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
- 
-        </span><span class="s2">//inflate the fragment to create the view</span><span class="s1"> 
-        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.lay_addcontact, container, </span><span class="s0">false</span><span class="s1">); 
- 
-        </span><span class="s2">//Gets our button</span><span class="s1"> 
-        addContact = (Button) view.findViewById(R.id.addContactToDB); 
- 
-        </span><span class="s2">//Checks if the button exists</span><span class="s1"> 
-        </span><span class="s0">if</span><span class="s1">(addContact == </span><span class="s0">null</span><span class="s1">) 
-        { 
-            Log.d(</span><span class="s3">&quot;debugCheck&quot;</span><span class="s1">, </span><span class="s3">&quot;HeadFrag: sendButton is null&quot;</span><span class="s1">); 
-            </span><span class="s0">return </span><span class="s1">view; 
-        } 
- 
-        </span><span class="s2">//Listener; catches when the user clicks the button</span><span class="s1"> 
-        addContact.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
-            @Override 
-            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
-                addContactToDB(v); 
-            } 
-        }); 
-        </span><span class="s0">return </span><span class="s1">view; 
-    } 
- 
-    @Override 
-    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
-        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
-    } 
- 
-    </span><span class="s2">//Adds the info in the EditText field for inputting contact name</span><span class="s1"> 
-    </span><span class="s2">//to our sql database</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">addContactToDB(View v){ 
-        </span><span class="s2">// Get text from name field</span><span class="s1"> 
-        EditText contactName = (EditText) view.findViewById(R.id.inputName); 
-        String name = contactName.getText().toString(); 
- 
-        </span><span class="s2">// Initialize dbHelper and adds the contacts name to the database.</span><span class="s1"> 
-        DbHelper dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
-        ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues(); 
-        contentValues.put(</span><span class="s3">&quot;name&quot;</span><span class="s1">,name); 
-        </span><span class="s0">long </span><span class="s1">id = sqLiteDatabase.insert(</span><span class="s3">&quot;CONTACTS&quot;</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,contentValues); 
-    } 
-} 
-</span></pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity; 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.util.Log; 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.view.View; 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">android.widget.Button; 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">android.widget.EditText; 
+<a name="l14"><span class="ln">14   </span></a> 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s2">/** 
+<a name="l16"><span class="ln">16   </span></a> * Created by napptime on 12/11/14. 
+<a name="l17"><span class="ln">17   </span></a> * The AddContact class serves the purpose of adding a contact to our sql database and 
+<a name="l18"><span class="ln">18   </span></a> * provides a user friendly form to do so. 
+<a name="l19"><span class="ln">19   </span></a> */</span><span class="s1"> 
+<a name="l20"><span class="ln">20   </span></a> 
+<a name="l21"><span class="ln">21   </span></a></span><span class="s0">public class </span><span class="s1">AddContact </span><span class="s0">extends </span><span class="s1">Fragment{ 
+<a name="l22"><span class="ln">22   </span></a> 
+<a name="l23"><span class="ln">23   </span></a>    </span><span class="s2">//Instance variables</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a>    </span><span class="s2">//Button for adding contact to sql database</span><span class="s1"> 
+<a name="l26"><span class="ln">26   </span></a>    </span><span class="s0">private </span><span class="s1">Button addContact = </span><span class="s0">null</span><span class="s1">; 
+<a name="l27"><span class="ln">27   </span></a> 
+<a name="l28"><span class="ln">28   </span></a>    </span><span class="s2">//Our layouts view</span><span class="s1"> 
+<a name="l29"><span class="ln">29   </span></a>    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
+<a name="l30"><span class="ln">30   </span></a> 
+<a name="l31"><span class="ln">31   </span></a>    @Override 
+<a name="l32"><span class="ln">32   </span></a>    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+<a name="l33"><span class="ln">33   </span></a> 
+<a name="l34"><span class="ln">34   </span></a>        </span><span class="s2">//inflate the fragment to create the view</span><span class="s1"> 
+<a name="l35"><span class="ln">35   </span></a>        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.lay_addcontact, container, </span><span class="s0">false</span><span class="s1">); 
+<a name="l36"><span class="ln">36   </span></a> 
+<a name="l37"><span class="ln">37   </span></a>        </span><span class="s2">//Gets our button</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>        addContact = (Button) view.findViewById(R.id.addContactToDB); 
+<a name="l39"><span class="ln">39   </span></a> 
+<a name="l40"><span class="ln">40   </span></a>        </span><span class="s2">//Checks if the button exists</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>        </span><span class="s0">if</span><span class="s1">(addContact == </span><span class="s0">null</span><span class="s1">) 
+<a name="l42"><span class="ln">42   </span></a>        { 
+<a name="l43"><span class="ln">43   </span></a>            Log.d(</span><span class="s3">&quot;debugCheck&quot;</span><span class="s1">, </span><span class="s3">&quot;HeadFrag: sendButton is null&quot;</span><span class="s1">); 
+<a name="l44"><span class="ln">44   </span></a>            </span><span class="s0">return </span><span class="s1">view; 
+<a name="l45"><span class="ln">45   </span></a>        } 
+<a name="l46"><span class="ln">46   </span></a> 
+<a name="l47"><span class="ln">47   </span></a>        </span><span class="s2">//Listener; catches when the user clicks the button</span><span class="s1"> 
+<a name="l48"><span class="ln">48   </span></a>        addContact.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l49"><span class="ln">49   </span></a>            @Override 
+<a name="l50"><span class="ln">50   </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+<a name="l51"><span class="ln">51   </span></a>                addContactToDB(v); 
+<a name="l52"><span class="ln">52   </span></a>            } 
+<a name="l53"><span class="ln">53   </span></a>        }); 
+<a name="l54"><span class="ln">54   </span></a>        </span><span class="s0">return </span><span class="s1">view; 
+<a name="l55"><span class="ln">55   </span></a>    } 
+<a name="l56"><span class="ln">56   </span></a> 
+<a name="l57"><span class="ln">57   </span></a>    @Override 
+<a name="l58"><span class="ln">58   </span></a>    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
+<a name="l59"><span class="ln">59   </span></a>        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
+<a name="l60"><span class="ln">60   </span></a>    } 
+<a name="l61"><span class="ln">61   </span></a> 
+<a name="l62"><span class="ln">62   </span></a>    </span><span class="s2">//Adds the info in the EditText field for inputting contact name</span><span class="s1"> 
+<a name="l63"><span class="ln">63   </span></a>    </span><span class="s2">//to our sql database</span><span class="s1"> 
+<a name="l64"><span class="ln">64   </span></a>    </span><span class="s0">public void </span><span class="s1">addContactToDB(View v){ 
+<a name="l65"><span class="ln">65   </span></a>        </span><span class="s2">// Get text from name field</span><span class="s1"> 
+<a name="l66"><span class="ln">66   </span></a>        EditText contactName = (EditText) view.findViewById(R.id.inputName); 
+<a name="l67"><span class="ln">67   </span></a>        String name = contactName.getText().toString(); 
+<a name="l68"><span class="ln">68   </span></a> 
+<a name="l69"><span class="ln">69   </span></a>        </span><span class="s2">// Initialize dbHelper and adds the contacts name to the database.</span><span class="s1"> 
+<a name="l70"><span class="ln">70   </span></a>        DbHelper dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
+<a name="l71"><span class="ln">71   </span></a>        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
+<a name="l72"><span class="ln">72   </span></a>        ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues(); 
+<a name="l73"><span class="ln">73   </span></a>        contentValues.put(</span><span class="s3">&quot;name&quot;</span><span class="s1">,name); 
+<a name="l74"><span class="ln">74   </span></a>        </span><span class="s0">long </span><span class="s1">id = sqLiteDatabase.insert(</span><span class="s3">&quot;CONTACTS&quot;</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,contentValues); 
+<a name="l75"><span class="ln">75   </span></a>    } 
+<a name="l76"><span class="ln">76   </span></a>} 
+<a name="l77"><span class="ln">77   </span></a></span></pre>
 </body>
 </html>

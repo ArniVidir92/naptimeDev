@@ -54,19 +54,19 @@ public class MainActivity extends Activity
         ContentValues contentValues = new ContentValues();
         contentValues.put("name","yo");
         contentValues.put("description","fokk mikill peningur");
+        contentValues.put("favorite", 1);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
-        Message.message(this, "Entry: "+id);*/
+        Message.message(this, "Entry: "+id);
+        */
 
         //read from database
         /*
         String[] columns = {"name"};
-        Cursor cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("CONTACTS",
+        columns,null,null,null,null,null);
         while(cursor.moveToNext())
             Message.message(this,""+cursor.getString(0));
         */
-
-
-
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -124,6 +124,11 @@ public class MainActivity extends Activity
                 // About
                 fragment = new ChosenContact();
                 mTitle = getString(R.string.title_section8);
+                break;
+            case 8:
+                // About
+                fragment = new PotEntry();
+                mTitle = getString(R.string.title_section9);
                 break;
         }
         fragmentManager.beginTransaction()
@@ -189,6 +194,16 @@ public class MainActivity extends Activity
         fragment.setArguments(args);
         mTitle = name;
         setTitle(mTitle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    public void changeFragmentToPotEntry()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new PotEntry();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

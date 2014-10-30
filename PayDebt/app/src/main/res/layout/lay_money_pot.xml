@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Money_Pot_Name"
+                android:textColor="#FFFFFF"
+                android:id="@+id/moneyPotName"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Money_Pot_Desc"
+                android:textColor="#FFFFFF"
+                android:id="@+id/moneyPotDsc"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/debts"
+                android:textColor="#FFFFFF"
+                android:id="@+id/moneyPotDebts"
+                android:layout_gravity="center"/>
+
+            <com.development.napptime.paydebt.NonScrollListView
+                android:id="@+id/mp_nonscroll_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.development.napptime.paydebt.NonScrollListView>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/moneyPotPeople"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/textViewFavorite"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/moneyPotPeople"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
+
+                 <TextView
+                     android:layout_width="fill_parent"
+                     android:layout_height="40dp"
+                     android:textAppearance="?android:attr/textAppearanceLarge"
+                     android:text="@string/Amount_per_person"
+                     android:textColor="#FFFFFF"
+                     android:id="@+id/amountPot"
+                     android:layout_gravity="center"
+                     android:textAlignment="center" />
+            </LinearLayout>
+
+            <Button
+                android:text="@string/addMoneyPotDebt"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#FFFFFF"
+                android:layout_margin="10dp"
+                android:id="@+id/buttonAddEntry"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

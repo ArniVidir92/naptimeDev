@@ -53,7 +53,8 @@ public class Contacts extends Fragment {
         // Selects the column name and puts the column in too cursor.
         cursor = db.query("CONTACTS",columns,null,null,null,null,null);
 
-        // Moves through each row of the db and adds the name of each contact to the listItem
+        // Moves through each row of the db and adds
+        // the name of each contact to the listItem
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             listItems.add(name);
@@ -62,7 +63,8 @@ public class Contacts extends Fragment {
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.contacts_list);
         //Adapts the listitems to our list view using lay_contacts_row
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.lay_contacts_row, R.id.listText, listItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
 
 

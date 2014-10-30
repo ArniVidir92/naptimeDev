@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
@@ -25,6 +26,7 @@ public class AddContact extends Fragment{
     //Button for adding contact to sql database
     private Button addContact = null;
 
+    private int favoriteCheck = 0;
     //Our layouts view
     private View view = null;
 
@@ -59,18 +61,29 @@ public class AddContact extends Fragment{
         super.onAttach(activity);
     }
 
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
+        if (checkBox.isChecked()) {
+            favoriteCheck = 1;
+        }
+
+
+    }
+
     //Adds the info in the EditText field for inputting contact name
     //to our sql database
     public void addContactToDB(View v){
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
-
+        onCheckboxClicked(view);
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",name);
+        contentValues.put("favorite", favoriteCheck);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
     }
 }

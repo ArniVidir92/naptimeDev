@@ -21,6 +21,7 @@ class DbHelper extends SQLiteOpenHelper
     // Initializing the name of the database as well as the name of the tables.
     private static final String DATABASE_NAME = "napptimedb";
     private static final String TABLE_NAME_C = "CONTACTS";
+    private static final String TABLE_NAME_P = "POTS";
     private static final String TABLE_NAME_D = "DEBTS";
     /*
     private static final String UID = "_contact_id";
@@ -43,19 +44,37 @@ class DbHelper extends SQLiteOpenHelper
         Message.message(context, "Constructor called");
     }
 
-
-
-
-    //Called when database is created for the first time, create tables and initial data
+    //Called when database is created for the first time,
+    // create tables and initial data
     @Override
     public void onCreate(SQLiteDatabase db)
     {
         //Create table for contacts
-        String query = "CREATE TABLE "+TABLE_NAME_C+" (_contact_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), description VARCHAR(255), favorite INTEGER );";
+        String query = "CREATE TABLE "+TABLE_NAME_C+" (" +
+                "_contact_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " name VARCHAR(255)," +
+                " description VARCHAR(255)," +
+                "favorite INTEGER );";
+        db.execSQL(query);
+
+        //Create table for money pots
+        query = "CREATE TABLE "+TABLE_NAME_P+" (_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " _contact_id INTEGER," +
+                " name VARCHAR(255), " +
+                "description VARCHAR(255)," +
+                "amount REAL, " +
+                "object VARCHAR(255) );";
         db.execSQL(query);
 
         //Create table for debts
-        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT, _contact_id INTEGER, name VARCHAR(255), description VARCHAR(255), reminder INTEGER, date INTEGER, due INTEGER, amount REAL, object VARCHAR(255) );";
+        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " _contact_id INTEGER," +
+                " name VARCHAR(255), " +
+                "description VARCHAR(255)," +
+                " reminder INTEGER, date INTEGER," +
+                " due INTEGER, " +
+                "amount REAL, " +
+                "object VARCHAR(255) );";
         db.execSQL(query);
 
         //notify user

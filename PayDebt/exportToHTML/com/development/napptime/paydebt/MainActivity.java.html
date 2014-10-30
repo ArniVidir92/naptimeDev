@@ -18,186 +18,187 @@ MainActivity.java</FONT>
 </center></TD></TR></TABLE>
 <pre>
 
-<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
- 
-</span><span class="s0">import </span><span class="s1">android.app.Activity; 
- 
-</span><span class="s0">import </span><span class="s1">android.app.ActionBar; 
-</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
-</span><span class="s0">import </span><span class="s1">android.app.FragmentManager; 
-</span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
-</span><span class="s0">import </span><span class="s1">android.database.Cursor; 
-</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
-</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
-</span><span class="s0">import </span><span class="s1">android.view.Menu; 
-</span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
-</span><span class="s0">import </span><span class="s1">android.support.v4.widget.DrawerLayout; 
-</span><span class="s0">import </span><span class="s1">android.view.View; 
-</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
- 
-</span><span class="s2">/** 
- * Created by Napptime on 10/13/14. 
- * The main Activity of the application. This is the homescreen of the application and acts as a 
- * fragment manager for the rest of the application. 
- * 
- */</span><span class="s1"> 
- 
-</span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">Activity 
-        </span><span class="s0">implements </span><span class="s1">NavigationDrawerFragment.NavigationDrawerCallbacks { 
- 
-    </span><span class="s2">/** 
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer. 
-     */</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">NavigationDrawerFragment mNavigationDrawerFragment; 
- 
-    </span><span class="s2">/* 
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}. 
-     */</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">CharSequence mTitle; 
-    DbHelper dbHelper; 
- 
-    @Override 
-    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
-        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
-        setContentView(R.layout.activity_main); 
- 
-        </span><span class="s2">//initialize helper</span><span class="s1"> 
-        dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(</span><span class="s0">this</span><span class="s1">); 
- 
-        </span><span class="s2">//get database object</span><span class="s1"> 
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
- 
-        </span><span class="s2">//add a demo entry</span><span class="s1"> 
-        </span><span class="s2">/* 
-        ContentValues contentValues = new ContentValues(); 
-        contentValues.put(&quot;name&quot;,&quot;yo&quot;); 
-        contentValues.put(&quot;description&quot;,&quot;fokk mikill peningur&quot;); 
-        long id = sqLiteDatabase.insert(&quot;CONTACTS&quot;,null,contentValues); 
-        Message.message(this, &quot;Entry: &quot;+id);*/</span><span class="s1"> 
- 
-        </span><span class="s2">//read from database</span><span class="s1"> 
-        </span><span class="s2">/* 
-        String[] columns = {&quot;name&quot;}; 
-        Cursor cursor = sqLiteDatabase.query(&quot;CONTACTS&quot;,columns,null,null,null,null,null); 
-        while(cursor.moveToNext()) 
-            Message.message(this,&quot;&quot;+cursor.getString(0)); 
-        */</span><span class="s1"> 
- 
- 
- 
- 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) 
-                getFragmentManager().findFragmentById(R.id.navigation_drawer); 
-        mTitle = getTitle(); 
- 
-        </span><span class="s2">// Set up the drawer.</span><span class="s1"> 
-        mNavigationDrawerFragment.setUp( 
-                R.id.navigation_drawer, 
-                (DrawerLayout) findViewById(R.id.drawer_layout)); 
-    } 
- 
-    @Override 
-    </span><span class="s0">public void </span><span class="s1">onNavigationDrawerItemSelected(</span><span class="s0">int </span><span class="s1">position) { 
-        </span><span class="s2">// update the main content by replacing fragments</span><span class="s1"> 
-        FragmentManager fragmentManager = getFragmentManager(); 
-        Fragment fragment = </span><span class="s0">null</span><span class="s1">; 
-        </span><span class="s0">switch</span><span class="s1">(position){ 
-            </span><span class="s0">case </span><span class="s3">0</span><span class="s1">: 
-                </span><span class="s2">// Contacts</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">Contacts(); 
-                mTitle = getString(R.string.title_section1); 
- 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">1</span><span class="s1">: 
-                </span><span class="s2">// Favorites</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">Favorites(); 
-                mTitle = getString(R.string.title_section2); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">2</span><span class="s1">: 
-                </span><span class="s2">// MyDebts</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">MyDebts(); 
-                mTitle = getString(R.string.title_section3); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">3</span><span class="s1">: 
-                </span><span class="s2">// Calculator</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">Calculator(); 
-                mTitle = getString(R.string.title_section4); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">4</span><span class="s1">: 
-                </span><span class="s2">// About</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">About(); 
-                mTitle = getString(R.string.title_section5); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">5</span><span class="s1">: 
-                </span><span class="s2">// MoneyPot</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">MoneyPot(); 
-                mTitle = getString(R.string.title_section6); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">6</span><span class="s1">: 
-                </span><span class="s2">// AddDebt</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">AddDebt(); 
-                mTitle = getString(R.string.title_section7); 
-                </span><span class="s0">break</span><span class="s1">; 
-            </span><span class="s0">case </span><span class="s3">7</span><span class="s1">: 
-                </span><span class="s2">// About</span><span class="s1"> 
-                fragment = </span><span class="s0">new </span><span class="s1">ChosenContact(); 
-                mTitle = getString(R.string.title_section8); 
-                </span><span class="s0">break</span><span class="s1">; 
-        } 
-        fragmentManager.beginTransaction() 
-                .replace(R.id.container, fragment) 
-                .commit(); 
- 
-    } 
- 
-    </span><span class="s2">// Restores the ActionBar</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">restoreActionBar() { 
-        ActionBar actionBar = getActionBar(); 
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD); 
-        actionBar.setDisplayShowTitleEnabled(</span><span class="s0">true</span><span class="s1">); 
-        actionBar.setTitle(mTitle); 
-    } 
- 
- 
-    @Override 
-    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
-        </span><span class="s0">if </span><span class="s1">(!mNavigationDrawerFragment.isDrawerOpen()) { 
-            </span><span class="s2">// Only show items in the action bar relevant to this screen</span><span class="s1"> 
-            </span><span class="s2">// if the drawer is not showing. Otherwise, let the drawer</span><span class="s1"> 
-            </span><span class="s2">// decide what to show in the action bar.</span><span class="s1"> 
-            getMenuInflater().inflate(R.menu.main, menu); 
-            restoreActionBar(); 
-            </span><span class="s0">return true</span><span class="s1">; 
-        } 
-        </span><span class="s0">return super</span><span class="s1">.onCreateOptionsMenu(menu); 
-    } 
- 
-    @Override 
-    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
-        </span><span class="s2">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
-        </span><span class="s2">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
-        </span><span class="s2">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
- 
-        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
-        </span><span class="s0">return </span><span class="s1">id == R.id.action_settings || </span><span class="s0">super</span><span class="s1">.onOptionsItemSelected(item); 
-    } 
- 
-    </span><span class="s2">// Changes the fragment so we can add a debt to a specific contact</span><span class="s1"> 
-    </span><span class="s0">public void </span><span class="s1">changeFragmentToAddDebt() 
-    { 
-        FragmentManager fragmentManager = getFragmentManager(); 
-        Fragment fragment = </span><span class="s0">null</span><span class="s1">; 
-        fragment = </span><span class="s0">new </span><span class="s1">AddDebt(); 
-        fragmentManager.beginTransaction() 
-                .replace(R.id.container, fragment) 
-                .commit(); 
-    } 
-} 
- 
- 
- 
- 
- 
-</span></pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity; 
+<a name="l4"><span class="ln">4    </span></a> 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.app.ActionBar; 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.app.FragmentManager; 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.content.ContentValues; 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.database.Cursor; 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">android.view.Menu; 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">android.view.MenuItem; 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import </span><span class="s1">android.support.v4.widget.DrawerLayout; 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">import </span><span class="s1">android.view.View; 
+<a name="l16"><span class="ln">16   </span></a></span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+<a name="l17"><span class="ln">17   </span></a> 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s2">/** 
+<a name="l19"><span class="ln">19   </span></a> * Created by Napptime on 10/13/14. 
+<a name="l20"><span class="ln">20   </span></a> * The main Activity of the application. This is the homescreen of the application and acts as a 
+<a name="l21"><span class="ln">21   </span></a> * fragment manager for the rest of the application. 
+<a name="l22"><span class="ln">22   </span></a> * 
+<a name="l23"><span class="ln">23   </span></a> */</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a></span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">Activity 
+<a name="l26"><span class="ln">26   </span></a>        </span><span class="s0">implements </span><span class="s1">NavigationDrawerFragment.NavigationDrawerCallbacks { 
+<a name="l27"><span class="ln">27   </span></a> 
+<a name="l28"><span class="ln">28   </span></a>    </span><span class="s2">/** 
+<a name="l29"><span class="ln">29   </span></a>     * Fragment managing the behaviors, interactions and presentation of the navigation drawer. 
+<a name="l30"><span class="ln">30   </span></a>     */</span><span class="s1"> 
+<a name="l31"><span class="ln">31   </span></a>    </span><span class="s0">private </span><span class="s1">NavigationDrawerFragment mNavigationDrawerFragment; 
+<a name="l32"><span class="ln">32   </span></a> 
+<a name="l33"><span class="ln">33   </span></a>    </span><span class="s2">/* 
+<a name="l34"><span class="ln">34   </span></a>     * Used to store the last screen title. For use in {@link #restoreActionBar()}. 
+<a name="l35"><span class="ln">35   </span></a>     */</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a>    </span><span class="s0">private </span><span class="s1">CharSequence mTitle; 
+<a name="l37"><span class="ln">37   </span></a>    DbHelper dbHelper; 
+<a name="l38"><span class="ln">38   </span></a> 
+<a name="l39"><span class="ln">39   </span></a>    @Override 
+<a name="l40"><span class="ln">40   </span></a>    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+<a name="l41"><span class="ln">41   </span></a>        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+<a name="l42"><span class="ln">42   </span></a>        setContentView(R.layout.activity_main); 
+<a name="l43"><span class="ln">43   </span></a> 
+<a name="l44"><span class="ln">44   </span></a>        </span><span class="s2">//initialize helper</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a>        dbHelper = </span><span class="s0">new </span><span class="s1">DbHelper(</span><span class="s0">this</span><span class="s1">); 
+<a name="l46"><span class="ln">46   </span></a> 
+<a name="l47"><span class="ln">47   </span></a>        </span><span class="s2">//get database object</span><span class="s1"> 
+<a name="l48"><span class="ln">48   </span></a>        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase(); 
+<a name="l49"><span class="ln">49   </span></a> 
+<a name="l50"><span class="ln">50   </span></a>        </span><span class="s2">//add a demo entry</span><span class="s1"> 
+<a name="l51"><span class="ln">51   </span></a>        </span><span class="s2">/* 
+<a name="l52"><span class="ln">52   </span></a>        ContentValues contentValues = new ContentValues(); 
+<a name="l53"><span class="ln">53   </span></a>        contentValues.put(&quot;name&quot;,&quot;yo&quot;); 
+<a name="l54"><span class="ln">54   </span></a>        contentValues.put(&quot;description&quot;,&quot;fokk mikill peningur&quot;); 
+<a name="l55"><span class="ln">55   </span></a>        long id = sqLiteDatabase.insert(&quot;CONTACTS&quot;,null,contentValues); 
+<a name="l56"><span class="ln">56   </span></a>        Message.message(this, &quot;Entry: &quot;+id);*/</span><span class="s1"> 
+<a name="l57"><span class="ln">57   </span></a> 
+<a name="l58"><span class="ln">58   </span></a>        </span><span class="s2">//read from database</span><span class="s1"> 
+<a name="l59"><span class="ln">59   </span></a>        </span><span class="s2">/* 
+<a name="l60"><span class="ln">60   </span></a>        String[] columns = {&quot;name&quot;}; 
+<a name="l61"><span class="ln">61   </span></a>        Cursor cursor = sqLiteDatabase.query(&quot;CONTACTS&quot;, 
+<a name="l62"><span class="ln">62   </span></a>        columns,null,null,null,null,null); 
+<a name="l63"><span class="ln">63   </span></a>        while(cursor.moveToNext()) 
+<a name="l64"><span class="ln">64   </span></a>            Message.message(this,&quot;&quot;+cursor.getString(0)); 
+<a name="l65"><span class="ln">65   </span></a>        */</span><span class="s1"> 
+<a name="l66"><span class="ln">66   </span></a> 
+<a name="l67"><span class="ln">67   </span></a> 
+<a name="l68"><span class="ln">68   </span></a> 
+<a name="l69"><span class="ln">69   </span></a> 
+<a name="l70"><span class="ln">70   </span></a>        mNavigationDrawerFragment = (NavigationDrawerFragment) 
+<a name="l71"><span class="ln">71   </span></a>                getFragmentManager().findFragmentById(R.id.navigation_drawer); 
+<a name="l72"><span class="ln">72   </span></a>        mTitle = getTitle(); 
+<a name="l73"><span class="ln">73   </span></a> 
+<a name="l74"><span class="ln">74   </span></a>        </span><span class="s2">// Set up the drawer.</span><span class="s1"> 
+<a name="l75"><span class="ln">75   </span></a>        mNavigationDrawerFragment.setUp( 
+<a name="l76"><span class="ln">76   </span></a>                R.id.navigation_drawer, 
+<a name="l77"><span class="ln">77   </span></a>                (DrawerLayout) findViewById(R.id.drawer_layout)); 
+<a name="l78"><span class="ln">78   </span></a>    } 
+<a name="l79"><span class="ln">79   </span></a> 
+<a name="l80"><span class="ln">80   </span></a>    @Override 
+<a name="l81"><span class="ln">81   </span></a>    </span><span class="s0">public void </span><span class="s1">onNavigationDrawerItemSelected(</span><span class="s0">int </span><span class="s1">position) { 
+<a name="l82"><span class="ln">82   </span></a>        </span><span class="s2">// update the main content by replacing fragments</span><span class="s1"> 
+<a name="l83"><span class="ln">83   </span></a>        FragmentManager fragmentManager = getFragmentManager(); 
+<a name="l84"><span class="ln">84   </span></a>        Fragment fragment = </span><span class="s0">null</span><span class="s1">; 
+<a name="l85"><span class="ln">85   </span></a>        </span><span class="s0">switch</span><span class="s1">(position){ 
+<a name="l86"><span class="ln">86   </span></a>            </span><span class="s0">case </span><span class="s3">0</span><span class="s1">: 
+<a name="l87"><span class="ln">87   </span></a>                </span><span class="s2">// Contacts</span><span class="s1"> 
+<a name="l88"><span class="ln">88   </span></a>                fragment = </span><span class="s0">new </span><span class="s1">Contacts(); 
+<a name="l89"><span class="ln">89   </span></a>                mTitle = getString(R.string.title_section1); 
+<a name="l90"><span class="ln">90   </span></a> 
+<a name="l91"><span class="ln">91   </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l92"><span class="ln">92   </span></a>            </span><span class="s0">case </span><span class="s3">1</span><span class="s1">: 
+<a name="l93"><span class="ln">93   </span></a>                </span><span class="s2">// Favorites</span><span class="s1"> 
+<a name="l94"><span class="ln">94   </span></a>                fragment = </span><span class="s0">new </span><span class="s1">Favorites(); 
+<a name="l95"><span class="ln">95   </span></a>                mTitle = getString(R.string.title_section2); 
+<a name="l96"><span class="ln">96   </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l97"><span class="ln">97   </span></a>            </span><span class="s0">case </span><span class="s3">2</span><span class="s1">: 
+<a name="l98"><span class="ln">98   </span></a>                </span><span class="s2">// MyDebts</span><span class="s1"> 
+<a name="l99"><span class="ln">99   </span></a>                fragment = </span><span class="s0">new </span><span class="s1">MyDebts(); 
+<a name="l100"><span class="ln">100  </span></a>                mTitle = getString(R.string.title_section3); 
+<a name="l101"><span class="ln">101  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l102"><span class="ln">102  </span></a>            </span><span class="s0">case </span><span class="s3">3</span><span class="s1">: 
+<a name="l103"><span class="ln">103  </span></a>                </span><span class="s2">// Calculator</span><span class="s1"> 
+<a name="l104"><span class="ln">104  </span></a>                fragment = </span><span class="s0">new </span><span class="s1">Calculator(); 
+<a name="l105"><span class="ln">105  </span></a>                mTitle = getString(R.string.title_section4); 
+<a name="l106"><span class="ln">106  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l107"><span class="ln">107  </span></a>            </span><span class="s0">case </span><span class="s3">4</span><span class="s1">: 
+<a name="l108"><span class="ln">108  </span></a>                </span><span class="s2">// About</span><span class="s1"> 
+<a name="l109"><span class="ln">109  </span></a>                fragment = </span><span class="s0">new </span><span class="s1">About(); 
+<a name="l110"><span class="ln">110  </span></a>                mTitle = getString(R.string.title_section5); 
+<a name="l111"><span class="ln">111  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l112"><span class="ln">112  </span></a>            </span><span class="s0">case </span><span class="s3">5</span><span class="s1">: 
+<a name="l113"><span class="ln">113  </span></a>                </span><span class="s2">// MoneyPot</span><span class="s1"> 
+<a name="l114"><span class="ln">114  </span></a>                fragment = </span><span class="s0">new </span><span class="s1">MoneyPot(); 
+<a name="l115"><span class="ln">115  </span></a>                mTitle = getString(R.string.title_section6); 
+<a name="l116"><span class="ln">116  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l117"><span class="ln">117  </span></a>            </span><span class="s0">case </span><span class="s3">6</span><span class="s1">: 
+<a name="l118"><span class="ln">118  </span></a>                </span><span class="s2">// AddDebt</span><span class="s1"> 
+<a name="l119"><span class="ln">119  </span></a>                fragment = </span><span class="s0">new </span><span class="s1">AddDebt(); 
+<a name="l120"><span class="ln">120  </span></a>                mTitle = getString(R.string.title_section7); 
+<a name="l121"><span class="ln">121  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l122"><span class="ln">122  </span></a>            </span><span class="s0">case </span><span class="s3">7</span><span class="s1">: 
+<a name="l123"><span class="ln">123  </span></a>                </span><span class="s2">// About</span><span class="s1"> 
+<a name="l124"><span class="ln">124  </span></a>                fragment = </span><span class="s0">new </span><span class="s1">ChosenContact(); 
+<a name="l125"><span class="ln">125  </span></a>                mTitle = getString(R.string.title_section8); 
+<a name="l126"><span class="ln">126  </span></a>                </span><span class="s0">break</span><span class="s1">; 
+<a name="l127"><span class="ln">127  </span></a>        } 
+<a name="l128"><span class="ln">128  </span></a>        fragmentManager.beginTransaction() 
+<a name="l129"><span class="ln">129  </span></a>                .replace(R.id.container, fragment) 
+<a name="l130"><span class="ln">130  </span></a>                .commit(); 
+<a name="l131"><span class="ln">131  </span></a> 
+<a name="l132"><span class="ln">132  </span></a>    } 
+<a name="l133"><span class="ln">133  </span></a> 
+<a name="l134"><span class="ln">134  </span></a>    </span><span class="s2">// Restores the ActionBar</span><span class="s1"> 
+<a name="l135"><span class="ln">135  </span></a>    </span><span class="s0">public void </span><span class="s1">restoreActionBar() { 
+<a name="l136"><span class="ln">136  </span></a>        ActionBar actionBar = getActionBar(); 
+<a name="l137"><span class="ln">137  </span></a>        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD); 
+<a name="l138"><span class="ln">138  </span></a>        actionBar.setDisplayShowTitleEnabled(</span><span class="s0">true</span><span class="s1">); 
+<a name="l139"><span class="ln">139  </span></a>        actionBar.setTitle(mTitle); 
+<a name="l140"><span class="ln">140  </span></a>    } 
+<a name="l141"><span class="ln">141  </span></a> 
+<a name="l142"><span class="ln">142  </span></a> 
+<a name="l143"><span class="ln">143  </span></a>    @Override 
+<a name="l144"><span class="ln">144  </span></a>    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+<a name="l145"><span class="ln">145  </span></a>        </span><span class="s0">if </span><span class="s1">(!mNavigationDrawerFragment.isDrawerOpen()) { 
+<a name="l146"><span class="ln">146  </span></a>            </span><span class="s2">// Only show items in the action bar relevant to this screen</span><span class="s1"> 
+<a name="l147"><span class="ln">147  </span></a>            </span><span class="s2">// if the drawer is not showing. Otherwise, let the drawer</span><span class="s1"> 
+<a name="l148"><span class="ln">148  </span></a>            </span><span class="s2">// decide what to show in the action bar.</span><span class="s1"> 
+<a name="l149"><span class="ln">149  </span></a>            getMenuInflater().inflate(R.menu.main, menu); 
+<a name="l150"><span class="ln">150  </span></a>            restoreActionBar(); 
+<a name="l151"><span class="ln">151  </span></a>            </span><span class="s0">return true</span><span class="s1">; 
+<a name="l152"><span class="ln">152  </span></a>        } 
+<a name="l153"><span class="ln">153  </span></a>        </span><span class="s0">return super</span><span class="s1">.onCreateOptionsMenu(menu); 
+<a name="l154"><span class="ln">154  </span></a>    } 
+<a name="l155"><span class="ln">155  </span></a> 
+<a name="l156"><span class="ln">156  </span></a>    @Override 
+<a name="l157"><span class="ln">157  </span></a>    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+<a name="l158"><span class="ln">158  </span></a>        </span><span class="s2">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+<a name="l159"><span class="ln">159  </span></a>        </span><span class="s2">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+<a name="l160"><span class="ln">160  </span></a>        </span><span class="s2">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+<a name="l161"><span class="ln">161  </span></a> 
+<a name="l162"><span class="ln">162  </span></a>        </span><span class="s0">int </span><span class="s1">id = item.getItemId(); 
+<a name="l163"><span class="ln">163  </span></a>        </span><span class="s0">return </span><span class="s1">id == R.id.action_settings || </span><span class="s0">super</span><span class="s1">.onOptionsItemSelected(item); 
+<a name="l164"><span class="ln">164  </span></a>    } 
+<a name="l165"><span class="ln">165  </span></a> 
+<a name="l166"><span class="ln">166  </span></a>    </span><span class="s2">// Changes the fragment so we can add a debt to a specific contact</span><span class="s1"> 
+<a name="l167"><span class="ln">167  </span></a>    </span><span class="s0">public void </span><span class="s1">changeFragmentToAddDebt() 
+<a name="l168"><span class="ln">168  </span></a>    { 
+<a name="l169"><span class="ln">169  </span></a>        FragmentManager fragmentManager = getFragmentManager(); 
+<a name="l170"><span class="ln">170  </span></a>        Fragment fragment = </span><span class="s0">null</span><span class="s1">; 
+<a name="l171"><span class="ln">171  </span></a>        fragment = </span><span class="s0">new </span><span class="s1">AddDebt(); 
+<a name="l172"><span class="ln">172  </span></a>        fragmentManager.beginTransaction() 
+<a name="l173"><span class="ln">173  </span></a>                .replace(R.id.container, fragment) 
+<a name="l174"><span class="ln">174  </span></a>                .commit(); 
+<a name="l175"><span class="ln">175  </span></a>    } 
+<a name="l176"><span class="ln">176  </span></a>} 
+<a name="l177"><span class="ln">177  </span></a> 
+<a name="l178"><span class="ln">178  </span></a> 
+<a name="l179"><span class="ln">179  </span></a> 
+<a name="l180"><span class="ln">180  </span></a> 
+<a name="l181"><span class="ln">181  </span></a> 
+<a name="l182"><span class="ln">182  </span></a></span></pre>
 </body>
 </html>

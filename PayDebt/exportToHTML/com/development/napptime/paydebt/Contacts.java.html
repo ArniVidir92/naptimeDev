@@ -19,74 +19,76 @@ Contacts.java</FONT>
 </center></TD></TR></TABLE>
 <pre>
 
-<span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
- 
-</span><span class="s0">import </span><span class="s1">android.app.Activity; 
-</span><span class="s0">import </span><span class="s1">android.app.Fragment; 
-</span><span class="s0">import </span><span class="s1">android.database.Cursor; 
-</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
-</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
-</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
-</span><span class="s0">import </span><span class="s1">android.view.View; 
-</span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
-</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter; 
-</span><span class="s0">import </span><span class="s1">android.widget.ListView; 
- 
-</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
-</span><span class="s0">import </span><span class="s1">java.util.List; 
- 
- 
-</span><span class="s2">/** 
- * Created by napptime on 10/11/14. 
- * Contact class serves the purpose of showing and managing contacts with a user friendly layout. 
- */</span><span class="s1"> 
-</span><span class="s0">public class </span><span class="s1">Contacts </span><span class="s0">extends </span><span class="s1">Fragment { 
- 
-    </span><span class="s2">// dbhelper that serves as a helper for the class</span><span class="s1"> 
-    DbHelper dbhelper; 
-    </span><span class="s2">// A database that serves this class</span><span class="s1"> 
-    SQLiteDatabase db; 
-    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
-    ListView listView; 
-    String name; 
-    Cursor cursor; 
- 
-    List&lt;String&gt; listItems=</span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;(); 
- 
-    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, 
-                             Bundle savedInstanceState) { 
-        </span><span class="s2">// Initialize the view</span><span class="s1"> 
-        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.lay_contacts, container, </span><span class="s0">false</span><span class="s1">); 
- 
-        </span><span class="s2">// Initialize the dbhelper</span><span class="s1"> 
-        dbhelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
-        db = dbhelper.getWritableDatabase(); 
- 
-        </span><span class="s2">//Denotes the columns that we want to fetch from the database</span><span class="s1"> 
-        String[] columns = {</span><span class="s3">&quot;name&quot;</span><span class="s1">}; 
- 
-        </span><span class="s2">// Selects the column name and puts the column in too cursor.</span><span class="s1"> 
-        cursor = db.query(</span><span class="s3">&quot;CONTACTS&quot;</span><span class="s1">,columns,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">); 
- 
-        </span><span class="s2">// Moves through each row of the db and adds the name of each contact to the listItem</span><span class="s1"> 
-        </span><span class="s0">while</span><span class="s1">(cursor.moveToNext()) { 
-            name = cursor.getString(</span><span class="s4">0</span><span class="s1">); 
-            listItems.add(name); 
-        } 
- 
-        </span><span class="s2">//Gets the list view from the layout</span><span class="s1"> 
-        listView = (ListView) view.findViewById(R.id.contacts_list); 
-        </span><span class="s2">//Adapts the listitems to our list view using lay_contacts_row</span><span class="s1"> 
-        ArrayAdapter&lt;String&gt; adapter = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;String&gt;(getActivity(), R.layout.lay_contacts_row, R.id.listText, listItems); 
-        listView.setAdapter(adapter); 
- 
-        </span><span class="s0">return </span><span class="s1">view; 
-    } 
-    @Override 
-    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
-        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
-    } 
-} 
-</span></pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.development.napptime.paydebt; 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity; 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.app.Fragment; 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.database.Cursor; 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase; 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.view.LayoutInflater; 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.view.View; 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.view.ViewGroup; 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter; 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">android.widget.ListView; 
+<a name="l13"><span class="ln">13   </span></a> 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">import </span><span class="s1">java.util.List; 
+<a name="l16"><span class="ln">16   </span></a> 
+<a name="l17"><span class="ln">17   </span></a> 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s2">/** 
+<a name="l19"><span class="ln">19   </span></a> * Created by napptime on 10/11/14. 
+<a name="l20"><span class="ln">20   </span></a> * Contact class serves the purpose of showing and managing contacts with a user friendly layout. 
+<a name="l21"><span class="ln">21   </span></a> */</span><span class="s1"> 
+<a name="l22"><span class="ln">22   </span></a></span><span class="s0">public class </span><span class="s1">Contacts </span><span class="s0">extends </span><span class="s1">Fragment { 
+<a name="l23"><span class="ln">23   </span></a> 
+<a name="l24"><span class="ln">24   </span></a>    </span><span class="s2">// dbhelper that serves as a helper for the class</span><span class="s1"> 
+<a name="l25"><span class="ln">25   </span></a>    DbHelper dbhelper; 
+<a name="l26"><span class="ln">26   </span></a>    </span><span class="s2">// A database that serves this class</span><span class="s1"> 
+<a name="l27"><span class="ln">27   </span></a>    SQLiteDatabase db; 
+<a name="l28"><span class="ln">28   </span></a>    </span><span class="s0">private </span><span class="s1">View view = </span><span class="s0">null</span><span class="s1">; 
+<a name="l29"><span class="ln">29   </span></a>    ListView listView; 
+<a name="l30"><span class="ln">30   </span></a>    String name; 
+<a name="l31"><span class="ln">31   </span></a>    Cursor cursor; 
+<a name="l32"><span class="ln">32   </span></a> 
+<a name="l33"><span class="ln">33   </span></a>    List&lt;String&gt; listItems=</span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;(); 
+<a name="l34"><span class="ln">34   </span></a> 
+<a name="l35"><span class="ln">35   </span></a>    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, ViewGroup container, 
+<a name="l36"><span class="ln">36   </span></a>                             Bundle savedInstanceState) { 
+<a name="l37"><span class="ln">37   </span></a>        </span><span class="s2">// Initialize the view</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>        </span><span class="s0">this</span><span class="s1">.view = inflater.inflate(R.layout.lay_contacts, container, </span><span class="s0">false</span><span class="s1">); 
+<a name="l39"><span class="ln">39   </span></a> 
+<a name="l40"><span class="ln">40   </span></a>        </span><span class="s2">// Initialize the dbhelper</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>        dbhelper = </span><span class="s0">new </span><span class="s1">DbHelper(getActivity()); 
+<a name="l42"><span class="ln">42   </span></a>        db = dbhelper.getWritableDatabase(); 
+<a name="l43"><span class="ln">43   </span></a> 
+<a name="l44"><span class="ln">44   </span></a>        </span><span class="s2">//Denotes the columns that we want to fetch from the database</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a>        String[] columns = {</span><span class="s3">&quot;name&quot;</span><span class="s1">}; 
+<a name="l46"><span class="ln">46   </span></a> 
+<a name="l47"><span class="ln">47   </span></a>        </span><span class="s2">// Selects the column name and puts the column in too cursor.</span><span class="s1"> 
+<a name="l48"><span class="ln">48   </span></a>        cursor = db.query(</span><span class="s3">&quot;CONTACTS&quot;</span><span class="s1">,columns,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">,</span><span class="s0">null</span><span class="s1">); 
+<a name="l49"><span class="ln">49   </span></a> 
+<a name="l50"><span class="ln">50   </span></a>        </span><span class="s2">// Moves through each row of the db and adds</span><span class="s1"> 
+<a name="l51"><span class="ln">51   </span></a>        </span><span class="s2">// the name of each contact to the listItem</span><span class="s1"> 
+<a name="l52"><span class="ln">52   </span></a>        </span><span class="s0">while</span><span class="s1">(cursor.moveToNext()) { 
+<a name="l53"><span class="ln">53   </span></a>            name = cursor.getString(</span><span class="s4">0</span><span class="s1">); 
+<a name="l54"><span class="ln">54   </span></a>            listItems.add(name); 
+<a name="l55"><span class="ln">55   </span></a>        } 
+<a name="l56"><span class="ln">56   </span></a> 
+<a name="l57"><span class="ln">57   </span></a>        </span><span class="s2">//Gets the list view from the layout</span><span class="s1"> 
+<a name="l58"><span class="ln">58   </span></a>        listView = (ListView) view.findViewById(R.id.contacts_list); 
+<a name="l59"><span class="ln">59   </span></a>        </span><span class="s2">//Adapts the listitems to our list view using lay_contacts_row</span><span class="s1"> 
+<a name="l60"><span class="ln">60   </span></a>        ArrayAdapter&lt;String&gt; adapter = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;String&gt;(getActivity(), 
+<a name="l61"><span class="ln">61   </span></a>                R.layout.lay_contacts_row, R.id.listText, listItems); 
+<a name="l62"><span class="ln">62   </span></a>        listView.setAdapter(adapter); 
+<a name="l63"><span class="ln">63   </span></a> 
+<a name="l64"><span class="ln">64   </span></a>        </span><span class="s0">return </span><span class="s1">view; 
+<a name="l65"><span class="ln">65   </span></a>    } 
+<a name="l66"><span class="ln">66   </span></a>    @Override 
+<a name="l67"><span class="ln">67   </span></a>    </span><span class="s0">public void </span><span class="s1">onAttach(Activity activity) { 
+<a name="l68"><span class="ln">68   </span></a>        </span><span class="s0">super</span><span class="s1">.onAttach(activity); 
+<a name="l69"><span class="ln">69   </span></a>    } 
+<a name="l70"><span class="ln">70   </span></a>} 
+<a name="l71"><span class="ln">71   </span></a></span></pre>
 </body>
 </html>
