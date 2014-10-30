@@ -32,7 +32,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String DUE = "due";
     private static final String FAV = "favorite";
     */
-    private static final int DATABASE_VERSION = 4 ;
+    private static final int DATABASE_VERSION = 5;
 
     // Used as the context of the MainActivity
     private Context context;
@@ -44,38 +44,41 @@ class DbHelper extends SQLiteOpenHelper
         Message.message(context, "Constructor called");
     }
 
+    public static final String CONTACTS_TABLE = "create table if not exists "
+            +TABLE_NAME_C+" (" +
+            "_contact_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " name VARCHAR(255)," +
+            " description VARCHAR(255)," +
+            "favorite INTEGER );";
+
+    public static final String DEBTS_TABLE = "create table if not exists "
+            +TABLE_NAME_D+" (" +
+            "_debt_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " _contact_id INTEGER," +
+            " name VARCHAR(255), " +
+            "description VARCHAR(255)," +
+            " reminder INTEGER, date INTEGER," +
+            " due INTEGER, " +
+            "amount REAL, " +
+            "object VARCHAR(255) );";
+
+    public static final String POTS_TABLE = "create table if not exists "
+            +TABLE_NAME_P+" (" +
+            "_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " _contact_id INTEGER," +
+            " name VARCHAR(255), " +
+            "description VARCHAR(255)," +
+            "amount REAL);";
+
     //Called when database is created for the first time,
     // create tables and initial data
     @Override
     public void onCreate(SQLiteDatabase db)
     {
         //Create table for contacts
-        String query = "CREATE TABLE "+TABLE_NAME_C+" (" +
-                "_contact_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " name VARCHAR(255)," +
-                " description VARCHAR(255)," +
-                "favorite INTEGER );";
-        db.execSQL(query);
-
-        //Create table for money pots
-        query = "CREATE TABLE "+TABLE_NAME_P+" (_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " _contact_id INTEGER," +
-                " name VARCHAR(255), " +
-                "description VARCHAR(255)," +
-                "amount REAL, " +
-                "object VARCHAR(255) );";
-        db.execSQL(query);
-
-        //Create table for debts
-        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " _contact_id INTEGER," +
-                " name VARCHAR(255), " +
-                "description VARCHAR(255)," +
-                " reminder INTEGER, date INTEGER," +
-                " due INTEGER, " +
-                "amount REAL, " +
-                "object VARCHAR(255) );";
-        db.execSQL(query);
+        db.execSQL(CONTACTS_TABLE);
+        db.execSQL(DEBTS_TABLE);
+        db.execSQL(POTS_TABLE);
 
         //notify user
         Message.message(context, "onCreate called");
@@ -87,6 +90,9 @@ class DbHelper extends SQLiteOpenHelper
     {
         //Delete table contacts
         String query = "DROP TABLE IF EXISTS CONTACTS";
+        db.execSQL(query);
+        //Delete table pots
+        query = "DROP TABLE IF EXISTS POTS";
         db.execSQL(query);
         //Delete table debts
         query = "DROP TABLE IF EXISTS DEBTS";

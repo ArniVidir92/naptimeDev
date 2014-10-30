@@ -45,7 +45,6 @@ public class MainActivity extends Activity
 
         //initialize helper
         dbHelper = new DbHelper(this);
-
         //get database object
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
@@ -54,15 +53,14 @@ public class MainActivity extends Activity
         ContentValues contentValues = new ContentValues();
         contentValues.put("name","yo");
         contentValues.put("description","fokk mikill peningur");
-        contentValues.put("favorite", 1);
-        long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
+        //contentValues.put("favorite", 1);
+        long id = sqLiteDatabase.insert("POTS",null,contentValues);
         Message.message(this, "Entry: "+id);
-        */
 
         //read from database
-        /*
+
         String[] columns = {"name"};
-        Cursor cursor = sqLiteDatabase.query("CONTACTS",
+        Cursor cursor = sqLiteDatabase.query("POTS",
         columns,null,null,null,null,null);
         while(cursor.moveToNext())
             Message.message(this,""+cursor.getString(0));
