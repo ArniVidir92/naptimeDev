@@ -11,11 +11,19 @@ import android.view.ViewGroup;
  */
 public class MoneyPot extends Fragment {
 
+    private View view = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lay_moneypot, container, false);
+        // Initialize the view
+        this.view = inflater.inflate(R.layout.lay_money_pot, container, false);
+
+
+
+
+
+        return view;
     }
 }
 

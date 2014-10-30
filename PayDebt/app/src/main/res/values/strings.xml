@@ -36,6 +36,10 @@
     <string name="AddContact">Add contact</string>
     <string name="newContact">Add contact</string>
     <string name="X">X</string>
+    <string name="Money_Pot">Money Pot</string>
+    <string name="addMoneyPotDebt">Add</string>
+    <string name="moneyPotPeople">Count:</string>
+    <string name="Amount_per_person">Amount per person</string>
 
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>
