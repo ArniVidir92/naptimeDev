@@ -66,9 +66,6 @@ public class MainActivity extends Activity
             Message.message(this,""+cursor.getString(0));
         */
 
-
-
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -126,6 +123,11 @@ public class MainActivity extends Activity
                 fragment = new ChosenContact();
                 mTitle = getString(R.string.title_section8);
                 break;
+            case 8:
+                // About
+                fragment = new PotEntry();
+                mTitle = getString(R.string.title_section9);
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
@@ -171,6 +173,16 @@ public class MainActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         fragment = new AddDebt();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    public void changeFragmentToPotEntry()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new PotEntry();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

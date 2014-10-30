@@ -21,6 +21,7 @@ class DbHelper extends SQLiteOpenHelper
     // Initializing the name of the database as well as the name of the tables.
     private static final String DATABASE_NAME = "napptimedb";
     private static final String TABLE_NAME_C = "CONTACTS";
+    private static final String TABLE_NAME_P = "POTS";
     private static final String TABLE_NAME_D = "DEBTS";
     /*
     private static final String UID = "_contact_id";
@@ -54,6 +55,15 @@ class DbHelper extends SQLiteOpenHelper
                 " name VARCHAR(255)," +
                 " description VARCHAR(255)," +
                 "favorite INTEGER );";
+        db.execSQL(query);
+
+        //Create table for money pots
+        query = "CREATE TABLE "+TABLE_NAME_P+" (_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " _contact_id INTEGER," +
+                " name VARCHAR(255), " +
+                "description VARCHAR(255)," +
+                "amount REAL, " +
+                "object VARCHAR(255) );";
         db.execSQL(query);
 
         //Create table for debts
