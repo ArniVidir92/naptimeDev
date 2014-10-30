@@ -60,7 +60,8 @@ public class MainActivity extends Activity
         //read from database
         /*
         String[] columns = {"name"};
-        Cursor cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("CONTACTS",
+        columns,null,null,null,null,null);
         while(cursor.moveToNext())
             Message.message(this,""+cursor.getString(0));
         */

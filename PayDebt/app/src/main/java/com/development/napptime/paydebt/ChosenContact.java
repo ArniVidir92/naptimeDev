@@ -2,8 +2,6 @@ package com.development.napptime.paydebt;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,10 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +79,8 @@ public class ChosenContact extends Fragment {
         String[] columns = {"name", "amount"};
         cursor = db.query("DEBTS",columns,null,null,null,null,null);
 
-        // Moves through each row of the db and adds the name and amount of each debt to the listItemsName
+        // Moves through each row of the db and adds the name
+        // and amount of each debt to the listItemsName
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             amount = cursor.getDouble(1);
@@ -91,7 +92,8 @@ public class ChosenContact extends Fragment {
         listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
 
         //Adapts the listItems to our list view using lay_chosen_contact_row
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
         listView.setAdapter(adapter);
 
         return view;
@@ -103,12 +105,10 @@ public class ChosenContact extends Fragment {
         ((MainActivity)getActivity()).changeFragmentToAddDebt();
         Log.d("Villa","Hallodrasl");
     }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
-
 
 
 }

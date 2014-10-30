@@ -96,7 +96,7 @@
                 android:textColor="#FFFFFF"
                 android:inputType="textMultiLine"
                 android:lines="10"
-                android:minLines="4"
+                android:minLines="2"
                 android:gravity="top|start"
                 android:maxLines="10"
                 android:maxLength="255"

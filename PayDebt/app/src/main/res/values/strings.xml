@@ -35,6 +35,7 @@
     <string name="Favorite">Favorite</string>
     <string name="AddContact">Add contact</string>
     <string name="newContact">Add contact</string>
+    <string name="X">X</string>
 
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>

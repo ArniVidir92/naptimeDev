@@ -8,6 +8,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +87,7 @@ public class AddDebt extends Fragment{
         return view;
     }
 
+
     //Set the selected date
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
         @Override
@@ -99,13 +102,17 @@ public class AddDebt extends Fragment{
     //Sets our dateOrDue variable to the corresponding field
     public void clickDate(View view){
         dateOrDue = getString(R.string.AddDebt_date);
-        new DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog( getActivity(), date,
+                c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     //Sets our dateOrDue variable to the corresponding field
     public void clickDueDate(View view){
         dateOrDue = getString(R.string.AddDebt_Due);
-        new DatePickerDialog( getActivity(), date, c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog( getActivity(), date,
+                c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     //Fetches the datePicker value and puts it into the corresponding field
@@ -146,6 +153,7 @@ public class AddDebt extends Fragment{
 
         return Double.parseDouble(str);
     }
+
 
     //Adds debt information to the database
     public void addDebtToDatabase(View v){
@@ -194,4 +202,5 @@ public class AddDebt extends Fragment{
         contentValues.put("reminder", reminder);
         long id = sqLiteDatabase.insert("DEBTS",null,contentValues);
     }
+
 }

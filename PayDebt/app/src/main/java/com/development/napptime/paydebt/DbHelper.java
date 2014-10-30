@@ -43,19 +43,28 @@ class DbHelper extends SQLiteOpenHelper
         Message.message(context, "Constructor called");
     }
 
-
-
-
-    //Called when database is created for the first time, create tables and initial data
+    //Called when database is created for the first time,
+    // create tables and initial data
     @Override
     public void onCreate(SQLiteDatabase db)
     {
         //Create table for contacts
-        String query = "CREATE TABLE "+TABLE_NAME_C+" (_contact_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), description VARCHAR(255), favorite INTEGER );";
+        String query = "CREATE TABLE "+TABLE_NAME_C+" (" +
+                "_contact_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " name VARCHAR(255)," +
+                " description VARCHAR(255)," +
+                "favorite INTEGER );";
         db.execSQL(query);
 
         //Create table for debts
-        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT, _contact_id INTEGER, name VARCHAR(255), description VARCHAR(255), reminder INTEGER, date INTEGER, due INTEGER, amount REAL, object VARCHAR(255) );";
+        query = "CREATE TABLE "+TABLE_NAME_D+" (_debt_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " _contact_id INTEGER," +
+                " name VARCHAR(255), " +
+                "description VARCHAR(255)," +
+                " reminder INTEGER, date INTEGER," +
+                " due INTEGER, " +
+                "amount REAL, " +
+                "object VARCHAR(255) );";
         db.execSQL(query);
 
         //notify user
