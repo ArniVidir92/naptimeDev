@@ -47,6 +47,18 @@ public class AddDebt extends Fragment{
     //Variable for our calendar
     final Calendar c = Calendar.getInstance();
 
+    //Contact Id
+    private int cId = -1;
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            this.cId = args.getInt("cId");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -185,7 +197,7 @@ public class AddDebt extends Fragment{
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("_contact_id",1);
+        contentValues.put("_contact_id",this.cId);
         contentValues.put("name",name);
         contentValues.put("description",description);
         if(dbDate != -1){contentValues.put("date",dbDate);}

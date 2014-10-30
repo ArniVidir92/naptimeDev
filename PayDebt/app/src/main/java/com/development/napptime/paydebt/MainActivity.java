@@ -9,11 +9,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -163,11 +165,30 @@ public class MainActivity extends Activity
     }
 
     // Changes the fragment so we can add a debt to a specific contact
-    public void changeFragmentToAddDebt()
+    public void changeFragmentToAddDebt(int contactId)
     {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         fragment = new AddDebt();
+        Bundle args = new Bundle();
+        args.putInt("cId", contactId);
+        fragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    // Changes the fragment so we can look at a specific contact a debt to a specific contact
+    public void changeFragmentToChosenContact(int pos, String name )
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new ChosenContact();
+        Bundle args = new Bundle();
+        args.putInt("cId", pos);
+        fragment.setArguments(args);
+        mTitle = name;
+        setTitle(mTitle);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

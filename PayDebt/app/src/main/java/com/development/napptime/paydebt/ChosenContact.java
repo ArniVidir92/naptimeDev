@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class ChosenContact extends Fragment {
 
     //Instance variables
 
+    // Id of the contact we are currently looking at
+    private int cId=-1;
+
     //Button that swaps the current fragment for
     //the fragment that adds debts
     private Button addDebt = null;
@@ -45,8 +49,9 @@ public class ChosenContact extends Fragment {
     //Our layouts list for debts
     ListView listView;
 
-    //String and double for debt name and amount
+    //String, Integer and double for debt name, contact Id and amount
     String name;
+    int contactId;
     double amount;
 
     //Database cursor
@@ -55,9 +60,23 @@ public class ChosenContact extends Fragment {
     //Initialize a list of strings
     List<String> listItemsName=new ArrayList<String>();
 
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            this.cId = args.getInt("cId")+1;
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //this.cId = this.getArguments().getInt("cId");
+
+        Log.d("cId",""+cId);
 
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_chosen_contact, container, false);
@@ -71,20 +90,28 @@ public class ChosenContact extends Fragment {
             }
         });
 
+        addDebtsForContactFromDb();
+
+        return view;
+    }
+
+    public void addDebtsForContactFromDb(){
         //Initializes the database helper with the fragment's parent activity's context
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
-        
+
         //Denotes the columns that we want to fetch from the database
-        String[] columns = {"name", "amount"};
+        String[] columns = {"_contact_id", "name", "amount"};
         cursor = db.query("DEBTS",columns,null,null,null,null,null);
 
         // Moves through each row of the db and adds the name and amount of each debt to the listItemsName
         while(cursor.moveToNext()) {
-            name = cursor.getString(0);
-            amount = cursor.getDouble(1);
-
-            listItemsName.add(name + ":   " + amount);
+            contactId = cursor.getInt(0);
+            name = cursor.getString(1);
+            amount = cursor.getDouble(2);
+            if(cId == contactId){
+                listItemsName.add(name + ":   " + amount);
+            }
         }
 
         //Gets the list view from the layout
@@ -93,14 +120,12 @@ public class ChosenContact extends Fragment {
         //Adapts the listItems to our list view using lay_chosen_contact_row
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
         listView.setAdapter(adapter);
-
-        return view;
     }
 
     // Adds a new debt to the chosen contact
     public void addDebt(View v)
     {
-        ((MainActivity)getActivity()).changeFragmentToAddDebt();
+        ((MainActivity)getActivity()).changeFragmentToAddDebt(this.cId);
         Log.d("Villa","Hallodrasl");
     }
 
