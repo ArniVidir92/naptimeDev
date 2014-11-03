@@ -20,6 +20,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 
 /**
  * Created by napptime on 10/11/14.
@@ -51,7 +53,7 @@ public class Contacts extends Fragment {
         String[] columns = {"name"};
 
         // Selects the column name and puts the column in too cursor.
-        cursor = db.query("CONTACTS",columns,null,null,null,null,null);
+        cursor = db.query("CONTACTS",columns,null,null,null,null,"name");
 
         // Moves through each row of the db and adds
         // the name of each contact to the listItem
@@ -62,7 +64,7 @@ public class Contacts extends Fragment {
 
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.contacts_list);
-        //Adapts the listitems to our list view using lay_contacts_row
+        //Adapts the listItems to our list view using lay_contacts_row
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
