@@ -25,7 +25,8 @@
                 android:text="@string/newContact"
                 android:id="@+id/textNewContact"
                 android:layout_gravity="center"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/bluesq"/>
 
             <LinearLayout
                 android:orientation="horizontal"

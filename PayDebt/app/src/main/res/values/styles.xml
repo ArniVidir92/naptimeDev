@@ -3,6 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ActionStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:colorBackground">#333333</item>
+
     </style>
+
+    <style name="ActionStyle"
+        parent="@android:style/Widget.Holo.ActionBar.Solid">
+        <item name="android:background">@drawable/actionbackground</item>
+    </style>
+
+    <style name="ButtonStyle" parent="android:style/Widget.Button">
+        <item name="android:background">#0078FF</item>
+        <item name="android:padding">4pt</item>
+        <item name="android:layout_marginLeft">1pt</item>
+        <item name="android:layout_marginRight">1pt</item>
+    </style>
+
 
 </resources>
