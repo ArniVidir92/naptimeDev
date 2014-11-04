@@ -77,6 +77,7 @@ public class AddContact extends Fragment{
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
+        name = name.substring(0,1).toUpperCase() + name.substring(1);
         onCheckboxClicked(view);
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());

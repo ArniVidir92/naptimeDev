@@ -178,22 +178,24 @@ public class MainActivity extends Activity
         fragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
     // Changes the fragment so we can look at a specific contact a debt to a specific contact
-    public void changeFragmentToChosenContact(int pos, String name )
+    public void changeFragmentToChosenContact( String name, int cId )
     {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         fragment = new ChosenContact();
         Bundle args = new Bundle();
-        args.putInt("cId", pos);
+        args.putInt("cId", cId);
         fragment.setArguments(args);
         mTitle = name;
         setTitle(mTitle);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -206,6 +208,7 @@ public class MainActivity extends Activity
                 .replace(R.id.container, fragment)
                 .commit();
     }
+
 }
 
 
