@@ -20,6 +20,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 
 /**
  * Created by napptime on 10/11/14.
@@ -34,46 +36,34 @@ public class Contacts extends Fragment {
     private View view = null;
     ListView listView;
     String name;
+    int id;
     Cursor cursor;
 
     List<String> listItems=new ArrayList<String>();
+    List<Integer> listIds = new ArrayList<Integer>();
+    //The ArrayAdapter for the listView
+    private ArrayAdapter<String> adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_contacts, container, false);
 
-        // Initialize the dbhelper
-        dbhelper = new DbHelper(getActivity());
-        db = dbhelper.getWritableDatabase();
-
-        //Denotes the columns that we want to fetch from the database
-        String[] columns = {"name"};
-
-        // Selects the column name and puts the column in too cursor.
-        cursor = db.query("CONTACTS",columns,null,null,null,null,null);
-
-        // Moves through each row of the db and adds
-        // the name of each contact to the listItem
-        while(cursor.moveToNext()) {
-            name = cursor.getString(0);
-            listItems.add(name);
-        }
-
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.contacts_list);
-        //Adapts the listitems to our list view using lay_contacts_row
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_contacts_row, R.id.listText, listItems);
-        listView.setAdapter(adapter);
 
+        if( listItems.isEmpty() ) {
+            addToListView();
+        }else{
+            listView.setAdapter(adapter);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // String item = ((TextView)view).getText().toString();
-                ((MainActivity)getActivity()).changeFragmentToChosenContact(position, listItems.get(position));
+                ((MainActivity)getActivity()).changeFragmentToChosenContact( listItems.get(position), listIds.get(position) );
                 /*String item = listItems.get(position);
                 Toast.makeText(getActivity(), item, Toast.LENGTH_LONG).show();*/
 
@@ -82,6 +72,33 @@ public class Contacts extends Fragment {
 
         return view;
     }
+
+    public void addToListView(){
+        // Initialize the dbhelper
+        dbhelper = new DbHelper(getActivity());
+        db = dbhelper.getWritableDatabase();
+
+        //Denotes the columns that we want to fetch from the database
+        String[] columns = {"name", "_contact_id"};
+
+        // Selects the column name and puts the column in too cursor.
+        cursor = db.query("CONTACTS",columns,null,null,null,null,"name");
+
+        // Moves through each row of the db and adds
+        // the name of each contact to the listItem
+        while(cursor.moveToNext()) {
+            name = cursor.getString(0);
+            id = cursor.getInt(1);
+            listItems.add(name);
+            listIds.add(id);
+        }
+
+        //Adapts the listItems to our list view using lay_contacts_row
+        adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.lay_contacts_row, R.id.listText, listItems);
+        listView.setAdapter(adapter);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

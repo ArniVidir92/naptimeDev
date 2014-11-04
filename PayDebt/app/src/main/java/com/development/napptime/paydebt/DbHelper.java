@@ -32,7 +32,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String DUE = "due";
     private static final String FAV = "favorite";
     */
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     // Used as the context of the MainActivity
     private Context context;
