@@ -12,24 +12,27 @@
 
     <ImageButton android:text="Button"
         android:id="@+id/searchButton"
-        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_weight="1.2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:src="@drawable/ic_action_action_search"/>
 
     <EditText
+        android:id="@+id/searchBox"
         android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:layout_weight="1"
-        android:textColor="#FFFFFF"
-        android:inputType="textMultiLine"
-        android:lines="15"
-        android:minLines="2"
-        android:gravity="top|start"
-        android:maxLines="15"
-        android:maxLength="255"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:id="@+id/editTextDesc" />
+        android:ems="10"
+        android:hint="search"
+        android:inputType="text"
+        android:imeOptions="actionGo"
+
+        android:singleLine="true" >
+
+    </EditText>
 
     <ImageButton android:text="Button"
         android:id="@+id/favoriteButton"

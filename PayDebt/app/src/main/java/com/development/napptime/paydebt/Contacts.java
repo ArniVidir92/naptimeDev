@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.text.Editable;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ public class Contacts extends Fragment {
     private View view = null;
     private ImageButton addContact = null;
     private ImageButton favoritesButton = null;
+    private EditText inputSearch;
     ListView listView;
     String name;
     int id;
@@ -118,6 +122,22 @@ public class Contacts extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
+
+        inputSearch = (EditText) view.findViewById(R.id.searchBox);
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                adapter.getFilter().filter(cs);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+            }
+        });
     }
 
     public void addContact(View v)
