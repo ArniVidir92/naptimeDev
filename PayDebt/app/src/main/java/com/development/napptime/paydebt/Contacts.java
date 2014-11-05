@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,8 @@ public class Contacts extends Fragment {
     // A database that serves this class
     SQLiteDatabase db;
     private View view = null;
-    private Button addContact = null;
+    private ImageButton addContact = null;
+    private ImageButton favoritesButton = null;
     ListView listView;
     String name;
     int id;
@@ -51,11 +53,19 @@ public class Contacts extends Fragment {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_contacts, container, false);
 
-        addContact = (Button) view.findViewById(R.id.buttonAddContact);
+        addContact = (ImageButton) view.findViewById(R.id.buttonAddContact);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addContact(v);
+            }
+        });
+
+        favoritesButton = (ImageButton) view.findViewById(R.id.favoriteButton);
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Favorites(v);
             }
         });
 
@@ -74,7 +84,7 @@ public class Contacts extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // String item = ((TextView)view).getText().toString();
-                ((MainActivity)getActivity()).changeFragmentToChosenContact( listItems.get(position), listIds.get(position) );
+                ((MainActivity)getActivity()).changeFragmentToChosenContact(listItems.get(position), listIds.get(position));
                 /*String item = listItems.get(position);
                 Toast.makeText(getActivity(), item, Toast.LENGTH_LONG).show();*/
 
@@ -113,6 +123,11 @@ public class Contacts extends Fragment {
     public void addContact(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToAddContact();
+    }
+
+    public void Favorites(View v)
+    {
+        ((MainActivity)getActivity()).changeFragmentToFavorites();
     }
 
     @Override
