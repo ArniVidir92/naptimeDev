@@ -5,17 +5,11 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -120,7 +114,7 @@ public class MainActivity extends Activity
                 break;
             case 7:
                 // About
-                fragment = new ChosenContact();
+                fragment = new ChosenDebt();
                 mTitle = getString(R.string.title_section8);
                 break;
             case 8:
