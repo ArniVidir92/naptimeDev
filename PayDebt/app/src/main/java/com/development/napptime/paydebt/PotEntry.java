@@ -3,15 +3,19 @@ package com.development.napptime.paydebt;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,11 @@ public class PotEntry extends Fragment {
 
     private View view = null;
     private Button addEntry = null;
+    private List<Integer> listIds = new ArrayList<Integer>();
+    private ArrayList<String> list=new ArrayList<String>();
+    String name;
+    Integer id;
+    Object item;
 
     Cursor cursor;
 
@@ -48,17 +57,23 @@ public class PotEntry extends Fragment {
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
-        String[] columns = {"name"};
+        String[] columns = {"name", "_contact_id"};
+
+        // Selects the column name and puts the column in too cursor.
+        cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,"name");
         spinner = (Spinner) view.findViewById(R.id.contactsSpinner);
 
-        cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,null);
-
-        int i=0;
-        for (cursor.moveToFirst(); i < cursor.getCount(); i++) {
-            List list = new ArrayList();
-            
-            cursor.moveToNext();
+        while(cursor.moveToNext()) {
+            name = cursor.getString(0);
+            id = cursor.getInt(1);
+            list.add(name);
+            listIds.add(id);
         }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item,list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
 
         return view;
     }
@@ -72,8 +87,6 @@ public class PotEntry extends Fragment {
 
     public void addEntryToPotDatabase(View v){
         // Get text from name field
-        EditText nameET = (EditText) view.findViewById(R.id.inputName);
-        String name = nameET.getText().toString();
         // Get amount from EditText box
         EditText amountET = (EditText) view.findViewById(R.id.inputAmount);
         String amount = amountET.getText().toString();
@@ -88,9 +101,12 @@ public class PotEntry extends Fragment {
         //database
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
+
+        String nameTest = spinner.getSelectedItem().toString();
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("_contact_id",1);
-        contentValues.put("name",name);
+        contentValues.put("name",nameTest);
         contentValues.put("description",description);
         if(entryAmount != -1){contentValues.put("amount", entryAmount);}
         long id = sqLiteDatabase.insert("POTS",null,contentValues);
