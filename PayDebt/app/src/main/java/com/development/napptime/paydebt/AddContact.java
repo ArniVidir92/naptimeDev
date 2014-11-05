@@ -101,6 +101,6 @@ public class AddContact extends Fragment{
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
 
         // Change to fragment Contacts
-        ((MainActivity)getActivity()).changeFragmentContacts();
+        ((MainActivity)getActivity()).changeFragmentToContacts();
     }
 }

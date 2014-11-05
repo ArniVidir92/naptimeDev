@@ -221,8 +221,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
-    public void changeFragmentContacts()
-    {
+
+    public void changeFragmentToContacts() {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         fragment = new Contacts();
@@ -232,7 +232,16 @@ public class MainActivity extends Activity
                 .commit();
     }
 
-
+    public void changeFragmentToFavorites()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new Favorites();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }
 
 

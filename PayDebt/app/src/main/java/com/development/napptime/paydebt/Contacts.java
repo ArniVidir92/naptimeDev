@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.text.Editable;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,11 +39,13 @@ public class Contacts extends Fragment {
     // A database that serves this class
     private SQLiteDatabase db;
     private View view = null;
-    private Button addContact = null;
     private ListView listView;
     private String name;
     private int id;
     private Cursor cursor;
+    private ImageButton addContact = null;
+    private ImageButton favoritesButton = null;
+    private EditText inputSearch;
 
     // To indicate if we need to update the contact list or not
     private boolean needsToUpdate = false;
@@ -54,11 +60,19 @@ public class Contacts extends Fragment {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_contacts, container, false);
 
-        addContact = (Button) view.findViewById(R.id.buttonAddContact);
+        addContact = (ImageButton) view.findViewById(R.id.buttonAddContact);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addContact(v);
+            }
+        });
+
+        favoritesButton = (ImageButton) view.findViewById(R.id.favoriteButton);
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Favorites(v);
             }
         });
 
@@ -77,7 +91,7 @@ public class Contacts extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // String item = ((TextView)view).getText().toString();
-                ((MainActivity)getActivity()).changeFragmentToChosenContact( listItems.get(position), listIds.get(position) );
+                ((MainActivity)getActivity()).changeFragmentToChosenContact(listItems.get(position), listIds.get(position));
                 /*String item = listItems.get(position);
                 Toast.makeText(getActivity(), item, Toast.LENGTH_LONG).show();*/
 
@@ -111,11 +125,32 @@ public class Contacts extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
+
+        inputSearch = (EditText) view.findViewById(R.id.searchBox);
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                adapter.getFilter().filter(cs);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+            }
+        });
     }
 
     public void addContact(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToAddContact();
+    }
+
+    public void Favorites(View v)
+    {
+        ((MainActivity)getActivity()).changeFragmentToFavorites();
     }
 
     @Override
