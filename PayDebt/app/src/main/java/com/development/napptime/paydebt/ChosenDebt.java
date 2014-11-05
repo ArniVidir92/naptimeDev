@@ -81,7 +81,7 @@ public class ChosenDebt extends Fragment {
 
 
     public void setDescription(){
-        TextView aboutC = (TextView) view.findViewById(R.id.descriptionDebt);
+        TextView aboutC = (TextView) view.findViewById(R.id.Description);
         aboutC.setVisibility(View.GONE);
 
         String description = "";
