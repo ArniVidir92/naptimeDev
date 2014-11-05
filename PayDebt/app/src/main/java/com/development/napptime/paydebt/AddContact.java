@@ -67,8 +67,6 @@ public class AddContact extends Fragment{
         if (checkBox.isChecked()) {
             favoriteCheck = 1;
         }
-
-
     }
 
     //Adds the info in the EditText field for inputting contact name

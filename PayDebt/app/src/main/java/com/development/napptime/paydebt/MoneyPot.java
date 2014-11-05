@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +59,12 @@ public class MoneyPot extends Fragment {
         String[] columns = {"name", "amount"};
 
         cursor = db.query("POTS",columns,null,null,null,null,null);
+        int total_amount = 0;
 
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             amount = cursor.getDouble(1);
+            total_amount += amount;
 
             listItemsName.add(name + ":   " + amount);
         }
@@ -69,6 +74,18 @@ public class MoneyPot extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
+
+        EditText moneyPotPeople = (EditText) view.findViewById(R.id.moneyPotPeople);
+        TextView totalPot = (TextView) view.findViewById(R.id.amountPot);
+
+        if (moneyPotPeople.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), "Input missing", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            int peeps = Integer.parseInt(moneyPotPeople.getText().toString());
+            int amountPerDude = total_amount/peeps;
+            totalPot.setText(String.valueOf("Amount per person:" + amountPerDude));
+        }
 
         return view;
     }

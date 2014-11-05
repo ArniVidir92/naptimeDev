@@ -14,33 +14,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <Spinner
+                android:id="@+id/contactsSpinner"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="wrap_content" />
 
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#FFFFFF"
-                    android:text="@string/name"
-                    android:id="@+id/moneyPotDebt"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"/>
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:inputType="text"
-                    android:layout_height="40dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:id="@+id/inputName"
-                    android:layout_weight="1" />
-
-
-            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
@@ -65,8 +43,6 @@
                     android:layout_gravity="center"
                     android:id="@+id/inputAmount"
                     android:layout_weight="1" />
-
-
             </LinearLayout>
 
             <TextView
