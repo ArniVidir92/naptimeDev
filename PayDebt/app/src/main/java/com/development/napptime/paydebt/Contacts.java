@@ -31,18 +31,21 @@ import static java.util.Collections.sort;
 public class Contacts extends Fragment {
 
     // DbHelper that serves as a helper for the class
-    DbHelper dbhelper;
+    private DbHelper dbhelper;
     // A database that serves this class
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
     private View view = null;
     private Button addContact = null;
-    ListView listView;
-    String name;
-    int id;
-    Cursor cursor;
+    private ListView listView;
+    private String name;
+    private int id;
+    private Cursor cursor;
 
-    List<String> listItems=new ArrayList<String>();
-    List<Integer> listIds = new ArrayList<Integer>();
+    // To indicate if we need to update the contact list or not
+    private boolean needsToUpdate = false;
+
+    private List<String> listItems=new ArrayList<String>();
+    private List<Integer> listIds = new ArrayList<Integer>();
     //The ArrayAdapter for the listView
     private ArrayAdapter<String> adapter;
 

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ public class AddContact extends Fragment{
     //Button for adding contact to sql database
     private Button addContact = null;
 
+    private EditText phoneNr = null;
+
     private int favoriteCheck = 0;
     //Our layouts view
     private View view = null;
@@ -35,6 +38,11 @@ public class AddContact extends Fragment{
 
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_addcontact, container, false);
+
+        // Set a phone number listener to the phone number text edit
+        phoneNr = (EditText) view.findViewById(R.id.inputContactPhoneNumber);
+
+        phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         //Gets our button
         addContact = (Button) view.findViewById(R.id.addContactToDB);
@@ -72,6 +80,8 @@ public class AddContact extends Fragment{
     //Adds the info in the EditText field for inputting contact name
     //to our sql database
     public void addContactToDB(View v){
+        // Get text from phone number
+        String phone = phoneNr.getText().toString();
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
@@ -86,7 +96,11 @@ public class AddContact extends Fragment{
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",name);
         contentValues.put("description",description);
+        contentValues.put("phone",phone);
         contentValues.put("favorite", favoriteCheck);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
+
+        // Change to fragment Contacts
+        ((MainActivity)getActivity()).changeFragmentContacts();
     }
 }

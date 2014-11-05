@@ -28,7 +28,7 @@
     <string name="AddDebt_date">date</string>
     <string name="AddDebt_Due">due</string>
     <string name="contacts_header">Contacts</string>
-    <string name="phoneNumber">Phone number</string>
+    <string name="phoneNumber">Phone:</string>
     <string name="contactName">Name</string>
     <string name="bankAcc">Bank account</string>
     <string name="contactDesc">Other info</string>

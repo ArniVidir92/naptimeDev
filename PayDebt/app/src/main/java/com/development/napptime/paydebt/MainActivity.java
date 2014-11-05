@@ -221,6 +221,17 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    public void changeFragmentContacts()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new Contacts();
+        fragmentManager.popBackStack();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
 
 }
 

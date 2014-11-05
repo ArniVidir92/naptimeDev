@@ -72,7 +72,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="#FFFFFF"
                     android:layout_height="40dp"
                     android:layout_gravity="center"

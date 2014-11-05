@@ -83,6 +83,7 @@ public class ChosenContact extends Fragment {
 
         //Adds a description about the contact from db
         setDescription();
+        setPhone();
 
 
         //Gets our button and sets a listener to catch when user clicks it
@@ -124,8 +125,12 @@ public class ChosenContact extends Fragment {
     }
 
     public void setDescription(){
-        TextView aboutC = (TextView) view.findViewById(R.id.descriptionContact);
+
+        TextView descrTV = (TextView) view.findViewById(R.id.descriptionContact);
+        TextView aboutC = (TextView) view.findViewById(R.id.aboutContact);
+
         aboutC.setVisibility(View.GONE);
+        descrTV.setVisibility(View.GONE);
 
         String description = "";
         String[] columns = {"description"};
@@ -134,12 +139,36 @@ public class ChosenContact extends Fragment {
         while(cursor.moveToNext()) {
             description = cursor.getString(0);
             Log.d("De", description);
-            aboutC.setText(description);
-            aboutC.setVisibility(View.VISIBLE);
+            descrTV.setText(description);
+            if( !description.equals("") ){
+                descrTV.setVisibility(View.VISIBLE);
+                aboutC.setVisibility(View.VISIBLE);
+            }
         }
         cursor.close();
+    }
 
+    public void setPhone(){
+        TextView phone = (TextView) view.findViewById(R.id.contactPhone);
+        TextView number = (TextView) view.findViewById(R.id.phoneNumber);
 
+        phone.setVisibility(View.GONE);
+        number.setVisibility(View.GONE);
+
+        String phoneNumber = "";
+        String[] columns = {"phone"};
+        String where = "_contact_id = "+cId+" AND phone is not NULL";
+        cursor = db.query("CONTACTS",columns,where,null,null,null,null);
+        while(cursor.moveToNext()) {
+            phoneNumber = cursor.getString(0);
+            Log.d("De", phoneNumber);
+            number.setText(phoneNumber);
+            if( !phoneNumber.equals("") ){
+                phone.setVisibility(View.VISIBLE);
+                number.setVisibility(View.VISIBLE);
+            }
+        }
+        cursor.close();
     }
 
     // Adds a new debt to the chosen contact
