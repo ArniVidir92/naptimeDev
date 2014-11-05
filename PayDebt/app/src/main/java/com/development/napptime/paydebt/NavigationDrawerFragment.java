@@ -258,15 +258,6 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            FragmentManager fragmentManager = getFragmentManager();
-            Fragment fragment = null;
-            fragment = new AddContact();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit();
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

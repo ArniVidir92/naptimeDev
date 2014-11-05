@@ -66,7 +66,7 @@ public class ChosenContact extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            this.cId = args.getInt("cId")+1;
+            this.cId = args.getInt("cId");
         }
     }
 
@@ -74,12 +74,16 @@ public class ChosenContact extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //this.cId = this.getArguments().getInt("cId");
-
-        Log.d("cId",""+cId);
-
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_chosen_contact, container, false);
+
+        //Initializes the database helper with the fragment's parent activity's context
+        dbhelper = new DbHelper(getActivity());
+        db = dbhelper.getWritableDatabase();
+
+        //Adds a description about the contact from db
+        setDescription();
+
 
         //Gets our button and sets a listener to catch when user clicks it
         addDebt = (Button) view.findViewById(R.id.buttonAddDebt);
@@ -96,25 +100,20 @@ public class ChosenContact extends Fragment {
     }
 
     public void addDebtsForContactFromDb(){
-        //Initializes the database helper with the fragment's parent activity's context
-        dbhelper = new DbHelper(getActivity());
-        db = dbhelper.getWritableDatabase();
 
         //Denotes the columns that we want to fetch from the database
-        String[] columns = {"_contact_id", "name", "amount"};
-        cursor = db.query("DEBTS",columns,null,null,null,null,null);
+        String[] columns = {"name", "amount"};
+        String where = "_contact_id = "+cId;
+        cursor = db.query("DEBTS",columns,where,null,null,null,null);
 
         // Moves through each row of the db and adds the name
         // and amount of each debt to the listItemsName
         while(cursor.moveToNext()) {
-            contactId = cursor.getInt(0);
-            name = cursor.getString(1);
-            amount = cursor.getDouble(2);
-            if(cId == contactId){
-                listItemsName.add(name + ":   " + amount);
-            }
+            name = cursor.getString(0);
+            amount = cursor.getDouble(1);
+            listItemsName.add(name + ":   " + amount);
         }
-
+        cursor.close();
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
 
@@ -122,6 +121,25 @@ public class ChosenContact extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
         listView.setAdapter(adapter);
+    }
+
+    public void setDescription(){
+        TextView aboutC = (TextView) view.findViewById(R.id.descriptionContact);
+        aboutC.setVisibility(View.GONE);
+
+        String description = "";
+        String[] columns = {"description"};
+        String where = "_contact_id = "+cId+" AND description is not NULL";
+        cursor = db.query("CONTACTS",columns,where,null,null,null,null);
+        while(cursor.moveToNext()) {
+            description = cursor.getString(0);
+            Log.d("De", description);
+            aboutC.setText(description);
+            aboutC.setVisibility(View.VISIBLE);
+        }
+        cursor.close();
+
+
     }
 
     // Adds a new debt to the chosen contact
@@ -134,6 +152,4 @@ public class ChosenContact extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
-
-
 }

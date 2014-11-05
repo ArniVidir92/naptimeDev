@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class Contacts extends Fragment {
     // A database that serves this class
     SQLiteDatabase db;
     private View view = null;
+    private Button addContact = null;
     ListView listView;
     String name;
     int id;
@@ -48,6 +50,15 @@ public class Contacts extends Fragment {
                              Bundle savedInstanceState) {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_contacts, container, false);
+
+        addContact = (Button) view.findViewById(R.id.buttonAddContact);
+        addContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addContact(v);
+            }
+        });
+
 
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.contacts_list);
@@ -97,6 +108,11 @@ public class Contacts extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_contacts_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
+    }
+
+    public void addContact(View v)
+    {
+        ((MainActivity)getActivity()).changeFragmentToAddContact();
     }
 
     @Override

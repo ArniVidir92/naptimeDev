@@ -206,8 +206,21 @@ public class MainActivity extends Activity
         fragment = new PotEntry();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(null)
                 .commit();
     }
+
+    public void changeFragmentToAddContact()
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new AddContact();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
 }
 
