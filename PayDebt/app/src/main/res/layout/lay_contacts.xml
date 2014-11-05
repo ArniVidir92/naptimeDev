@@ -5,6 +5,15 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal">
 
+    <Button
+        android:text="@string/addContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:id="@+id/buttonAddContact"
+        android:layout_margin="10dp"
+        android:layout_gravity="right" />
+
     <ListView android:id="@+id/contacts_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
@@ -14,4 +23,5 @@
         android:layout_marginTop="130px"
         android:textSize="25px"
         android:text="@+string/contacts_header"/>
+
 </LinearLayout>
