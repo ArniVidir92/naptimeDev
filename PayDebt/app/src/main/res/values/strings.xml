@@ -44,6 +44,7 @@
     <string name="Money_Pot_Desc">Description</string>
     <string name="title_section9">Money Pot Entry</string>
     <string name="Purchases">Purchases</string>
+    <string name="description">About Contact</string>
 
     <string-array name="sports_array">
         <item>Shuttle Badminton</item>

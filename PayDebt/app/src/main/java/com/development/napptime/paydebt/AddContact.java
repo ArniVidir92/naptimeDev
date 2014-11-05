@@ -67,8 +67,6 @@ public class AddContact extends Fragment{
         if (checkBox.isChecked()) {
             favoriteCheck = 1;
         }
-
-
     }
 
     //Adds the info in the EditText field for inputting contact name
@@ -78,12 +76,16 @@ public class AddContact extends Fragment{
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
         name = name.substring(0,1).toUpperCase() + name.substring(1);
+        // Get text from description field
+        EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
+        String description = contactDescription.getText().toString();
         onCheckboxClicked(view);
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name",name);
+        contentValues.put("description",description);
         contentValues.put("favorite", favoriteCheck);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
     }

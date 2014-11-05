@@ -87,7 +87,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/contactDesc"
+                android:text="@string/desc"
                 android:textColor="#FFFFFF"
                 android:id="@+id/contactDesc"
                 android:layout_gravity="center"/>
