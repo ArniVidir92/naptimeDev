@@ -30,7 +30,7 @@ import static java.util.Collections.sort;
  */
 public class Contacts extends Fragment {
 
-    // dbhelper that serves as a helper for the class
+    // DbHelper that serves as a helper for the class
     DbHelper dbhelper;
     // A database that serves this class
     SQLiteDatabase db;
