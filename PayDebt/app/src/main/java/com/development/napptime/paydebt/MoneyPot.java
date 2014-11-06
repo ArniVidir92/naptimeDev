@@ -22,7 +22,9 @@ import java.util.List;
 
 /**
  * Created by napptime on 10/11/14.
- *
+ * The money pot class serves the purpose of creating and working with
+ * the moneypot feature. The moneypot feature allows users to divide the debts from a selection
+ * of payments paid by separate people.
  */
 public class MoneyPot extends Fragment {
 

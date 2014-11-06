@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 /**
  * Created by napptime on 5.11.2014.
+ * the chosen debts class serves the purpose of showing and working around a
+ * single selected debt from a selected user.
  */
 public class ChosenDebt extends Fragment {
 
