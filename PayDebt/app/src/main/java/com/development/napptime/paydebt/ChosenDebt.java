@@ -91,7 +91,7 @@ public class ChosenDebt extends Fragment {
         String[] columnsD = {"name", "description", "amount","date","due"};
         where = "_debt_id = "+ this.dId;
         cursor = db.query("DEBTS",columnsD,where,null,null,null,null);
-        while(cursor.moveToNext()){
+        while(cursor.moveToNext()) {
             dName = cursor.getString(0);
             dDescription = cursor.getString(1);
             amount = cursor.getString(2);

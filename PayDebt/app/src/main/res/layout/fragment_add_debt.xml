@@ -18,7 +18,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:padding="1dp">
 
 
                 <TextView
@@ -35,7 +36,6 @@
                     android:layout_width="fill_parent"
                     android:inputType="text"
                     android:layout_height="40dp"
-                    android:textColor="#FFFFFF"
                     android:layout_gravity="center"
                     android:id="@+id/editName"
                     android:layout_weight="1" />
@@ -45,7 +45,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:padding="1dp">
 
 
                 <TextView
@@ -61,7 +62,6 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:inputType="number"
-                    android:textColor="#FFFFFF"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/editTextAmount"
@@ -72,7 +72,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:padding="1dp">
 
 
                 <TextView
@@ -87,7 +88,6 @@
 
                 <EditText
                     android:layout_width="fill_parent"
-                    android:textColor="#FFFFFF"
                     android:inputType="date"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -100,7 +100,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:padding="1dp">
 
 
                 <TextView
@@ -115,7 +116,6 @@
 
                 <EditText
                     android:layout_width="fill_parent"
-                    android:textColor="#FFFFFF"
                     android:inputType="date"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -137,7 +137,6 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:textColor="#FFFFFF"
                 android:inputType="textMultiLine"
                 android:lines="15"
                 android:minLines="2"
