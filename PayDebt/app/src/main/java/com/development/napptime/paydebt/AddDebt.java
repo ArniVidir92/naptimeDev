@@ -55,6 +55,7 @@ public class AddDebt extends Fragment{
     //Contact Id
     private int cId = -1;
 
+    //Overrides the onCreate of parent
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -65,6 +66,7 @@ public class AddDebt extends Fragment{
         }
     }
 
+    //Overrides the OnCreateView of parent
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
