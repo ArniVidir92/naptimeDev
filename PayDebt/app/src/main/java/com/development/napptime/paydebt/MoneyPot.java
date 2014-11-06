@@ -97,12 +97,15 @@ public class MoneyPot extends Fragment {
         listView.setAdapter(adapter);
 
         String contact;
-        Integer split;
+        Integer split=0;
         Integer paid;
         Integer newAmount;
         Integer gets;
         Integer pays;
-        split = total_amount/numOfContacts;
+        if(!numOfContacts.equals(0)) {
+            split = total_amount / numOfContacts;
+        }
+
         //select name, sum(amount) from pots group by name;
         Cursor cursorAmount = db.rawQuery(
                 "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
