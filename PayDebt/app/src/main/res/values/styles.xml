@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/ActionStyle</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
         <item name="android:colorBackground">#333333</item>
 
     </style>
@@ -12,6 +13,12 @@
     <style name="ActionStyle"
         parent="@android:style/Widget.Holo.ActionBar.Solid">
         <item name="android:background">@drawable/actionbackground</item>
+    </style>
+
+    <style name="EditTextStyle" parent="android:style/Widget.EditText">
+        <item name="android:background">@drawable/edittextbox</item>
+        <item name="android:layout_margin">2pt</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
     <style name="ButtonStyle" parent="android:style/Widget.Button">

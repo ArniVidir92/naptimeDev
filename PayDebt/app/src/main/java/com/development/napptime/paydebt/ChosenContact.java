@@ -33,7 +33,8 @@ public class ChosenContact extends Fragment {
     //Instance variables
 
     // Id of the contact we are currently looking at
-    private int cId=-1;
+    private int cId = -1;
+    private String cName = "";
 
     //Button that swaps the current fragment for
     //the fragment that adds debts
@@ -47,11 +48,12 @@ public class ChosenContact extends Fragment {
     private View view = null;
 
     //Our layouts list for debts
-    ListView listView;
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
 
     //String, Integer and double for debt name, contact Id and amount
     String name;
-    int contactId;
+    private int debtId;
     double amount;
 
     //Database cursor
@@ -59,6 +61,8 @@ public class ChosenContact extends Fragment {
 
     //Initialize a list of strings
     List<String> listItemsName=new ArrayList<String>();
+    List<String> listDebtName = new ArrayList<String>();
+    List<Integer> listDebtIds=new ArrayList<Integer>();
 
 
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -67,13 +71,13 @@ public class ChosenContact extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
+            this.cName = args.getString("cName");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_chosen_contact, container, false);
 
@@ -85,7 +89,6 @@ public class ChosenContact extends Fragment {
         setDescription();
         setPhone();
 
-
         //Gets our button and sets a listener to catch when user clicks it
         addDebt = (Button) view.findViewById(R.id.buttonAddDebt);
         addDebt.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +98,25 @@ public class ChosenContact extends Fragment {
             }
         });
 
-        addDebtsForContactFromDb();
+        //Gets the list view from the layout
+        listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
+        //Adapts the listItems to our list view using lay_chosen_contact_row
+        adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
+
+        if( listItemsName.isEmpty() ) {
+            addDebtsForContactFromDb();
+        }else{
+            listView.setAdapter(adapter);
+        }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                ((MainActivity)getActivity()).changeFragmentToChosenDebt(listDebtName.get(position), listDebtIds.get(position),cId);
+            }
+        });
 
         return view;
     }
@@ -103,24 +124,22 @@ public class ChosenContact extends Fragment {
     public void addDebtsForContactFromDb(){
 
         //Denotes the columns that we want to fetch from the database
-        String[] columns = {"name", "amount"};
+        String[] columns = {"_debt_id","name", "amount"};
         String where = "_contact_id = "+cId;
         cursor = db.query("DEBTS",columns,where,null,null,null,null);
 
         // Moves through each row of the db and adds the name
         // and amount of each debt to the listItemsName
         while(cursor.moveToNext()) {
-            name = cursor.getString(0);
-            amount = cursor.getDouble(1);
+            debtId = cursor.getInt(0);
+            name = cursor.getString(1);
+            amount = cursor.getDouble(2);
             listItemsName.add(name + ":   " + amount);
+            listDebtName.add(name);
+            listDebtIds.add(debtId);
         }
         cursor.close();
-        //Gets the list view from the layout
-        listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
 
-        //Adapts the listItems to our list view using lay_chosen_contact_row
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_chosen_contact_row, R.id.chosenContactName, listItemsName);
         listView.setAdapter(adapter);
     }
 
