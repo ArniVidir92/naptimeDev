@@ -68,6 +68,7 @@ public class ChosenContact extends Fragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //getting the sent variable
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
@@ -148,17 +149,21 @@ public class ChosenContact extends Fragment {
         listView.setAdapter(adapter);
     }
 
+    //sets the description for the chosen context
     public void setDescription(){
 
+        // gets the textfield
         TextView descrTV = (TextView) view.findViewById(R.id.descriptionContact);
         TextView aboutC = (TextView) view.findViewById(R.id.aboutContact);
 
+        // sets the visibility of the fields
         aboutC.setVisibility(View.GONE);
         descrTV.setVisibility(View.GONE);
 
         String description = "";
         String[] columns = {"description"};
         String where = "_contact_id = "+cId+" AND description is not NULL";
+        //the select query for the database
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
         while(cursor.moveToNext()) {
             description = cursor.getString(0);
@@ -169,19 +174,24 @@ public class ChosenContact extends Fragment {
                 aboutC.setVisibility(View.VISIBLE);
             }
         }
+        //close the database commection
         cursor.close();
     }
 
+    //updates the phone field for the chosen contact
     public void setPhone(){
+        //gets the textfields
         TextView phone = (TextView) view.findViewById(R.id.contactPhone);
         TextView number = (TextView) view.findViewById(R.id.phoneNumber);
 
+        //set the visibility of the text fields
         phone.setVisibility(View.GONE);
         number.setVisibility(View.GONE);
 
         String phoneNumber = "";
         String[] columns = {"phone"};
         String where = "_contact_id = "+cId+" AND phone is not NULL";
+        //the select query for the database
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
         while(cursor.moveToNext()) {
             phoneNumber = cursor.getString(0);

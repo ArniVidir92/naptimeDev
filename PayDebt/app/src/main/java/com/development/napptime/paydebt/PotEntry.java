@@ -27,10 +27,12 @@ import java.util.List;
  */
 public class PotEntry extends Fragment {
 
+    //Define variables for the various widgets of the layout
     private View view = null;
     private Button addEntry = null;
     private List<Integer> listIds = new ArrayList<Integer>();
     private ArrayList<String> list=new ArrayList<String>();
+    //various other instance variables
     String name;
     Integer id;
 
@@ -52,6 +54,8 @@ public class PotEntry extends Fragment {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_moneypot, container, false);
 
+        //gets the entry button from the layout and connects it's functionality
+        // to the on click listener
         addEntry = (Button) view.findViewById(R.id.buttonAddEntry);
         addEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +64,11 @@ public class PotEntry extends Fragment {
             }
         });
 
+        //initialize the database helper
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        //define what we need
         String[] columns = {"name", "_contact_id"};
         String[] amounts = {"amount"};
 
@@ -70,11 +76,14 @@ public class PotEntry extends Fragment {
         cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,"name");
         cursorFA = sqLiteDatabase.query("POTS",amounts,null,null,null,null,null);
 
+        //get the spinner from the layout
         spinner = (Spinner) view.findViewById(R.id.contactsSpinner);
 
+        //define the hash and set the number of contacts as 0 to begin with
         numOfContacts = 0;
         HashSet test = new HashSet();
 
+        //go through all the contacts
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             id = cursor.getInt(1);
@@ -83,6 +92,8 @@ public class PotEntry extends Fragment {
 
             test.add(name);
         }
+
+        //toast message for testing purposes
         Integer blaff = test.size();
         String bla= blaff.toString();
 
@@ -92,11 +103,13 @@ public class PotEntry extends Fragment {
 
         totalAmount = 0;
 
+        // count
         while(cursorFA.moveToNext()) {
             entryAmount = cursorFA.getInt(0);
             totalAmount +=entryAmount;
         }
 
+        //create an adapter and use it to move our list into the spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -105,6 +118,7 @@ public class PotEntry extends Fragment {
         return view;
     }
 
+    //converts a string to double and returns -1 if it's the empty string
     public static double stringToDouble(String str){
         if(str.equals(""))
             return -1;
@@ -112,6 +126,7 @@ public class PotEntry extends Fragment {
         return Double.parseDouble(str);
     }
 
+    //add the entry we created to the database
     public void addEntryToPotDatabase(View v){
         // Get text from name field
         // Get amount from EditText box
@@ -129,8 +144,10 @@ public class PotEntry extends Fragment {
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        //get the info from the spinner
         String nameTest = spinner.getSelectedItem().toString();
 
+        //create the content values and insert it into the database
         ContentValues contentValues = new ContentValues();
         contentValues.put("_contact_id",1);
         contentValues.put("name",nameTest);

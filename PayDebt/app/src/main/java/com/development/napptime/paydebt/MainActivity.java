@@ -71,6 +71,7 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        // used by us to see the changes on the backstack
         getFragmentManager().addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
@@ -177,6 +178,7 @@ public class MainActivity extends Activity
     }
 
     // Changes the fragment so we can add a debt to a specific contact
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToAddDebt(int contactId)
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -192,6 +194,7 @@ public class MainActivity extends Activity
     }
 
     // Changes the fragment so we can look at a specific contact a debt to a specific contact
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToChosenContact( String name, int cId )
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -209,6 +212,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    //change the fragment so we can access the money pot feature
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToPotEntry()
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -220,6 +225,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    //change the fragment so we can add another contact to the database
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToAddContact()
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -231,6 +238,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    //change the fragment to see the list of favorite contacts in the app
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToFavorites()
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -242,6 +251,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    //change the fragment to the chosendebt to see more about it
+    //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToChosenDebt(String debtName, int debtId, int contactId){
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
@@ -258,6 +269,8 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    //override the onBackPressed to make it call the same function because of weird implementation
+    // of onBackPressed in older devices
     @Override
     public void onBackPressed(){
         super.onBackPressed();

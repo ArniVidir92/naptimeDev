@@ -27,8 +27,10 @@ public class AddContact extends Fragment{
     //Button for adding contact to sql database
     private Button addContact = null;
 
+    //a editable text field for the phone number
     private EditText phoneNr = null;
 
+    // a variable to contains whether contact should be favorite
     private int favoriteCheck = 0;
     //Our layouts view
     private View view = null;
