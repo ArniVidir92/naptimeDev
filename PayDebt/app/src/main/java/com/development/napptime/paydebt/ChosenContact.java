@@ -81,6 +81,11 @@ public class ChosenContact extends Fragment {
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_chosen_contact, container, false);
 
+        // Initialize as empty
+        listItemsName=new ArrayList<String>();
+        listDebtName = new ArrayList<String>();
+        listDebtIds=new ArrayList<Integer>();
+
         //Initializes the database helper with the fragment's parent activity's context
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();

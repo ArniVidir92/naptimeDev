@@ -57,6 +57,10 @@ public class Contacts extends Fragment {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_contacts, container, false);
 
+        // Initialize as empty
+        listItems=new ArrayList<String>();
+        listIds = new ArrayList<Integer>();
+
         addContact = (ImageButton) view.findViewById(R.id.buttonAddContact);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
