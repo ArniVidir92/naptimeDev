@@ -47,9 +47,6 @@ public class Contacts extends Fragment {
     private ImageButton favoritesButton = null;
     private EditText inputSearch;
 
-    // To indicate if we need to update the contact list or not
-    private boolean needsToUpdate = false;
-
     private List<String> listItems=new ArrayList<String>();
     private List<Integer> listIds = new ArrayList<Integer>();
     //The ArrayAdapter for the listView
@@ -90,11 +87,7 @@ public class Contacts extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                // String item = ((TextView)view).getText().toString();
                 ((MainActivity)getActivity()).changeFragmentToChosenContact(listItems.get(position), listIds.get(position));
-                /*String item = listItems.get(position);
-                Toast.makeText(getActivity(), item, Toast.LENGTH_LONG).show();*/
-
             }
         });
 

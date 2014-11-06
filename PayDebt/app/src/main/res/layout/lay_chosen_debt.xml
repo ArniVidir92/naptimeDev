@@ -2,7 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#333333">>
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -25,7 +26,8 @@
                 android:textColor="#FFFFFF"
                 android:id="@+id/ContactNameText"
                 android:layout_gravity="center"
-                android:text="Contact name:" />
+                android:text="Contact name:"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -35,7 +37,8 @@
                 android:id="@+id/ContactName"
                 android:layout_gravity="center"
                 android:textStyle="italic"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -49,7 +52,8 @@
                     android:textColor="#FFFFFF"
                     android:id="@+id/DebtNameText"
                     android:layout_gravity="center"
-                    android:text="Debt Name:" />
+                    android:text="Debt Name:"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -59,7 +63,8 @@
                     android:id="@+id/DebtName"
                     android:layout_gravity="center"
                     android:textStyle="italic"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -73,7 +78,8 @@
                     android:textColor="#FFFFFF"
                     android:id="@+id/DebtAmountText"
                     android:layout_gravity="center"
-                    android:text="Debt Amount:" />
+                    android:text="Debt Amount:"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -83,7 +89,8 @@
                     android:id="@+id/DebtAmount"
                     android:layout_gravity="center"
                     android:textStyle="italic"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -97,7 +104,8 @@
                     android:textColor="#FFFFFF"
                     android:id="@+id/DateText"
                     android:layout_gravity="center"
-                    android:text="Date:" />
+                    android:text="Date:"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -107,7 +115,8 @@
                     android:id="@+id/Date"
                     android:layout_gravity="center"
                     android:textStyle="italic"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -121,7 +130,8 @@
                     android:textColor="#FFFFFF"
                     android:id="@+id/DueText"
                     android:layout_gravity="center"
-                    android:text="Due by:" />
+                    android:text="Due by:"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -131,7 +141,8 @@
                     android:id="@+id/Due"
                     android:layout_gravity="center"
                     android:textStyle="italic"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
 

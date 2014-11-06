@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -68,6 +70,19 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        getFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        Log.d("console","Jeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                    }
+                });
+        getFragmentManager().removeOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        Log.d("console","ooooooooooooooooooooooooooohh");
+                    }
+                });
     }
 
     @Override
@@ -184,6 +199,7 @@ public class MainActivity extends Activity
         fragment = new ChosenContact();
         Bundle args = new Bundle();
         args.putInt("cId", cId);
+        args.putString("cName", name);
         fragment.setArguments(args);
         mTitle = name;
         setTitle(mTitle);
@@ -215,17 +231,6 @@ public class MainActivity extends Activity
                 .commit();
     }
 
-
-    public void changeFragmentToContacts() {
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new Contacts();
-        fragmentManager.popBackStack();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
-    }
-
     public void changeFragmentToFavorites()
     {
         FragmentManager fragmentManager = getFragmentManager();
@@ -235,6 +240,27 @@ public class MainActivity extends Activity
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void changeFragmentToChosenDebt(String debtName, int debtId, int contactId){
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new ChosenDebt();
+        Bundle args = new Bundle();
+        args.putInt("cId", contactId);
+        args.putInt("dId", debtId);
+        fragment.setArguments(args);
+        mTitle = debtName;
+        setTitle(mTitle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 }
 

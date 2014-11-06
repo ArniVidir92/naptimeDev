@@ -37,6 +37,9 @@ public class AddDebt extends Fragment{
 
     //Instance variables
 
+    // Contact name
+    private String cName = "";
+
     //Button, adds debts to database when used
     private Button addDebt = null;
 
@@ -58,6 +61,7 @@ public class AddDebt extends Fragment{
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
+            this.cName = args.getString("cName");
         }
     }
 
@@ -188,8 +192,6 @@ public class AddDebt extends Fragment{
         CheckBox reminderCB = (CheckBox) view.findViewById(R.id.checkBoxReminder);
 
         double dbAmount = stringToDouble(amount);
-        int dbDate = dateToInt(date);
-        int dbDue = dateToInt(due);
 
         //Sets our reminder to 1, or 0 depending on context
         int reminder;
@@ -208,11 +210,13 @@ public class AddDebt extends Fragment{
         contentValues.put("_contact_id",this.cId);
         contentValues.put("name",name);
         contentValues.put("description",description);
-        if(dbDate != -1){contentValues.put("date",dbDate);}
-        if(dbDue != -1){contentValues.put("due",dbDue);}
+        contentValues.put("date",date);
+        contentValues.put("due",due);
         if(dbAmount != -1){contentValues.put("amount", dbAmount);}
         contentValues.put("reminder", reminder);
         long id = sqLiteDatabase.insert("DEBTS",null,contentValues);
+
+        getActivity().onBackPressed();
     }
 
 }
