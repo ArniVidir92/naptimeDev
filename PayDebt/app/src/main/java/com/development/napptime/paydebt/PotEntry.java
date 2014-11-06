@@ -23,7 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Created by Snorri on 30.10.2014.
+ * Created by napptime on 30.10.2014.
+ * This class serves the purpose of adding a new entry to an already existing money pot with
+ * all the required information and providing a user friendly form to do so
  */
 public class PotEntry extends Fragment {
 
