@@ -24,12 +24,16 @@ public class Favorites extends Fragment {
     DbHelper dbhelper;
     // A database that serves this class
     SQLiteDatabase db;
+
+    //Initialize variables
+
     private View view = null;
     ListView listView;
     String name;
     int id;
     Cursor cursor;
 
+    //initialize array lists
     List<String> listItems = new ArrayList<String>();
     List<Integer> listIds = new ArrayList<Integer>();
 
@@ -66,6 +70,7 @@ public class Favorites extends Fragment {
         return view;
     }
 
+    //Add all favorite contacts to the listview
     public void addToListView(){
         // Initialize the dbhelper
         dbhelper = new DbHelper(getActivity());

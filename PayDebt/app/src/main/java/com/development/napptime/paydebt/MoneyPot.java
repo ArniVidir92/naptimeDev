@@ -26,11 +26,13 @@ import java.util.List;
  */
 public class MoneyPot extends Fragment {
 
+    //Initialize variables
     private View view = null;
     private Button addEntry = null;
 
     private TextView showTotalAmount;
-
+    
+    //initialize variables for the database
     DbHelper dbhelper;
     SQLiteDatabase db;
 
@@ -38,6 +40,7 @@ public class MoneyPot extends Fragment {
 
     ListView listView;
 
+    //Initalize variables for later calculations
     Integer total_amount;
     Integer numOfContacts;
 
@@ -51,7 +54,7 @@ public class MoneyPot extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.lay_money_pot, container, false);
-
+        //Get the addEntry button from the layout
         addEntry = (Button) view.findViewById(R.id.buttonAddEntry);
         addEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +63,11 @@ public class MoneyPot extends Fragment {
             }
         });
 
+        //database variables
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
 
+        //only get name and amount of money paid from the database
         String[] columns = {"name", "amount"};
 
         cursor = db.query("POTS",columns,null,null,null,null,null);
@@ -71,6 +76,7 @@ public class MoneyPot extends Fragment {
         numOfContacts = 0;
         HashSet uniqueNames = new HashSet();
 
+        //Sum up the total amount of the moneypot
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             amount = cursor.getInt(1);
@@ -81,27 +87,34 @@ public class MoneyPot extends Fragment {
             listItemsName.add(name + ":   " + amount);
         }
 
+        //Number of unique names in the moneypot
         numOfContacts = uniqueNames.size();
 
+        //Toast message to show the number of unique contacts
         String bla= numOfContacts.toString();
         Toast.makeText(getActivity(), bla,
                 Toast.LENGTH_SHORT).show();
 
+        //Show the sum of all the payments in the moneypot
         showTotalAmount = (TextView) view.findViewById(R.id.showTotalAmount);
         showTotalAmount.setText(String.valueOf(total_amount));
 
+        //Get the list from the layout
         listView = (ListView) view.findViewById(R.id.mp_nonscroll_list);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
 
+        // initialize variables for the calculations of the money pot split
         String contact;
         Integer split=0;
         Integer paid;
         Integer newAmount;
         Integer gets;
         Integer pays;
+
+        //NumOfContacts != 0
         if(!numOfContacts.equals(0)) {
             split = total_amount / numOfContacts;
         }
@@ -109,20 +122,27 @@ public class MoneyPot extends Fragment {
         //select name, sum(amount) from pots group by name;
         Cursor cursorAmount = db.rawQuery(
                 "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
+
+        //Calculate which contact has to pay to the moneypot and which gets money from it.
         while(cursorAmount.moveToNext()) {
             contact = cursorAmount.getString(0);
             paid = cursorAmount.getInt(1);
             newAmount = paid-split;
+            //if you pay more money than the average money paid, you will get money from the pot
             if(paid>split) {
                 gets = newAmount;
                 Toast.makeText(getActivity(), contact +" gets " + gets.toString(),
                         Toast.LENGTH_SHORT).show();
             }
+            //if you pay less money than the average money paid, you will have to pay to the pot
             if(paid<split) {
                 pays = -newAmount;
                 Toast.makeText(getActivity(),contact + " pays " + pays.toString(),
                         Toast.LENGTH_SHORT).show();
             }
+
+            //if you paid the exact average of the money paid to the pot, you will neither get
+            //money nor have to pay money
             if(paid.equals(split)) {
                 Toast.makeText(getActivity(),contact + " is good",
                     Toast.LENGTH_SHORT).show();
@@ -145,6 +165,7 @@ public class MoneyPot extends Fragment {
         */
     }
 
+    //change the fragment to potEntry
     public void addEntry(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToPotEntry();

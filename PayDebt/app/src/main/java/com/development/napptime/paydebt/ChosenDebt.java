@@ -18,9 +18,13 @@ import android.widget.TextView;
  */
 public class ChosenDebt extends Fragment {
 
+    //Instance variables
 
+    //Id of the contact we are currently looking at
     private String cName = "";
     private int cId=-1;
+
+    //Id of the debt we are currently looking at
     private int dId = -1;
 
     private Button DeleteDebt = null;
@@ -100,6 +104,7 @@ public class ChosenDebt extends Fragment {
         }
         cursor.close();
 
+        //Variables for information about the debt we are currently looking at.
         TextView contact = (TextView) view.findViewById(R.id.ContactName);
         TextView debtName = (TextView) view.findViewById(R.id.DebtName);
         TextView debtAmount = (TextView) view.findViewById(R.id.DebtAmount);
@@ -110,6 +115,8 @@ public class ChosenDebt extends Fragment {
         TextView debtDescription = (TextView) view.findViewById(R.id.Description);
         TextView debtDescriptionText = (TextView) view.findViewById(R.id.DescriptionText);
 
+
+        //Give the Textview variables their proper value for information.
         contact.setText(cName);
         debtName.setText(dName);
         debtAmount.setText(amount);
@@ -133,8 +140,9 @@ public class ChosenDebt extends Fragment {
 
     }
 
-
+    //Deletes the debt we are currently looking at
     private void DeleteDebt(View v) {
+        //delete the debt from the database
         db.delete("DEBTS", "_debt_id = " + dId, null);
 
         getActivity().onBackPressed();

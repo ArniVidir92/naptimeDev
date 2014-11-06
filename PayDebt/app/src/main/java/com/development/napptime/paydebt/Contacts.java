@@ -38,6 +38,8 @@ public class Contacts extends Fragment {
     private DbHelper dbhelper;
     // A database that serves this class
     private SQLiteDatabase db;
+
+    //Instance variables
     private View view = null;
     private ListView listView;
     private String name;
@@ -60,7 +62,7 @@ public class Contacts extends Fragment {
         // Initialize as empty
         listItems=new ArrayList<String>();
         listIds = new ArrayList<Integer>();
-
+        //get the AddContact button from the layout.
         addContact = (ImageButton) view.findViewById(R.id.buttonAddContact);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +70,7 @@ public class Contacts extends Fragment {
                 addContact(v);
             }
         });
-
+        //get the favorite Button from the layout.
         favoritesButton = (ImageButton) view.findViewById(R.id.favoriteButton);
         favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +88,7 @@ public class Contacts extends Fragment {
         }else{
             listView.setAdapter(adapter);
         }
-
+        //Button listener for a button that sends the user to Chosen contact if clicked.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -98,6 +100,7 @@ public class Contacts extends Fragment {
         return view;
     }
 
+    //add all contacts to the listview
     public void addToListView(){
         // Initialize the dbhelper
         dbhelper = new DbHelper(getActivity());
@@ -139,12 +142,12 @@ public class Contacts extends Fragment {
             }
         });
     }
-
+    //Navigate to addContact
     public void addContact(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToAddContact();
     }
-
+    //Navigate to Favorites
     public void Favorites(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToFavorites();
