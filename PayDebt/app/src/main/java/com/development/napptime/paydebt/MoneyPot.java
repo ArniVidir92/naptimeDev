@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class MoneyPot extends Fragment {
     private View view = null;
     private Button addEntry = null;
 
+    private TextView showTotalAmount;
+
     DbHelper dbhelper;
     SQLiteDatabase db;
 
@@ -35,10 +38,14 @@ public class MoneyPot extends Fragment {
 
     ListView listView;
 
+    Integer total_amount;
+    Integer numOfContacts;
+
     String name;
-    double amount;
+    Integer amount;
 
     List<String> listItemsName=new ArrayList<String>();
+    List<String> calculatedPayments=new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,15 +66,29 @@ public class MoneyPot extends Fragment {
         String[] columns = {"name", "amount"};
 
         cursor = db.query("POTS",columns,null,null,null,null,null);
-        int total_amount = 0;
+        total_amount = 0;
+
+        numOfContacts = 0;
+        HashSet uniqueNames = new HashSet();
 
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
-            amount = cursor.getDouble(1);
+            amount = cursor.getInt(1);
             total_amount += amount;
+
+            uniqueNames.add(name);
 
             listItemsName.add(name + ":   " + amount);
         }
+
+        numOfContacts = uniqueNames.size();
+
+        String bla= numOfContacts.toString();
+        Toast.makeText(getActivity(), bla,
+                Toast.LENGTH_SHORT).show();
+
+        showTotalAmount = (TextView) view.findViewById(R.id.showTotalAmount);
+        showTotalAmount.setText(String.valueOf(total_amount));
 
         listView = (ListView) view.findViewById(R.id.mp_nonscroll_list);
 
@@ -75,20 +96,52 @@ public class MoneyPot extends Fragment {
                 R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
 
-        EditText moneyPotPeople = (EditText) view.findViewById(R.id.moneyPotPeople);
-        TextView totalPot = (TextView) view.findViewById(R.id.amountPot);
+        String contact;
+        Integer split;
+        Integer paid;
+        Integer newAmount;
+        Integer gets;
+        Integer pays;
+        split = total_amount/numOfContacts;
+        //select name, sum(amount) from pots group by name;
+        Cursor cursorAmount = db.rawQuery(
+                "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
+        while(cursorAmount.moveToNext()) {
+            contact = cursorAmount.getString(0);
+            paid = cursorAmount.getInt(1);
+            newAmount = paid-split;
+            if(paid>split) {
+                gets = newAmount;
+                Toast.makeText(getActivity(), contact +" gets " + gets.toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+            if(paid<split) {
+                pays = -newAmount;
+                Toast.makeText(getActivity(),contact + " pays " + pays.toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+            if(paid.equals(split)) {
+                Toast.makeText(getActivity(),contact + " is good",
+                    Toast.LENGTH_SHORT).show();
+            }
 
-        if (moneyPotPeople.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), "Input missing", Toast.LENGTH_SHORT).show();
         }
-        else {
-            int peeps = Integer.parseInt(moneyPotPeople.getText().toString());
-            int amountPerDude = total_amount/peeps;
-            totalPot.setText(String.valueOf("Amount per person:" + amountPerDude));
-        }
+
 
         return view;
     }
+
+    public void calculateSplit(View v){
+
+        /*Pseudo code
+        split = total_amount/numOfContacts;
+        amount=paid-split;
+        if (paid>split) contactGets = amount;
+        if (paid<split) contactPays = amount;
+        if (paid=split) do nothing;
+        */
+    }
+
     public void addEntry(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToPotEntry();
