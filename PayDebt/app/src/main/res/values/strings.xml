@@ -48,7 +48,7 @@
     <string name="potName">Pot name</string>
     <string name="addContact">+</string>
     <string name="searchContact">Search</string>
-    <string name="search_hint">bla</string>
+    <string name="search_hint">search</string>
     <string name="totalAmountPlaceHolder">amount</string>
     <string name="totalAmount">Total Amount:</string>
 
