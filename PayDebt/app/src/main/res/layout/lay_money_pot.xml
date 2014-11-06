@@ -61,20 +61,21 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/moneyPotPeople"
+                    android:text="@string/totalAmount"
                     android:textColor="#FFFFFF"
-                    android:id="@+id/textViewFavorite"
+                    android:id="@+id/totalAmount"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
 
-                <EditText
+                <TextView
                     android:layout_width="fill_parent"
-                    android:inputType="number"
-                    android:textColor="#FFFFFF"
                     android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/totalAmountPlaceHolder"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/showTotalAmount"
                     android:layout_gravity="center"
-                    android:id="@+id/moneyPotPeople"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout

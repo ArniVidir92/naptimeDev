@@ -16,8 +16,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -31,9 +33,13 @@ public class PotEntry extends Fragment {
     private ArrayList<String> list=new ArrayList<String>();
     String name;
     Integer id;
-    Object item;
+
+    Integer numOfContacts;
+    Integer totalAmount;
+    Integer entryAmount;
 
     Cursor cursor;
+    Cursor cursorFA;
 
     Spinner spinner;
 
@@ -58,16 +64,37 @@ public class PotEntry extends Fragment {
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
         String[] columns = {"name", "_contact_id"};
+        String[] amounts = {"amount"};
 
         // Selects the column name and puts the column in too cursor.
         cursor = sqLiteDatabase.query("CONTACTS",columns,null,null,null,null,"name");
+        cursorFA = sqLiteDatabase.query("POTS",amounts,null,null,null,null,null);
+
         spinner = (Spinner) view.findViewById(R.id.contactsSpinner);
+
+        numOfContacts = 0;
+        HashSet test = new HashSet();
 
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             id = cursor.getInt(1);
             list.add(name);
             listIds.add(id);
+
+            test.add(name);
+        }
+        Integer blaff = test.size();
+        String bla= blaff.toString();
+
+        Toast.makeText(getActivity(), bla,
+                Toast.LENGTH_SHORT).show();
+
+
+        totalAmount = 0;
+
+        while(cursorFA.moveToNext()) {
+            entryAmount = cursorFA.getInt(0);
+            totalAmount +=entryAmount;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),

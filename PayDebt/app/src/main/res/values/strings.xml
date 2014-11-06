@@ -38,7 +38,7 @@
     <string name="X">X</string>
     <string name="Money_Pot">Money Pot</string>
     <string name="addMoneyPotDebt">New entry</string>
-    <string name="moneyPotPeople">Count:</string>
+    <string name="moneyPotPeople">Total Amount</string>
     <string name="Amount_per_person">Amount per person</string>
     <string name="Money_Pot_Name">Money Pot</string>
     <string name="Money_Pot_Desc">Description</string>
@@ -49,5 +49,7 @@
     <string name="addContact">+</string>
     <string name="searchContact">Search</string>
     <string name="search_hint">bla</string>
+    <string name="totalAmountPlaceHolder">amount</string>
+    <string name="totalAmount">Total Amount:</string>
 
 </resources>
