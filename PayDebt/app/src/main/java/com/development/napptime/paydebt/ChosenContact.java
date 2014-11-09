@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -146,6 +147,9 @@ public class ChosenContact extends Fragment {
         }
         cursor.close();
 
+        if(listItemsName.isEmpty())
+            listItemsName.add("This contact has no debts.");
+
         listView.setAdapter(adapter);
     }
 
@@ -161,7 +165,7 @@ public class ChosenContact extends Fragment {
         descrTV.setVisibility(View.GONE);
 
         String description = "";
-        String[] columns = {"description"};
+        String[] columns = {"description","favorite"};
         String where = "_contact_id = "+cId+" AND description is not NULL";
         //the select query for the database
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
@@ -172,6 +176,11 @@ public class ChosenContact extends Fragment {
             if( !description.equals("") ){
                 descrTV.setVisibility(View.VISIBLE);
                 aboutC.setVisibility(View.VISIBLE);
+            }
+            if(cursor.getInt(1)==1)
+            {
+                CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
+                checkBox.setChecked(true);
             }
         }
         //close the database commection

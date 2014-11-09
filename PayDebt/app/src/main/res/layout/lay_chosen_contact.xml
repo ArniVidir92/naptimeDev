@@ -95,7 +95,7 @@
             <Button
                 android:text="@string/adddebt"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:layout_margin="10dp"
                 android:id="@+id/buttonAddDebt"
@@ -123,12 +123,43 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkBoxFavorite"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:onClick="null"
+                    />
 
 
 
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
 
+                <Button
+                    android:text="Edit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:layout_margin="10dp"
+                    android:id="@+id/buttonEdit"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:text="Delete"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:layout_margin="10dp"
+                    android:id="@+id/buttonDelete"
+                    android:layout_weight="1"/>
+
+
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
