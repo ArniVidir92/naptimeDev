@@ -43,7 +43,7 @@ class DbHelper extends SQLiteOpenHelper
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-        Message.message(context, "Constructor called");
+        //Message.message(context, "Constructor called");
     }
 
     public static final String CONTACTS_TABLE = "create table if not exists "
@@ -84,7 +84,7 @@ class DbHelper extends SQLiteOpenHelper
         db.execSQL(POTS_TABLE);
 
         //notify user
-        Message.message(context, "onCreate called");
+        //Message.message(context, "onCreate called");
     }
 
     //Called when database to drop,add tables or any upgrades to the new  schema version

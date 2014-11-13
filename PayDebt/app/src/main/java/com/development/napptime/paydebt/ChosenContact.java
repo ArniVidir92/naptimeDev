@@ -40,6 +40,7 @@ public class ChosenContact extends Fragment {
     //Button that swaps the current fragment for
     //the fragment that adds debts
     private Button addDebt = null;
+    private Button DeleteContact = null;
 
     //Variables for our database
     DbHelper dbhelper;
@@ -91,6 +92,14 @@ public class ChosenContact extends Fragment {
         //Initializes the database helper with the fragment's parent activity's context
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
+
+        DeleteContact = (Button) view.findViewById(R.id.buttonDelete);
+        DeleteContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteContact(v);
+            }
+        });
 
         //Adds a description about the contact from db
         setDescription();
@@ -223,5 +232,13 @@ public class ChosenContact extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+    }
+
+    //Deletes the contact we are currently looking at
+    private void DeleteContact(View v) {
+        //delete the contact from the database
+        db.delete("CONTACTS", "_contact_id = " + cId, null);
+
+        getActivity().onBackPressed();
     }
 }
