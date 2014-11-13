@@ -139,6 +139,7 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section9);
                 break;
         }
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

@@ -51,6 +51,10 @@ public class Contacts extends Fragment {
 
     private List<String> listItems=new ArrayList<String>();
     private List<Integer> listIds = new ArrayList<Integer>();
+
+    // Extra variables for the search box
+    private List<String> listItemsCurrent=new ArrayList<String>();
+    private List<Integer> listIdsCurrent = new ArrayList<Integer>();
     //The ArrayAdapter for the listView
     private ArrayAdapter<String> adapter;
 
@@ -93,7 +97,8 @@ public class Contacts extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                ((MainActivity)getActivity()).changeFragmentToChosenContact(listItems.get(position), listIds.get(position));
+                Log.d("hallo",""+listItemsCurrent.get(position));
+                ((MainActivity)getActivity()).changeFragmentToChosenContact(listItemsCurrent.get(position), listIdsCurrent.get(position));
             }
         });
 
@@ -121,17 +126,39 @@ public class Contacts extends Fragment {
             listIds.add(id);
         }
 
+        listItemsCurrent.addAll(listItems);
+        listIdsCurrent.addAll(listIds);
+
         //Adapts the listItems to our list view using lay_contacts_row
         adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_contacts_row, R.id.listText, listItems);
+                R.layout.lay_contacts_row, R.id.listText, listItemsCurrent);
         listView.setAdapter(adapter);
+
+        listView.setTextFilterEnabled(true);
 
         inputSearch = (EditText) view.findViewById(R.id.searchBox);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                adapter.getFilter().filter(cs);
+
+                listIdsCurrent.clear();
+                listItemsCurrent.clear();
+                cs = cs.toString().toLowerCase();
+                if (cs.length() == 0) {
+                    listItemsCurrent.addAll(listItems);
+                    listIdsCurrent.addAll(listIds);
+                    } else {
+                    for (int pos = 0; pos < listItems.size(); pos++) {
+                        if (listItems.get(pos).toLowerCase().contains(cs)) {
+                            listItemsCurrent.add(listItems.get(pos));
+                            listIdsCurrent.add(listIds.get(pos));
+                            }
+                        }
+                    }
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.lay_contacts_row, R.id.listText, listItemsCurrent);
+                listView.setAdapter(adapter);
             }
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,

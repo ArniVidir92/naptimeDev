@@ -156,5 +156,8 @@ public class PotEntry extends Fragment {
         contentValues.put("description",description);
         if(entryAmount != -1){contentValues.put("amount", entryAmount);}
         long id = sqLiteDatabase.insert("POTS",null,contentValues);
+
+        // Change to fragment MoneyPot
+        getActivity().onBackPressed();
     }
 }
