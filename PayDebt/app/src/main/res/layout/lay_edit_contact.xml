@@ -34,10 +34,9 @@
                 android:layout_gravity="center"
                 android:text="@string/description" />
 
-            <TextView
+            <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                style="@style/FieldStyle"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:id="@+id/descriptionContact"
@@ -62,7 +61,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
 
-                <TextView
+                <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -70,39 +69,14 @@
                     android:id="@+id/phoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:inputType="phone"
-                    style="@style/FieldStyle"/>
+                    android:inputType="phone" />
 
 
 
             </LinearLayout>
 
             </LinearLayout>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/debts"
-                android:textColor="#FFFFFF"
-                android:id="@+id/textViewDebts"
-                android:layout_gravity="center"/>
 
-            <com.development.napptime.paydebt.NonScrollListView
-                android:id="@+id/lv_nonscroll_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true">
-            </com.development.napptime.paydebt.NonScrollListView>
-
-            <Button
-                android:text="@string/adddebt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:layout_margin="10dp"
-                android:id="@+id/buttonAddDebt"
-
-                android:clickable="false" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -126,22 +100,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/checkBoxFavorite"
                     android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:onClick="null"
                     />
 
 
 
             </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
 
                 <Button
-                    android:text="Edit"
+                    android:text="Confirm"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
@@ -149,19 +115,7 @@
                     android:id="@+id/buttonEdit"
                     android:layout_weight="1"/>
 
-                <Button
-                    android:text="Delete"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
-                    android:layout_margin="10dp"
-                    android:id="@+id/buttonDelete"
-                    android:layout_weight="1"/>
 
-
-
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
