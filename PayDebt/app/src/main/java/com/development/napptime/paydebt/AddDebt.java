@@ -102,6 +102,10 @@ public class AddDebt extends Fragment{
             }
         });
 
+        // Changing the actionBarTitle
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.adddebt));
+
+
         return view;
     }
 

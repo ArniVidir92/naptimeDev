@@ -63,6 +63,7 @@ public class AddContact extends Fragment{
                 addContactToDB(v);
             }
         });
+
         return view;
     }
 

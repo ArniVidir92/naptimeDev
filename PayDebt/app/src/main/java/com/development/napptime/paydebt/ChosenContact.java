@@ -134,6 +134,9 @@ public class ChosenContact extends Fragment {
             }
         });
 
+        // Changing the action bar title
+        ((MainActivity) getActivity()).setActionBarTitle(this.cName);
+
         return view;
     }
 

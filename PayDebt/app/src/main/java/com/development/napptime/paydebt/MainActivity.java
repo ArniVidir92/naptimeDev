@@ -256,14 +256,11 @@ public class MainActivity extends Activity
     //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToChosenDebt(String debtName, int debtId, int contactId){
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new ChosenDebt();
+        Fragment fragment = new ChosenDebt();
         Bundle args = new Bundle();
         args.putInt("cId", contactId);
         args.putInt("dId", debtId);
         fragment.setArguments(args);
-        mTitle = debtName;
-        setTitle(mTitle);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
@@ -275,6 +272,11 @@ public class MainActivity extends Activity
     @Override
     public void onBackPressed(){
         super.onBackPressed();
+    }
+
+    // Changing the title of the actionBar
+    public void setActionBarTitle(String title){
+        this.getActionBar().setTitle(title);
     }
 }
 

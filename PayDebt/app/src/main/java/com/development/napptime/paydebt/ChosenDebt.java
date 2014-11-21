@@ -28,6 +28,7 @@ public class ChosenDebt extends Fragment {
 
     //Id of the debt we are currently looking at
     private int dId = -1;
+    private String dName;
 
     private Button DeleteDebt = null;
 
@@ -77,12 +78,15 @@ public class ChosenDebt extends Fragment {
             }
         });
 
+        // Change the title in the actionBar
+        ((MainActivity) getActivity()).setActionBarTitle(dName);
         return view;
     }
 
     public void setInfo(){
         // Initializing variables
-        String dName = "", dDescription = "", amount = "", date = "", due = "";
+        dName = "";
+        String dDescription = "", amount = "", date = "", due = "";
 
         // Get the contact name that owes you this debt
         String[] columnsC = {"name"};

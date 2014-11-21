@@ -117,6 +117,8 @@ public class PotEntry extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
 
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.moneyPotNewEntry));
+
         return view;
     }
 

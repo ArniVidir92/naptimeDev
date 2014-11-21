@@ -38,6 +38,7 @@
     <string name="X">X</string>
     <string name="Money_Pot">Money Pot</string>
     <string name="addMoneyPotDebt">New entry</string>
+    <string name="moneyPotNewEntry">New pot entry</string>
     <string name="moneyPotPeople">Total Amount</string>
     <string name="Amount_per_person">Amount per person</string>
     <string name="Money_Pot_Name">Money Pot</string>
