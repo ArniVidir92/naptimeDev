@@ -21,7 +21,7 @@ import android.widget.EditText;
  * provides a user friendly form to do so.
  */
 
-public class Calculator extends Fragment{
+public class EditContact extends Fragment{
 
     //Instance variables
 
@@ -57,7 +57,7 @@ public class Calculator extends Fragment{
         //getting the sent variable
         Bundle args = getArguments();
         if (args != null) {
-            this.cId = 1;
+            this.cId = args.getInt("cId");
         }
     }
 

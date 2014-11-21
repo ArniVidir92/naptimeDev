@@ -41,6 +41,7 @@ public class ChosenContact extends Fragment {
     //the fragment that adds debts
     private Button addDebt = null;
     private Button DeleteContact = null;
+    private Button EditContact = null;
 
     //Variables for our database
     DbHelper dbhelper;
@@ -74,6 +75,7 @@ public class ChosenContact extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
+            Log.d("koppur",""+this.cId);
             this.cName = args.getString("cName");
         }
     }
@@ -98,6 +100,14 @@ public class ChosenContact extends Fragment {
             @Override
             public void onClick(View v) {
                 DeleteContact(v);
+            }
+        });
+
+        EditContact = (Button) view.findViewById(R.id.buttonEdit);
+        EditContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditContact(v);
             }
         });
 
@@ -243,5 +253,10 @@ public class ChosenContact extends Fragment {
         db.delete("CONTACTS", "_contact_id = " + cId, null);
 
         getActivity().onBackPressed();
+    }
+
+    //Deletes the contact we are currently looking at
+    private void EditContact(View v) {
+        ((MainActivity)getActivity()).changeFragmentToEditContact(this.cId);
     }
 }

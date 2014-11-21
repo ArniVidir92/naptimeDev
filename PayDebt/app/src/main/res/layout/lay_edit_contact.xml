@@ -36,7 +36,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/phoneNumber"
+                    android:text="Name:"
                     android:id="@+id/contactName"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -48,7 +48,7 @@
                     android:id="@+id/name"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:inputType="phone" />
+                    android:inputType="text" />
 
 
 
@@ -66,7 +66,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/descriptionContact"
+                android:id="@+id/description"
                 android:layout_gravity="center"
                 android:textStyle="italic"
                 android:textAlignment="center"/>
@@ -135,7 +135,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:id="@+id/buttonEdit"
+                    android:id="@+id/buttonConfirm"
                     android:layout_weight="1"/>
 
 
