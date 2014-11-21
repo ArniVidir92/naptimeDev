@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo">
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/ActionStyle</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
@@ -29,6 +29,7 @@
 
     <style name="ButtonStyle" parent="android:style/Widget.Button">
         <item name="android:background">@color/red</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:padding">4pt</item>
         <item name="android:layout_marginLeft">1pt</item>
         <item name="android:layout_marginRight">1pt</item>
