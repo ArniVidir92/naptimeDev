@@ -2,6 +2,7 @@ package com.development.napptime.paydebt;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -37,10 +38,11 @@ public class MoneyPot extends Fragment {
     //initialize variables for the database
     DbHelper dbhelper;
     SQLiteDatabase db;
-
+    ContentValues contentvalues;
     Cursor cursor;
 
     ListView listView;
+    ListView listSplit;
 
     //Initalize variables for later calculations
     Integer total_amount;
@@ -108,9 +110,8 @@ public class MoneyPot extends Fragment {
                 R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
 
-        // initialize variables for the calculations of the money pot split
         String contact;
-        Integer split=0;
+        Integer split = 0;
         Integer paid;
         Integer newAmount;
         Integer gets;
@@ -125,6 +126,9 @@ public class MoneyPot extends Fragment {
         Cursor cursorAmount = db.rawQuery(
                 "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
 
+        String[][] array = new String[numOfContacts][2];
+        Integer i = 0;
+
         //Calculate which contact has to pay to the moneypot and which gets money from it.
         while(cursorAmount.moveToNext()) {
             contact = cursorAmount.getString(0);
@@ -133,26 +137,66 @@ public class MoneyPot extends Fragment {
             //if you pay more money than the average money paid, you will get money from the pot
             if(paid>split) {
                 gets = newAmount;
-                Toast.makeText(getActivity(), contact +" gets " + gets.toString(),
-                        Toast.LENGTH_SHORT).show();
+
+                array[i][0] = contact;
+                array[i][1] = gets.toString();
+
+                calculatedPayments.add(contact + " gets:   " + gets);
             }
             //if you pay less money than the average money paid, you will have to pay to the pot
             if(paid<split) {
                 pays = -newAmount;
-                Toast.makeText(getActivity(),contact + " pays " + pays.toString(),
-                        Toast.LENGTH_SHORT).show();
-            }
 
+                array[i][0] = contact;
+                array[i][1] = pays.toString();
+
+                calculatedPayments.add(contact + " pays:   " + pays);
+            }
             //if you paid the exact average of the money paid to the pot, you will neither get
             //money nor have to pay money
             if(paid.equals(split)) {
-                Toast.makeText(getActivity(),contact + " is good",
-                    Toast.LENGTH_SHORT).show();
+                calculatedPayments.add(contact + ":   " + paid);
+            }
+            i +=1;
+        }
+
+        int swag;
+        int nextSwag;
+        int newAgeSwag;
+
+        String swaggerOne = "";
+        String swaggerTwo = "";
+
+        for (int j = 0; j< array.length; j++) {
+            for (int k=1; k< array.length; k++) {
+                swag = Integer.parseInt(array[j][1]);
+                nextSwag = Integer.parseInt(array[k][1]);
+
+                swaggerOne = array[j][0];
+                swaggerTwo = array[k][0];
+
+                if (swag>nextSwag) {
+                    newAgeSwag = split-swag;
+                    calculatedPayments.add(swaggerOne + " pays: " + newAgeSwag + " to: " +  swaggerTwo);
+                }
+
+                if (swag<nextSwag) {
+                    newAgeSwag = split-nextSwag;
+                    calculatedPayments.add(swaggerOne + " gets: " + newAgeSwag + " from: " +  swaggerTwo);
+                }
+
+                if (swag ==nextSwag) {
+                    //do nothing
+                }
             }
 
         }
 
+        listSplit = (ListView) view.findViewById(R.id.calculatedSplit);
 
+        ArrayAdapter<String> adapterSplit = new ArrayAdapter<String>(getActivity(),
+                R.layout.lay_money_pot_row, R.id.rowEntry, calculatedPayments);
+        listSplit.setAdapter(adapterSplit);
         return view;
     }
 
