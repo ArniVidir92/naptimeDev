@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PayDebt</string>
+    <string name="app_name">DebtTrack</string>
     <string name="title_section1">Contacts</string>
     <string name="title_section2">Favorites</string>
     <string name="title_section3">My Debts</string>
@@ -40,7 +40,7 @@
     <string name="addMoneyPotDebt">New entry</string>
     <string name="moneyPotNewEntry">New pot entry</string>
     <string name="moneyPotPeople">Total Amount</string>
-    <string name="Amount_per_person">Amount per person</string>
+    <string name="Amount_per_person">Calculated split: </string>
     <string name="Money_Pot_Name">Money Pot</string>
     <string name="Money_Pot_Desc">Description</string>
     <string name="title_section9">Money Pot Entry</string>
