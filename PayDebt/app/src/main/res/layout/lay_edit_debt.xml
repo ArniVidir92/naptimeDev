@@ -30,7 +30,7 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Name:"
-                    android:id="@+id/contactName"
+                    android:id="@+id/debttName"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
 
@@ -51,7 +51,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/aboutContact"
+                android:id="@+id/aboutDebt"
                 android:layout_gravity="center"
                 android:text="Description:" />
 
@@ -76,7 +76,7 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Amount:"
-                    android:id="@+id/contactPhone"
+                    android:id="@+id/debtAmount"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
 
@@ -84,7 +84,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/phoneNumber"
+                    android:id="@+id/amount"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:inputType="number" />
@@ -93,7 +93,63 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
 
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Date:"
+                    android:id="@+id/debtDate"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/date"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:inputType="number" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Due:"
+                    android:id="@+id/debtDue"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/due"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:inputType="number" />
+
+
+
+            </LinearLayout>
 
 
 
