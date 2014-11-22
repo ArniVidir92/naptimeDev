@@ -102,6 +102,8 @@ public class Contacts extends Fragment {
             }
         });
 
+        ((MainActivity) getActivity()).setActionBarTitle("Contacts");
+
         return view;
     }
 

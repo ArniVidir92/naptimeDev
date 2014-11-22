@@ -1,14 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="15dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mydebts"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:weightSum="1">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_margin="20dp"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/myAboutContact"
+                android:layout_gravity="center"
+                android:text="@string/myAbout" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                style="@style/FieldStyle"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/myDescriptionContact"
+                android:layout_gravity="center"
+                android:textStyle="italic"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="15dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/phoneNumber"
+                    android:id="@+id/myPhone"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/myPhoneNumber"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:inputType="phone"
+                    style="@style/FieldStyle"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/debts"
+            android:id="@+id/myTextViewDebts"
+            android:layout_gravity="center"/>
+
+        <com.development.napptime.paydebt.NonScrollListView
+            android:id="@+id/lv_nonscroll_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true">
+        </com.development.napptime.paydebt.NonScrollListView>
+
+        <Button
+            android:text="@string/adddebt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/myButtonAddDebt"
+
+            android:clickable="false" />
+
+            <Button
+                android:text="Edit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/myButtonEdit"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+
 </LinearLayout>

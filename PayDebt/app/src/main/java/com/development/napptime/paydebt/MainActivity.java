@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -105,8 +107,7 @@ public class MainActivity extends Activity
                 break;
             case 2:
                 // MyDebts
-                fragment = new MyDebts();
-                mTitle = getString(R.string.title_section3);
+                fragment = checkForYourInfo();
                 break;
             case 3:
                 // Calculator
@@ -265,6 +266,33 @@ public class MainActivity extends Activity
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    //change the fragment to the chosendebt to see more about it
+    //   and add it on the backstack so we can use the back button for navigation
+    public void changeFragmentToMyDebts(){
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = new MyDebts();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+    public Fragment checkForYourInfo(){
+        DbHelper dbhelper = new DbHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        String[] columns = {"description"};
+        String where = "_contact_id = "+0+" AND description is not NULL";
+        //the select query for the database
+        Cursor cursor = db.query("CONTACTS",columns,where,null,null,null,null);
+        if(cursor.moveToNext()) {
+            cursor.close();
+            return new MyDebts();
+        }else{
+            cursor.close();
+            return new YourInfo();
+        }
     }
 
     //override the onBackPressed to make it call the same function because of weird implementation

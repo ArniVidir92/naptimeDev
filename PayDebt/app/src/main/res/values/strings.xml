@@ -52,5 +52,7 @@
     <string name="search_hint">search</string>
     <string name="totalAmountPlaceHolder">amount</string>
     <string name="totalAmount">Total Amount:</string>
+    <string name="myAbout">About me:</string>
+    <string name="yourInfo">Your Info:</string>
 
 </resources>

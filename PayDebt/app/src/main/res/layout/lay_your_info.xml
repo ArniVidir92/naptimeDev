@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="35sp"
+                android:layout_marginBottom="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:text="@string/yourInfo"
+                android:id="@+id/textYourInfo"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="1dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/contactName"
+                    android:id="@+id/textYourName"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="text"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputYourName"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="1dp">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/phoneNumber"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/textYourPhone"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="phone"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/inputYourPhoneNumber"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/desc"
+                android:textColor="#FFFFFF"
+                android:id="@+id/yourDescr"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:inputType="textMultiLine"
+                android:lines="10"
+                android:minLines="2"
+                android:gravity="top|start"
+                android:maxLines="10"
+                android:maxLength="255"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:id="@+id/yourTextDesc" />
+
+            <Button
+                android:text="@string/AddContact"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#FFFFFF"
+                android:id="@+id/addInfo"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -20,18 +20,16 @@ import android.widget.EditText;
  * provides a user friendly form to do so.
  */
 
-public class AddContact extends Fragment{
+public class YourInfo extends Fragment{
 
     //Instance variables
 
     //Button for adding contact to sql database
-    private Button addContact = null;
+    private Button addYourInfo = null;
 
     //a editable text field for the phone number
     private EditText phoneNr = null;
 
-    // a variable to contains whether contact should be favorite
-    private int favoriteCheck = 0;
     //Our layouts view
     private View view = null;
 
@@ -39,31 +37,31 @@ public class AddContact extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //inflate the fragment to create the view
-        this.view = inflater.inflate(R.layout.lay_addcontact, container, false);
+        this.view = inflater.inflate(R.layout.lay_your_info, container, false);
 
         // Set a phone number listener to the phone number text edit
-        phoneNr = (EditText) view.findViewById(R.id.inputContactPhoneNumber);
+        phoneNr = (EditText) view.findViewById(R.id.inputYourPhoneNumber);
 
         phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         //Gets our button
-        addContact = (Button) view.findViewById(R.id.addContactToDB);
+        addYourInfo = (Button) view.findViewById(R.id.addInfo);
 
         //Checks if the button exists
-        if(addContact == null)
+        if(addYourInfo == null)
         {
             Log.d("debugCheck", "HeadFrag: sendButton is null");
             return view;
         }
 
         //Listener; catches when the user clicks the button
-        addContact.setOnClickListener(new View.OnClickListener() {
+        addYourInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addContactToDB(v);
+                addYourInfoToDB(v);
             }
         });
-        ((MainActivity) getActivity()).setActionBarTitle("Add Contact");
+        ((MainActivity) getActivity()).setActionBarTitle("Add Info");
         return view;
     }
 
@@ -72,38 +70,29 @@ public class AddContact extends Fragment{
         super.onAttach(activity);
     }
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
-        if (checkBox.isChecked()) {
-            favoriteCheck = 1;
-        }
-    }
 
     //Adds the info in the EditText field for inputting contact name
     //to our sql database
-    public void addContactToDB(View v){
+    public void addYourInfoToDB(View v){
         // Get text from phone number
         String phone = phoneNr.getText().toString();
         // Get text from name field
-        EditText contactName = (EditText) view.findViewById(R.id.inputName);
+        EditText contactName = (EditText) view.findViewById(R.id.inputYourName);
         String name = contactName.getText().toString();
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
-        EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
-        String description = contactDescription.getText().toString();
-        onCheckboxClicked(view);
+        EditText yourDescription = (EditText) view.findViewById(R.id.yourTextDesc);
+        String description = yourDescription.getText().toString();
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("_contact_id",0);
         contentValues.put("name",name);
         contentValues.put("description",description);
         contentValues.put("phone",phone);
-        contentValues.put("favorite", favoriteCheck);
         long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
 
-        // Change to fragment Contacts
-        getActivity().onBackPressed();
+        ((MainActivity)getActivity()).changeFragmentToMyDebts();
     }
 }
