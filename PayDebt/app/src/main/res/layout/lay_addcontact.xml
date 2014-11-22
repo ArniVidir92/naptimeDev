@@ -22,7 +22,6 @@
                 android:textSize="35sp"
                 android:layout_marginBottom="25dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FFFFFF"
                 android:text="@string/newContact"
                 android:id="@+id/textNewContact"
                 android:layout_gravity="center"
@@ -39,7 +38,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#FFFFFF"
                     android:text="@string/contactName"
                     android:id="@+id/textContactName"
                     android:layout_gravity="center"
@@ -67,7 +65,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/phoneNumber"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/contactPhoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -88,7 +85,6 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/desc"
-                android:textColor="#FFFFFF"
                 android:id="@+id/contactDesc"
                 android:layout_gravity="center"/>
 
@@ -116,7 +112,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/Favorite"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/contactViewReminder"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -132,8 +127,7 @@
                 android:text="@string/AddContact"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:textColor="#FFFFFF"
-                android:id="@+id/addContactToDB"
+                android:id="@+id/buttonConfirm"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp"/>
         </LinearLayout>

@@ -53,7 +53,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/aboutContact"
                 android:layout_gravity="center"
-                android:text="@string/description" />
+                android:text="Description:" />
 
             <EditText
                 android:layout_width="fill_parent"
@@ -75,7 +75,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/phoneNumber"
+                    android:text="Amount:"
                     android:id="@+id/contactPhone"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -87,7 +87,7 @@
                     android:id="@+id/phoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:inputType="phone" />
+                    android:inputType="number" />
 
 
 
@@ -96,32 +96,6 @@
 
 
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
-
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/favorite"
-                    android:id="@+id/textViewFavorite"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"/>
-
-                <CheckBox
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkBoxFavorite"
-                    android:layout_weight="1"
-                    />
-
-
-
-            </LinearLayout>
 
                 <Button
                     android:text="Confirm"

@@ -195,6 +195,22 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    // Changes the fragment so we can add a debt to a specific contact
+    //   and add it on the backstack so we can use the back button for navigation
+    public void changeFragmentToEditContact(int contactId)
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new EditContact();
+        Bundle args = new Bundle();
+        args.putInt("cId", contactId);
+        fragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     // Changes the fragment so we can look at a specific contact a debt to a specific contact
     //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToChosenContact( String name, int cId )

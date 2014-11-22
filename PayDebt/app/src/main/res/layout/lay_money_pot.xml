@@ -22,7 +22,6 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Money_Pot_Name"
-                android:textColor="#FFFFFF"
                 android:id="@+id/moneyPotName"
                 android:layout_gravity="center"/>
 
@@ -31,7 +30,6 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Money_Pot_Desc"
-                android:textColor="#FFFFFF"
                 android:id="@+id/moneyPotDsc"
                 android:layout_gravity="center"/>
 
@@ -41,7 +39,6 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Purchases"
-                android:textColor="#FFFFFF"
                 android:id="@+id/moneyPotDebts"
                 android:layout_gravity="center"/>
 
@@ -62,7 +59,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/totalAmount"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/totalAmount"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -72,7 +68,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/totalAmountPlaceHolder"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/showTotalAmount"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -89,7 +84,6 @@
                      android:layout_height="40dp"
                      android:textAppearance="?android:attr/textAppearanceLarge"
                      android:text="@string/Amount_per_person"
-                     android:textColor="#FFFFFF"
                      android:id="@+id/amountPot"
                      android:layout_gravity="center"
                      android:textAlignment="center" />
@@ -105,7 +99,6 @@
                 android:text="@string/addMoneyPotDebt"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:textColor="#FFFFFF"
                 android:layout_margin="10dp"
                 android:id="@+id/buttonAddEntry"/>
         </LinearLayout>

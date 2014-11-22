@@ -17,19 +17,11 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:layout_margin="20dp"
-            android:padding="8dp">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FFFFFF"
                 android:id="@+id/aboutContact"
                 android:layout_gravity="center"
                 android:text="@string/description" />
@@ -39,7 +31,6 @@
                 android:layout_height="40dp"
                 style="@style/FieldStyle"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FFFFFF"
                 android:id="@+id/descriptionContact"
                 android:layout_gravity="center"
                 android:textStyle="italic"
@@ -57,7 +48,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/phoneNumber"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/contactPhone"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -66,7 +56,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/phoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -77,13 +66,11 @@
 
             </LinearLayout>
 
-            </LinearLayout>
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/debts"
-                android:textColor="#FFFFFF"
                 android:id="@+id/textViewDebts"
                 android:layout_gravity="center"/>
 
@@ -98,7 +85,6 @@
                 android:text="@string/adddebt"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:layout_margin="10dp"
                 android:id="@+id/buttonAddDebt"
 
@@ -116,7 +102,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/favorite"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/textViewFavorite"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -144,7 +129,6 @@
                     android:text="Edit"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:layout_margin="10dp"
                     android:id="@+id/buttonEdit"
                     android:layout_weight="1"/>
@@ -153,7 +137,6 @@
                     android:text="Delete"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:layout_margin="10dp"
                     android:id="@+id/buttonDelete"
                     android:layout_weight="1"/>

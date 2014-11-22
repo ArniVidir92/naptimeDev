@@ -47,7 +47,7 @@ public class AddContact extends Fragment{
         phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         //Gets our button
-        addContact = (Button) view.findViewById(R.id.addContactToDB);
+        addContact = (Button) view.findViewById(R.id.buttonConfirm);
 
         //Checks if the button exists
         if(addContact == null)
