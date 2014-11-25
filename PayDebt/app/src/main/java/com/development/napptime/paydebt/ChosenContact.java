@@ -181,13 +181,14 @@ public class ChosenContact extends Fragment {
         // gets the textfield
         TextView descrTV = (TextView) view.findViewById(R.id.descriptionContact);
         TextView aboutC = (TextView) view.findViewById(R.id.aboutContact);
+        TextView cName = (TextView) view.findViewById(R.id.contactName);
 
         // sets the visibility of the fields
         aboutC.setVisibility(View.GONE);
         descrTV.setVisibility(View.GONE);
 
         String description = "";
-        String[] columns = {"description","favorite"};
+        String[] columns = {"description","favorite","name"};
         String where = "_contact_id = "+cId+" AND description is not NULL";
         //the select query for the database
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
@@ -204,6 +205,7 @@ public class ChosenContact extends Fragment {
                 CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
                 checkBox.setChecked(true);
             }
+            cName.setText(cursor.getString(2));
         }
         //close the database commection
         cursor.close();
@@ -255,7 +257,7 @@ public class ChosenContact extends Fragment {
         getActivity().onBackPressed();
     }
 
-    //Deletes the contact we are currently looking at
+    //Edits the contact we are currently looking at
     private void EditContact(View v) {
         ((MainActivity)getActivity()).changeFragmentToEditContact(this.cId);
     }

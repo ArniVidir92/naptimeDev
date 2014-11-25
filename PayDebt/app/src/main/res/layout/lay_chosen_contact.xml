@@ -17,30 +17,64 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:id="@+id/image"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:src="@drawable/icon_contact"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:singleLine="false"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="30dp"
+                    android:id="@+id/contactName"
+                    android:text="Name"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:inputType="text"/>
+
+
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/aboutContact"
                 android:layout_gravity="center"
-                android:text="@string/description" />
+                android:text="About contact:"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                style="@style/FieldStyle"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_height="wrap_content"
+                android:maxLines="10"
+                android:singleLine="false"
+                android:textAppearance="?android:attr/textAppearance"
                 android:id="@+id/descriptionContact"
                 android:layout_gravity="center"
                 android:textStyle="italic"
                 android:textAlignment="center"/>
 
+            <View style="@style/Divider"/>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -59,13 +93,12 @@
                     android:id="@+id/phoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:inputType="phone"
-                    style="@style/FieldStyle"/>
+                    android:inputType="phone"/>
 
 
 
             </LinearLayout>
-
+            <View style="@style/Divider"/>
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
@@ -89,19 +122,18 @@
                 android:id="@+id/buttonAddDebt"
 
                 android:clickable="false" />
-
+            <View style="@style/Divider"/>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
+                android:layout_height="fill_parent">
 
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/favorite"
+                    android:text="Is favorite:"
                     android:id="@+id/textViewFavorite"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>

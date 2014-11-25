@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
 
-    <ImageButton android:text="Button"
+    <ImageView
         android:id="@+id/searchButton"
         android:background="?android:attr/selectableItemBackground"
         android:focusableInTouchMode="false"
@@ -19,7 +19,7 @@
         android:layout_weight="1.3"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:src="@drawable/ic_action_action_search"/>
+        android:src="@drawable/magnifier"/>
 
     <EditText
         android:id="@+id/searchBox"
@@ -45,6 +45,7 @@
         android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:src="@drawable/ic_action_toggle_star"/>
 
     <ImageButton android:text="Button"
@@ -52,6 +53,7 @@
         android:layout_weight="1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:src="@drawable/ic_action_content_add_circle_outline"/>
     </LinearLayout>
 

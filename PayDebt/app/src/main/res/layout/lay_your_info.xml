@@ -22,7 +22,6 @@
                 android:textSize="35sp"
                 android:layout_marginBottom="25dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FFFFFF"
                 android:text="@string/yourInfo"
                 android:id="@+id/textYourInfo"
                 android:layout_gravity="center"
@@ -39,7 +38,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#FFFFFF"
                     android:text="@string/contactName"
                     android:id="@+id/textYourName"
                     android:layout_gravity="center"
@@ -67,7 +65,6 @@
                     android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/phoneNumber"
-                    android:textColor="#FFFFFF"
                     android:id="@+id/textYourPhone"
                     android:layout_gravity="center"
                     android:layout_weight="1"/>
@@ -88,7 +85,6 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/desc"
-                android:textColor="#FFFFFF"
                 android:id="@+id/yourDescr"
                 android:layout_gravity="center"/>
 
@@ -108,7 +104,6 @@
                 android:text="@string/AddContact"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:textColor="#FFFFFF"
                 android:id="@+id/addInfo"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp"/>
