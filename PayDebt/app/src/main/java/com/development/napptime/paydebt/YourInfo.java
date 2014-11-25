@@ -79,6 +79,14 @@ public class YourInfo extends Fragment{
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputYourName);
         String name = contactName.getText().toString();
+
+        //cancel operation if contact has no name or amount and notifies the user
+        if(name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("You do have a name don't you?.");
+            return;
+        }
+
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
         EditText yourDescription = (EditText) view.findViewById(R.id.yourTextDesc);

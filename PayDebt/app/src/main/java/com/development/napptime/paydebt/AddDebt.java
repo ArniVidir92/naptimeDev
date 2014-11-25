@@ -210,10 +210,19 @@ public class AddDebt extends Fragment{
         }
 
         //cancel operation if debt has no name or amount and notifies the user
-        if (amount.equals("")||name.equals(""))
+        if (amount.equals("") && name.equals(""))
         {
-            Toast toast = Toast.makeText(getActivity(), "Debt needs name and amount", Toast.LENGTH_SHORT);
-            toast.show();
+            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+            return;
+        }
+        else if (amount.equals("")||dbAmount==0)
+        {
+            ((MainActivity) getActivity()).toastIt("You need to specify an amount.");
+            return;
+        }
+        else if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("You can't add a nameless debt.");
             return;
         }
 

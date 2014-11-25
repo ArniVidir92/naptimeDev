@@ -123,6 +123,14 @@ public class EditDebt extends Fragment{
         return view;
     }
 
+    //Converts string to double if it's not empty
+    public static double stringToDouble(String str){
+        if(str.equals(""))
+            return -1;
+
+        return Double.parseDouble(str);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -138,13 +146,29 @@ public class EditDebt extends Fragment{
         // Get text from name field
         EditText debtName = (EditText) view.findViewById(R.id.name);
         String name = debtName.getText().toString();
-        name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
         EditText debtDescription = (EditText) view.findViewById(R.id.description);
         String description = debtDescription.getText().toString();
 
         String debtDue = due.getText().toString();
         String debtDate = date.getText().toString();
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if (amount.equals("") && name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+            return;
+        }
+        else if (debtAmount.equals("")||stringToDouble(debtAmount)==0)
+        {
+            ((MainActivity) getActivity()).toastIt("What happened to the amount?");
+            return;
+        }
+        else if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("What happened to the name?");
+            return;
+        }
 
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
