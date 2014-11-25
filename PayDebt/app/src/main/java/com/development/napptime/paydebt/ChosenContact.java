@@ -182,10 +182,13 @@ public class ChosenContact extends Fragment {
         TextView descrTV = (TextView) view.findViewById(R.id.descriptionContact);
         TextView aboutC = (TextView) view.findViewById(R.id.aboutContact);
         TextView cName = (TextView) view.findViewById(R.id.contactName);
+        View descrDiv = view.findViewById(R.id.descriptionDiv);
+
 
         // sets the visibility of the fields
         aboutC.setVisibility(View.GONE);
         descrTV.setVisibility(View.GONE);
+        descrDiv.setVisibility(View.GONE);
 
         String description = "";
         String[] columns = {"description","favorite","name"};
@@ -199,6 +202,7 @@ public class ChosenContact extends Fragment {
             if( !description.equals("") ){
                 descrTV.setVisibility(View.VISIBLE);
                 aboutC.setVisibility(View.VISIBLE);
+                descrDiv.setVisibility(View.VISIBLE);
             }
             if(cursor.getInt(1)==1)
             {
@@ -216,10 +220,12 @@ public class ChosenContact extends Fragment {
         //gets the textfields
         TextView phone = (TextView) view.findViewById(R.id.contactPhone);
         TextView number = (TextView) view.findViewById(R.id.phoneNumber);
+        View phoneDiv = view.findViewById(R.id.phoneDiv);
 
         //set the visibility of the text fields
         phone.setVisibility(View.GONE);
         number.setVisibility(View.GONE);
+        phoneDiv.setVisibility(View.GONE);
 
         String phoneNumber = "";
         String[] columns = {"phone"};
@@ -233,6 +239,7 @@ public class ChosenContact extends Fragment {
             if( !phoneNumber.equals("") ){
                 phone.setVisibility(View.VISIBLE);
                 number.setVisibility(View.VISIBLE);
+                phoneDiv.setVisibility(View.VISIBLE);
             }
         }
         cursor.close();

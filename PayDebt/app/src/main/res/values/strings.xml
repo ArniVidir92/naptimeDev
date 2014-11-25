@@ -54,6 +54,7 @@
     <string name="totalAmount">Total Amount:</string>
     <string name="myAbout">About me:</string>
     <string name="yourInfo">Your Info:</string>
+    <string name="newcomer">This looks like this is the first time you are using the My debts feature. Please fill in some basic informations about yourself to get started.</string>
     <string name="app_description">This application was made as an assignment in hugbúnaðarverkefni 1 (e. Software project 1) in the university of iceland. The creators are 4 friends who are all studying software engineering and call them selves napptime devolopment.</string>
 
 </resources>

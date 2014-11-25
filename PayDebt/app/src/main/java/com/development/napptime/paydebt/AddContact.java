@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by napptime on 12/11/14.
@@ -93,6 +94,15 @@ public class AddContact extends Fragment{
         EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
         String description = contactDescription.getText().toString();
         onCheckboxClicked(view);
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if (name.equals(""))
+        {
+            Toast toast = Toast.makeText(getActivity(), "Contact needs name", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
