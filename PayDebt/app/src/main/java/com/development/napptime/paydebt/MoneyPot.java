@@ -115,11 +115,11 @@ public class MoneyPot extends Fragment {
         listView.setAdapter(adapter);
 
         String contact;
-        Integer split = 0;
-        Integer paid;
-        Integer newAmount;
-        Integer gets;
-        Integer pays;
+        float split = 0;
+        float paid;
+        float newAmount;
+        float gets;
+        float pays;
 
         //NumOfContacts != 0
         if(!numOfContacts.equals(0)) {
@@ -143,7 +143,7 @@ public class MoneyPot extends Fragment {
                 gets = newAmount;
 
                 array[i][0] = contact;
-                array[i][1] = gets.toString();
+                array[i][1] = String.valueOf(gets);
                 array[i][2] = "gets";
 
                 calculatedPayments.add(contact + " gets:   " + gets);
@@ -153,22 +153,22 @@ public class MoneyPot extends Fragment {
                 pays = -newAmount;
 
                 array[i][0] = contact;
-                array[i][1] = pays.toString();
+                array[i][1] = String.valueOf(pays);
                 array[i][2] = "pays";
 
                 calculatedPayments.add(contact + " pays:   " + pays);
             }
             //if you paid the exact average of the money paid to the pot, you will neither get
             //money nor have to pay money
-            if(paid.equals(split)) {
+            if(paid == split) {
                 calculatedPayments.add(contact + ":   " + paid);
             }
             i +=1;
         }
 
-        int swag;
-        int nextSwag = 0;
-        int checkValue = 0;
+        float swag;
+        float nextSwag = 0;
+        float checkValue = 0;
 
         String swaggerOne = "";
         String nextSwagger = "";
@@ -188,7 +188,7 @@ public class MoneyPot extends Fragment {
 
             for (int j = 0; j< array.length; j++) {
 
-                swag = Integer.parseInt(array[j][1]);
+                swag = Float.parseFloat(array[j][1]);
                 swaggerOne = array[j][0];
                 getsOrPays = array[j][2];
 
@@ -196,7 +196,7 @@ public class MoneyPot extends Fragment {
 
                 for (int k = 1; k < array.length; k++) {
 
-                    nextSwag = Integer.parseInt(array[k][1]);
+                    nextSwag = Float.parseFloat(array[k][1]);
                     nextSwagger = array[k][0];
                     nextGetsOrPays = array[k][2];
 
@@ -207,14 +207,14 @@ public class MoneyPot extends Fragment {
                             array[k][1] = String.valueOf(0);
 
                             if (nextSwag !=0) {
-                                calculatedPayments.add(swaggerOne + " gets " + nextSwag + " from " + nextSwagger);
+                                calculatedPayments.add(swaggerOne + " gets " + Math.round(nextSwag) + " from " + nextSwagger);
                             }
 
                             checkValue = swag - nextSwag;
 
                             if (checkValue < 0) {
                                 array[j][2] = "pays";
-                                array[j][1] = String.valueOf(Math.abs(Integer.parseInt(array[j][1])));
+                                array[j][1] = String.valueOf(Math.abs(Float.parseFloat(array[j][1])));
                             }
                             if (checkValue > 0) {
                                 array[j][2] = "gets";
@@ -230,14 +230,14 @@ public class MoneyPot extends Fragment {
                             array[k][1] = String.valueOf(nextSwag - swag);
 
                             if (swag !=0) {
-                                calculatedPayments.add(nextSwagger + " gets " + swag + " from " + swaggerOne);
+                                calculatedPayments.add(nextSwagger + " gets " + Math.round(swag) + " from " + swaggerOne);
                             }
 
                             checkValue = nextSwag - swag;
 
                             if (checkValue < 0) {
                                 array[k][2] = "pays";
-                                array[k][1] = String.valueOf(Math.abs(Integer.parseInt(array[k][1])));
+                                array[k][1] = String.valueOf(Math.abs(Float.parseFloat(array[k][1])));
                             }
                             if (checkValue > 0) {
                                 array[k][2] = "gets";
