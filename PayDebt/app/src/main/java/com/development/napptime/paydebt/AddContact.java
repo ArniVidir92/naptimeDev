@@ -89,19 +89,22 @@ public class AddContact extends Fragment{
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if(name.equals(""))
+        {
+            Toast toast = Toast.makeText(getActivity(), "Contact needs name", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
         EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
         String description = contactDescription.getText().toString();
         onCheckboxClicked(view);
 
-        //cancel operation if debt has no name or amount and notifies the user
-        if (name.equals(""))
-        {
-            Toast toast = Toast.makeText(getActivity(), "Contact needs name", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
+
 
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
