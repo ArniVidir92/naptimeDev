@@ -2,17 +2,11 @@ package com.development.napptime.paydebt;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -128,13 +122,18 @@ public class Calculator extends Fragment{
         eqText.setText(equationStr);
     }
 
+    public boolean isUsable(){
+        if(equationStr.equals("") || !((Integer) numbers.size()).equals((Integer) operations.size()) ||
+                equationStr.substring(equationStr.length()-1).equals("+") || equationStr.substring(equationStr.length()-1).equals("-") ||
+                equationStr.substring(equationStr.length()-1).equals("/") || equationStr.substring(equationStr.length()-1).equals("x") ||
+                equationStr.substring(equationStr.length()-1).equals("+")){
+            return false;
+        }
+        return true;
+    }
+
     public void compute(View v){
-        if( equationStr.equals("") || !((Integer) numbers.size()).equals((Integer) operations.size()) ){
-            Log.d("size numbers",""+numbers.size());
-            Log.d("size operations",""+operations.size());
-            Log.d("uno", ""+numbers.get(0));
-            Log.d("uno", ""+numbers.get(1));
-            Log.d("uno", ""+numbers.get(2));
+        if( ! isUsable() ){
             resText.setText("NO INPUT OR IDIOT");
             destroyEquation(v);
             return;
