@@ -30,13 +30,17 @@ public class MyDebts extends Fragment{
 
     // Your name
     private String name;
+    private boolean hasDebt = true;
 
     // The buttons and textViews from the layout
     private Button addDebt;
+    private Button editC;
     private TextView phoneNr;
     private TextView phoneNrInput;
     private TextView descrInput;
     private TextView descr;
+    private View descrDiv;
+    private View phoneDiv;
 
     //Variables for our database
     private DbHelper dbhelper;
@@ -86,6 +90,14 @@ public class MyDebts extends Fragment{
             }
         });
 
+        editC = (Button) view.findViewById(R.id.myButtonEdit);
+        editC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditContact(v);
+            }
+        });
+
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.lv_nonscroll_list);
         //Adapts the listItems to our list view using lay_chosen_contact_row
@@ -102,8 +114,7 @@ public class MyDebts extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Log.d("blablaababa"," "+cId);
-                ((MainActivity)getActivity()).changeFragmentToChosenDebt(listDebtName.get(position), listDebtIds.get(position),cId);
+                goToDebt(position);
             }
         });
 
@@ -124,12 +135,14 @@ public class MyDebts extends Fragment{
         // gets the textfield
         this.descrInput = (TextView) view.findViewById(R.id.myDescriptionContact);
         this.descr = (TextView) view.findViewById(R.id.myAboutContact);
+        this.descrDiv = view.findViewById(R.id.descriptionDiv);
 
         Log.d("Check"," "+2);
 
         // sets the visibility of the fields
         descr.setVisibility(View.GONE);
         descrInput.setVisibility(View.GONE);
+        descrDiv.setVisibility(View.GONE);
 
         Log.d("Check"," "+2.1);
 
@@ -147,6 +160,7 @@ public class MyDebts extends Fragment{
             if( !description.equals("") ){
                 this.descrInput.setVisibility(View.VISIBLE);
                 this.descr.setVisibility(View.VISIBLE);
+                this.descrDiv.setVisibility(View.VISIBLE);
             }
             Log.d("Check"," "+2.2);
         }
@@ -159,10 +173,12 @@ public class MyDebts extends Fragment{
         //gets the textfields
         this.phoneNr = (TextView) view.findViewById(R.id.myPhone);
         this.phoneNrInput = (TextView) view.findViewById(R.id.myPhoneNumber);
+        this.phoneDiv = view.findViewById(R.id.phoneDiv);
 
         //set the visibility of the text fields
         phoneNr.setVisibility(View.GONE);
         phoneNrInput.setVisibility(View.GONE);
+        phoneDiv.setVisibility(View.GONE);
 
         String phoneNumber = "";
         String[] columns = {"phone"};
@@ -176,6 +192,7 @@ public class MyDebts extends Fragment{
             if( !phoneNumber.equals("") ){
                 phoneNr.setVisibility(View.VISIBLE);
                 phoneNrInput.setVisibility(View.VISIBLE);
+                phoneDiv.setVisibility(View.VISIBLE);
             }
         }
         cursor.close();
@@ -204,8 +221,23 @@ public class MyDebts extends Fragment{
         cursor.close();
 
         if(listItemsName.isEmpty())
+        {
             listItemsName.add("Congratulations you have no debts!");
+            hasDebt=false;
+        }
+
 
         listView.setAdapter(adapter);
+    }
+
+    //Edits the contact we are currently looking at
+    private void EditContact(View v) {
+        ((MainActivity)getActivity()).changeFragmentToEditContact(this.cId);
+    }
+
+    private void goToDebt(int position)
+    {
+        if(hasDebt)
+            ((MainActivity)getActivity()).changeFragmentToChosenDebt(listDebtName.get(position), listDebtIds.get(position),cId);
     }
 }

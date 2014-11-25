@@ -36,6 +36,7 @@ public class ChosenContact extends Fragment {
     // Id of the contact we are currently looking at
     private int cId = -1;
     private String cName = "";
+    private boolean hasDebt = true;
 
     //Button that swaps the current fragment for
     //the fragment that adds debts
@@ -139,8 +140,8 @@ public class ChosenContact extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                ((MainActivity)getActivity()).changeFragmentToChosenDebt(listDebtName.get(position), listDebtIds.get(position),cId);
+                                    long id) {goToDebt(position);
+
             }
         });
 
@@ -170,7 +171,11 @@ public class ChosenContact extends Fragment {
         cursor.close();
 
         if(listItemsName.isEmpty())
+        {
+            hasDebt = false;
             listItemsName.add("This contact has no debts.");
+        }
+
 
         listView.setAdapter(adapter);
     }
@@ -267,5 +272,11 @@ public class ChosenContact extends Fragment {
     //Edits the contact we are currently looking at
     private void EditContact(View v) {
         ((MainActivity)getActivity()).changeFragmentToEditContact(this.cId);
+    }
+
+    private void goToDebt(int position)
+    {
+        if(hasDebt)
+        ((MainActivity)getActivity()).changeFragmentToChosenDebt(listDebtName.get(position), listDebtIds.get(position),cId);
     }
 }

@@ -90,11 +90,10 @@ public class AddContact extends Fragment{
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
 
-        //cancel operation if debt has no name or amount and notifies the user
+        //cancel operation if contact has no name or amount and notifies the user
         if(name.equals(""))
         {
-            Toast toast = Toast.makeText(getActivity(), "Contact needs name", Toast.LENGTH_SHORT);
-            toast.show();
+            ((MainActivity) getActivity()).toastIt("This person must have a name.");
             return;
         }
 
