@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by napptime on 12/11/14.
  * The AddContact class serves the purpose of adding a contact to our sql database and
@@ -25,97 +28,55 @@ public class Calculator extends Fragment{
 
     //Instance variables
 
-    //id of the contact being changed
-    private int cId = 1;
-
-    //Button for adding contact to sql database
-    private Button confirm = null;
-
-    //a editable text field for the phone number
-    private EditText phoneNr = null;
-
-    //a editable text field for the phone number
-    private EditText description = null;
-
-    //a editable text field for the phone number
-    private EditText name = null;
-
-    // a variable to contains whether contact should be favorite
-    private int favoriteCheck = 0;
     //Our layouts view
     private View view = null;
 
-    //Database cursor
-    Cursor cursor;
-    //Variables for our database
-    DbHelper dbhelper;
-    SQLiteDatabase db;
+    //Buttons for calculator
+    private Button btn0 = null;
+    private Button btn1 = null;
+    private Button btn2 = null;
+    private Button btn3 = null;
+    private Button btn4 = null;
+    private Button btn5 = null;
+    private Button btn6 = null;
+    private Button btn7 = null;
+    private Button btn8 = null;
+    private Button btn9 = null;
+    private Button btnAC = null;
+    private Button btnD = null;
+    private Button btnM = null;
+    private Button btnP = null;
+    private Button btnMinus = null;
+    private Button btnEq = null;
+    private Button btnDot = null;
+    private Button btnAns = null;
 
-    @Override public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    //Textboxes for the results and equation
+    private EditText eqText = null;
+    private EditText resText = null;
 
-        //getting the sent variable
-        Bundle args = getArguments();
-        if (args != null) {
-            this.cId = 1;
-        }
-    }
+    // operations and numbers
+    private List<String> operations=new ArrayList<String>();
+    private List<Float> numbers=new ArrayList<Float>();
+
+    // Current input
+    private String current = "";
+
+    // Lets you know if the number is already a float
+    private boolean dotDone = false;
+
+    // The string to display
+    private String equationStr = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        dbhelper = new DbHelper(getActivity());
-        db = dbhelper.getWritableDatabase();
-
         //inflate the fragment to create the view
-        this.view = inflater.inflate(R.layout.lay_edit_contact, container, false);
+        this.view = inflater.inflate(R.layout.lay_calculator, container, false);
 
-        // Set a phone number listener to the phone number text edit
-        phoneNr = (EditText) view.findViewById(R.id.phoneNumber);
+        initializeLayoutVars();
 
-        name = (EditText) view.findViewById(R.id.name);
-
-        description = (EditText) view.findViewById(R.id.description);
-
-        phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
-
-        //Gets our button
-        confirm = (Button) view.findViewById(R.id.buttonConfirm);
-
-        //Checks if the button exists
-        if(confirm == null)
-        {
-            Log.d("debugCheck", "HeadFrag: sendButton is null");
-            return view;
-        }
-
-        //Listener; catches when the user clicks the button
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editContactInDB(v);
-            }
-        });
-
-        String[] columns = {"phone","favorite","name", "description"};
-        String where = "_contact_id = "+cId;
-        //the select query for the database
-        cursor = db.query("CONTACTS",columns,where,null,null,null,null);
-        String phone;
-        while(cursor.moveToNext()) {
-            phone = cursor.getString(0);
-            phoneNr.setText(phone);
-
-            if(cursor.getInt(1)==1)
-            {
-                CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
-                checkBox.setChecked(true);
-            }
-            name.setText(cursor.getString(2));
-            description.setText(cursor.getString(3));
-        }
-        //close the database commection
-        cursor.close();
+        setClickListeners();
 
         return view;
     }
@@ -125,40 +86,285 @@ public class Calculator extends Fragment{
         super.onAttach(activity);
     }
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
-        if (checkBox.isChecked()) {
-            favoriteCheck = 1;
+    public void clickedNumber(View v){
+        Button b = (Button) v;
+        String s = b.getText().toString();
+        if( s.equals(".") && equationStr.length() >= 1 &&  equationStr.substring(equationStr.length()-1).equals(".") ){
+            resText.setText("Don't do that");
+            destroyEquation(v);
+            return;
+        }
+        if( s.equals(".") ){
+            if( dotDone ){
+                resText.setText("Don't do that");
+                destroyEquation(v);
+                return;
+            }
+            dotDone = true;
+        }
+        if(current.equals("Not")){
+            current = b.getText().toString();
+        }else{
+            current += b.getText().toString();
+        }
+        equationStr += b.getText().toString();
+        eqText.setText(equationStr);
+    }
+
+    public void clickedOp(View v){
+        if( current.equals("") ){
+            resText.setText("Don't do that");
+            destroyEquation(v);
+            return ;
+        }
+        Button b = (Button) v;
+        operations.add(b.getText().toString());
+        equationStr += b.getText().toString();
+        if( !current.equals("Not") ){
+            numbers.add(Float.parseFloat(current));
+            current = "";
+            dotDone = false;
+        }
+        eqText.setText(equationStr);
+    }
+
+    public void compute(View v){
+        if( equationStr.equals("") || !((Integer) numbers.size()).equals((Integer) operations.size()) ){
+            Log.d("size numbers",""+numbers.size());
+            Log.d("size operations",""+operations.size());
+            Log.d("uno", ""+numbers.get(0));
+            Log.d("uno", ""+numbers.get(1));
+            Log.d("uno", ""+numbers.get(2));
+            resText.setText("NO INPUT OR IDIOT");
+            destroyEquation(v);
+            return;
+        }
+
+        numbers.add(Float.parseFloat(current));
+        current = "Not";
+        dotDone = false;
+
+        String op;
+        List<Float> numb = new ArrayList<Float>();
+        equals(numb,numbers);
+        List<String> cOperations = new ArrayList<String>();
+        int ni = 0;
+        for(int i = 0; i < operations.size(); i++){
+            op = operations.get(i);
+            if( op.equals("x") ){
+                numbers.set(ni ,numbers.get(ni) * numbers.get(ni+1));
+                numbers.remove(ni+1);
+                ni--;
+            }
+            else if( op.equals("/") ){
+                numbers.set(ni ,numbers.get(ni) / numbers.get(ni+1));
+                numbers.remove(ni+1);
+                ni--;
+            }
+            else if( op.equals("-") || op.equals("+") ){
+                cOperations.add(op);
+            }
+            ni++;
+        }
+
+        ni=0;
+        for (String ope : cOperations) {
+            if( ope.equals("+") ){
+                numbers.set(ni ,numbers.get(ni) + numbers.get(ni+1));
+                numbers.remove(ni+1);
+                ni--;
+            }
+            else if( ope.equals("-") ){
+                numbers.set(ni ,numbers.get(ni) - numbers.get(ni+1));
+                numbers.remove(ni+1);
+                ni--;
+            }
+            ni++;
+        }
+        resText.setText(""+numbers.get(0));
+        equals(numbers, numb);
+    }
+
+    public void destroyEquation(View v){
+        numbers = new ArrayList<Float>();
+        operations = new ArrayList<String>();
+        equationStr = "";
+        eqText.setText("");
+        current = "";
+    }
+
+    public void ans(View v){
+        if( resText.getText().toString().equals("") ){
+            return;
+        }
+        destroyEquation(v);
+        equationStr += resText.getText().toString();
+        eqText.setText(equationStr);
+        current = resText.getText().toString();
+        dotDone = true;
+    }
+
+    public void equals(List<Float> a, List<Float> b){
+        a.clear();
+        for (Float item : b) {
+            a.add(item);
         }
     }
 
-    //Adds the info in the EditText field for inputting contact name
-    //to our sql database
-    public void editContactInDB(View v){
+    public void initializeLayoutVars(){
+        btn0 = (Button) this.view.findViewById(R.id.calc0);
+        btn1 = (Button) this.view.findViewById(R.id.calc1);
+        btn2 = (Button) this.view.findViewById(R.id.calc2);
+        btn3 = (Button) this.view.findViewById(R.id.calc3);
+        btn4 = (Button) this.view.findViewById(R.id.calc4);
+        btn5 = (Button) this.view.findViewById(R.id.calc5);
+        btn6 = (Button) this.view.findViewById(R.id.calc6);
+        btn7 = (Button) this.view.findViewById(R.id.calc7);
+        btn8 = (Button) this.view.findViewById(R.id.calc8);
+        btn9 = (Button) this.view.findViewById(R.id.calc9);
+        btnP = (Button) this.view.findViewById(R.id.calcPlus);
+        btnM = (Button) this.view.findViewById(R.id.calcM);
+        btnMinus = (Button) this.view.findViewById(R.id.calcMinus);
+        btnD = (Button) this.view.findViewById(R.id.calcD);
+        btnAC = (Button) this.view.findViewById(R.id.calcAC);
+        btnEq = (Button) this.view.findViewById(R.id.calcEq);
+        btnDot = (Button) this.view.findViewById(R.id.calcDot);
+        btnAns = (Button) this.view.findViewById(R.id.calcAns);
 
-        // Get text from phone number
-        String phone = phoneNr.getText().toString();
-        // Get text from name field
-        EditText contactName = (EditText) view.findViewById(R.id.name);
-        String name = contactName.getText().toString();
-        name = name.substring(0,1).toUpperCase() + name.substring(1);
-        // Get text from description field
-        EditText contactDescription = (EditText) view.findViewById(R.id.description);
-        String description = contactDescription.getText().toString();
-        onCheckboxClicked(view);
-        // Initialize dbHelper and adds the contacts name to the database.
-        DbHelper dbHelper = new DbHelper(getActivity());
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name",name);
-        contentValues.put("description",description);
-        contentValues.put("phone",phone);
-        contentValues.put("favorite", favoriteCheck);
-        //long id = sqLiteDatabase.insert("CONTACTS",null,contentValues);
-        db.update("CONTACTS", contentValues, "_contact_id ="+this.cId, null);
 
-        // Change to fragment Contacts
-        getActivity().onBackPressed();
+        eqText = (EditText) this.view.findViewById(R.id.inputEquation);
+        resText = (EditText) this.view.findViewById(R.id.displayResults);
+
     }
+
+    public void setClickListeners(){
+        //Listener; catches when the user clicks the button
+        btn0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedOp(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedOp(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedOp(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedOp(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnEq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                compute(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnAC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                destroyEquation(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnAns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ans(v);
+            }
+        });
+        //Listener; catches when the user clicks the button
+        btnDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedNumber(v);
+            }
+        });
+    }
+
+
 }
