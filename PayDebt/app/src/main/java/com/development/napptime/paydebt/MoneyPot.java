@@ -166,9 +166,9 @@ public class MoneyPot extends Fragment {
             i +=1;
         }
 
-        float swag;
-        float nextSwag = 0;
-        float checkValue = 0;
+        int swag;
+        int nextSwag = 0;
+        int checkValue = 0;
 
         String swaggerOne = "";
         String nextSwagger = "";
@@ -186,7 +186,7 @@ public class MoneyPot extends Fragment {
 
             for (int j = 0; j< array.length; j++) {
 
-                swag = Float.parseFloat(array[j][1]);
+                swag = Integer.parseInt(array[j][1]);
                 swaggerOne = array[j][0];
                 getsOrPays = array[j][2];
 
@@ -194,7 +194,7 @@ public class MoneyPot extends Fragment {
 
                 for (int k = 1; k < array.length; k++) {
 
-                    nextSwag = Float.parseFloat(array[k][1]);
+                    nextSwag = Integer.parseInt(array[k][1]);
                     nextSwagger = array[k][0];
                     nextGetsOrPays = array[k][2];
 
@@ -204,13 +204,15 @@ public class MoneyPot extends Fragment {
                             array[j][1] = String.valueOf(swag - nextSwag);
                             array[k][1] = String.valueOf(0);
 
-                            calculatedPayments.add(swaggerOne + " gets " + nextSwag + " from " + nextSwagger);
+                            if (nextSwag !=0) {
+                                calculatedPayments.add(swaggerOne + " gets " + nextSwag + " from " + nextSwagger);
+                            }
 
                             checkValue = swag - nextSwag;
 
                             if (checkValue < 0) {
                                 array[j][2] = "pays";
-                                array[j][1] = String.valueOf(Math.abs(Float.parseFloat(array[j][1])));
+                                array[j][1] = String.valueOf(Math.abs(Integer.parseInt(array[j][1])));
                             }
                             if (checkValue > 0) {
                                 array[j][2] = "gets";
@@ -225,13 +227,15 @@ public class MoneyPot extends Fragment {
                             array[j][1] = String.valueOf(0);
                             array[k][1] = String.valueOf(nextSwag - swag);
 
-                            calculatedPayments.add(nextSwagger + " gets " + swag + " from " + swaggerOne);
+                            if (swag !=0) {
+                                calculatedPayments.add(nextSwagger + " gets " + swag + " from " + swaggerOne);
+                            }
 
                             checkValue = nextSwag - swag;
 
                             if (checkValue < 0) {
                                 array[k][2] = "pays";
-                                array[k][1] = String.valueOf(Math.abs(Float.parseFloat(array[k][1])));
+                                array[k][1] = String.valueOf(Math.abs(Integer.parseInt(array[k][1])));
                             }
                             if (checkValue > 0) {
                                 array[k][2] = "gets";
@@ -261,14 +265,17 @@ public class MoneyPot extends Fragment {
     }
 
     public static Boolean method(String[][] array) {
+        int count=0;
         for (int k=0; k<array.length; k++) {
             //Log.i("While loop check", "Values in array: " + array[k][1]);
             float swag = Float.parseFloat(array[k][1]);
             if (swag != 0) {
-                return false;
+                count +=1;
             }
         }
+        if (count <=1) {
         return true;
+        } else { return false;}
     }
 
     @Override
