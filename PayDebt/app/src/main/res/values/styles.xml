@@ -3,23 +3,29 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+
+        <item name="android:textColorHighlight">#99cc0000</item>
+        <item name="android:textSelectHandleLeft">@drawable/apptheme_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/apptheme_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/apptheme_text_select_handle_middle</item>
+
         <item name="android:actionBarStyle">@style/ActionStyle</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
         <item name="android:imageButtonStyle">@style/ImageButtonStyle</item>
-        <item name="android:editTextStyle">@style/EditTextStyle</item>
         <item name="android:colorBackground">#333333</item>
 
     </style>
 
     <style name="ActionStyle"
         parent="@android:style/Widget.Holo.ActionBar.Solid">
-        <item name="android:background">@drawable/actionbackground</item>
+        <item name="android:background">@color/red</item>
     </style>
 
     <style name="EditTextStyle" parent="android:style/Widget.EditText">
         <item name="android:background">@drawable/edittextbox</item>
         <item name="android:layout_margin">2pt</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="FieldStyle" parent="android:style/Widget.TextView">
@@ -36,7 +42,15 @@
     </style>
 
     <style name="ImageButtonStyle" parent="android:style/Widget.Holo.ImageButton">
-        <item name="android:tint">@color/red</item>
+        <item name="android:tint">@color/white</item>
+        <item name="android:background">@color/red</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
 

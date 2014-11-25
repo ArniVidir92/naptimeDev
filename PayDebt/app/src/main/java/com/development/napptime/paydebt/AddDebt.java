@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -206,6 +207,14 @@ public class AddDebt extends Fragment{
         }
         else{
             reminder = 0;
+        }
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if (amount.equals("")||name.equals(""))
+        {
+            Toast toast = Toast.makeText(getActivity(), "Debt needs name and amount", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
         }
 
         //Initialize DbHelper and creates a sql database object and puts it into the

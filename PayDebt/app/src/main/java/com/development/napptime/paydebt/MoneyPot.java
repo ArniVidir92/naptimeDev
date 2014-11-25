@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -67,6 +68,9 @@ public class MoneyPot extends Fragment {
             }
         });
 
+        listItemsName=new ArrayList<String>();
+        calculatedPayments=new ArrayList<String>();
+
         //database variables
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
@@ -111,11 +115,11 @@ public class MoneyPot extends Fragment {
         listView.setAdapter(adapter);
 
         String contact;
-        Integer split = 0;
-        Integer paid;
-        Integer newAmount;
-        Integer gets;
-        Integer pays;
+        float split = 0;
+        float paid;
+        float newAmount;
+        float gets;
+        float pays;
 
         //NumOfContacts != 0
         if(!numOfContacts.equals(0)) {
@@ -126,7 +130,7 @@ public class MoneyPot extends Fragment {
         Cursor cursorAmount = db.rawQuery(
                 "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
 
-        String[][] array = new String[numOfContacts][2];
+        String[][] array = new String[numOfContacts][3];
         Integer i = 0;
 
         //Calculate which contact has to pay to the moneypot and which gets money from it.
@@ -139,7 +143,8 @@ public class MoneyPot extends Fragment {
                 gets = newAmount;
 
                 array[i][0] = contact;
-                array[i][1] = gets.toString();
+                array[i][1] = String.valueOf(gets);
+                array[i][2] = "gets";
 
                 calculatedPayments.add(contact + " gets:   " + gets);
             }
@@ -148,48 +153,103 @@ public class MoneyPot extends Fragment {
                 pays = -newAmount;
 
                 array[i][0] = contact;
-                array[i][1] = pays.toString();
+                array[i][1] = String.valueOf(pays);
+                array[i][2] = "pays";
 
                 calculatedPayments.add(contact + " pays:   " + pays);
             }
             //if you paid the exact average of the money paid to the pot, you will neither get
             //money nor have to pay money
-            if(paid.equals(split)) {
+            if(paid == split) {
                 calculatedPayments.add(contact + ":   " + paid);
             }
             i +=1;
         }
 
-        int swag;
-        int nextSwag;
-        int newAgeSwag;
+        float swag;
+        float nextSwag = 0;
+        float checkValue = 0;
 
         String swaggerOne = "";
-        String swaggerTwo = "";
+        String nextSwagger = "";
 
-        for (int j = 0; j< array.length; j++) {
-            for (int k=1; k< array.length; k++) {
-                swag = Integer.parseInt(array[j][1]);
-                nextSwag = Integer.parseInt(array[k][1]);
+        String getsOrPays = "";
+        String nextGetsOrPays = "";
 
-                swaggerOne = array[j][0];
-                swaggerTwo = array[k][0];
+        Boolean again = true;
 
-                if (swag>nextSwag) {
-                    newAgeSwag = split-swag;
-                    calculatedPayments.add(swaggerOne + " pays: " + newAgeSwag + " to: " +  swaggerTwo);
-                }
-
-                if (swag<nextSwag) {
-                    newAgeSwag = split-nextSwag;
-                    calculatedPayments.add(swaggerOne + " gets: " + newAgeSwag + " from: " +  swaggerTwo);
-                }
-
-                if (swag ==nextSwag) {
-                    //do nothing
-                }
+        while (again) {
+            if(array.length<=1) {
+                break;
+            }
+            if (method(array)) {
+                break;
             }
 
+            for (int j = 0; j< array.length; j++) {
+
+                swag = Float.parseFloat(array[j][1]);
+                swaggerOne = array[j][0];
+                getsOrPays = array[j][2];
+
+                Log.i("While loop check", "Values in array: " + swag);
+
+                for (int k = 1; k < array.length; k++) {
+
+                    nextSwag = Float.parseFloat(array[k][1]);
+                    nextSwagger = array[k][0];
+                    nextGetsOrPays = array[k][2];
+
+                    if (swag != 0) {
+
+                        if (getsOrPays.equals("gets") && nextGetsOrPays.equals("pays")) {
+                            array[j][1] = String.valueOf(swag - nextSwag);
+                            array[k][1] = String.valueOf(0);
+
+                            if (nextSwag !=0) {
+                                calculatedPayments.add(swaggerOne + " gets " + Math.round(nextSwag) + " from " + nextSwagger);
+                            }
+
+                            checkValue = swag - nextSwag;
+
+                            if (checkValue < 0) {
+                                array[j][2] = "pays";
+                                array[j][1] = String.valueOf(Math.abs(Float.parseFloat(array[j][1])));
+                            }
+                            if (checkValue > 0) {
+                                array[j][2] = "gets";
+                            }
+                            if (checkValue == 0) {
+                                array[j][2] = "";
+                            }
+                            break;
+                        }
+
+                        if (getsOrPays.equals("pays") && nextGetsOrPays.equals("gets")) {
+                            array[j][1] = String.valueOf(0);
+                            array[k][1] = String.valueOf(nextSwag - swag);
+
+                            if (swag !=0) {
+                                calculatedPayments.add(nextSwagger + " gets " + Math.round(swag) + " from " + swaggerOne);
+                            }
+
+                            checkValue = nextSwag - swag;
+
+                            if (checkValue < 0) {
+                                array[k][2] = "pays";
+                                array[k][1] = String.valueOf(Math.abs(Float.parseFloat(array[k][1])));
+                            }
+                            if (checkValue > 0) {
+                                array[k][2] = "gets";
+                            }
+                            if (checkValue == 0) {
+                                array[k][2] = "";
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         listSplit = (ListView) view.findViewById(R.id.calculatedSplit);
@@ -200,21 +260,24 @@ public class MoneyPot extends Fragment {
         return view;
     }
 
-    public void calculateSplit(View v){
-
-        /*Pseudo code
-        split = total_amount/numOfContacts;
-        amount=paid-split;
-        if (paid>split) contactGets = amount;
-        if (paid<split) contactPays = amount;
-        if (paid=split) do nothing;
-        */
-    }
-
     //change the fragment to potEntry
     public void addEntry(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToPotEntry();
+    }
+
+    public static Boolean method(String[][] array) {
+        int count=0;
+        for (int k=0; k<array.length; k++) {
+            //Log.i("While loop check", "Values in array: " + array[k][1]);
+            float swag = Float.parseFloat(array[k][1]);
+            if (swag != 0) {
+                count +=1;
+            }
+        }
+        if (count <=1) {
+        return true;
+        } else { return false;}
     }
 
     @Override

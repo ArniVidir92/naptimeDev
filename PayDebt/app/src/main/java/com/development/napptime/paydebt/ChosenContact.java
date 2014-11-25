@@ -181,13 +181,17 @@ public class ChosenContact extends Fragment {
         // gets the textfield
         TextView descrTV = (TextView) view.findViewById(R.id.descriptionContact);
         TextView aboutC = (TextView) view.findViewById(R.id.aboutContact);
+        TextView cName = (TextView) view.findViewById(R.id.contactName);
+        View descrDiv = view.findViewById(R.id.descriptionDiv);
+
 
         // sets the visibility of the fields
         aboutC.setVisibility(View.GONE);
         descrTV.setVisibility(View.GONE);
+        descrDiv.setVisibility(View.GONE);
 
         String description = "";
-        String[] columns = {"description","favorite"};
+        String[] columns = {"description","favorite","name"};
         String where = "_contact_id = "+cId+" AND description is not NULL";
         //the select query for the database
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
@@ -198,12 +202,14 @@ public class ChosenContact extends Fragment {
             if( !description.equals("") ){
                 descrTV.setVisibility(View.VISIBLE);
                 aboutC.setVisibility(View.VISIBLE);
+                descrDiv.setVisibility(View.VISIBLE);
             }
             if(cursor.getInt(1)==1)
             {
                 CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
                 checkBox.setChecked(true);
             }
+            cName.setText(cursor.getString(2));
         }
         //close the database commection
         cursor.close();
@@ -214,10 +220,12 @@ public class ChosenContact extends Fragment {
         //gets the textfields
         TextView phone = (TextView) view.findViewById(R.id.contactPhone);
         TextView number = (TextView) view.findViewById(R.id.phoneNumber);
+        View phoneDiv = view.findViewById(R.id.phoneDiv);
 
         //set the visibility of the text fields
         phone.setVisibility(View.GONE);
         number.setVisibility(View.GONE);
+        phoneDiv.setVisibility(View.GONE);
 
         String phoneNumber = "";
         String[] columns = {"phone"};
@@ -231,6 +239,7 @@ public class ChosenContact extends Fragment {
             if( !phoneNumber.equals("") ){
                 phone.setVisibility(View.VISIBLE);
                 number.setVisibility(View.VISIBLE);
+                phoneDiv.setVisibility(View.VISIBLE);
             }
         }
         cursor.close();
@@ -255,7 +264,7 @@ public class ChosenContact extends Fragment {
         getActivity().onBackPressed();
     }
 
-    //Deletes the contact we are currently looking at
+    //Edits the contact we are currently looking at
     private void EditContact(View v) {
         ((MainActivity)getActivity()).changeFragmentToEditContact(this.cId);
     }

@@ -101,43 +101,23 @@ public class MainActivity extends Activity
 
                 break;
             case 1:
-                // Favorites
-                fragment = new Favorites();
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 2:
                 // MyDebts
                 fragment = checkForYourInfo();
                 break;
-            case 3:
+            case 2:
                 // Calculator
                 fragment = new Calculator();
                 mTitle = getString(R.string.title_section4);
+                break;
+            case 3:
+                // MoneyPot
+                fragment = new MoneyPot();
+                mTitle = getString(R.string.title_section6);
                 break;
             case 4:
                 // About
                 fragment = new About();
                 mTitle = getString(R.string.title_section5);
-                break;
-            case 5:
-                // MoneyPot
-                fragment = new MoneyPot();
-                mTitle = getString(R.string.title_section6);
-                break;
-            case 6:
-                // AddDebt
-                fragment = new AddDebt();
-                mTitle = getString(R.string.title_section7);
-                break;
-            case 7:
-                // About
-                fragment = new ChosenDebt();
-                mTitle = getString(R.string.title_section8);
-                break;
-            case 8:
-                // About
-                fragment = new PotEntry();
-                mTitle = getString(R.string.title_section9);
                 break;
         }
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -195,7 +175,7 @@ public class MainActivity extends Activity
                 .commit();
     }
 
-    // Changes the fragment so we can add a debt to a specific contact
+    // Changes the fragment so we can edit a specific contact
     //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToEditContact(int contactId)
     {
@@ -204,6 +184,22 @@ public class MainActivity extends Activity
         fragment = new EditContact();
         Bundle args = new Bundle();
         args.putInt("cId", contactId);
+        fragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    // Changes the fragment so we can edit a debt of a specific contact
+    //   and add it on the backstack so we can use the back button for navigation
+    public void changeFragmentToEditDebt(int debtId)
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new EditDebt();
+        Bundle args = new Bundle();
+        args.putInt("dId", debtId);
         fragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

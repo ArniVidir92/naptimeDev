@@ -31,6 +31,7 @@ public class ChosenDebt extends Fragment {
     private String dName;
 
     private Button DeleteDebt = null;
+    private Button EditDebt = null;
 
     //Variables for our database
     DbHelper dbhelper;
@@ -75,6 +76,14 @@ public class ChosenDebt extends Fragment {
             @Override
             public void onClick(View v) {
                 DeleteDebt(v);
+            }
+        });
+
+        EditDebt = (Button) view.findViewById(R.id.buttonEditDebt);
+        EditDebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditDebt(v);
             }
         });
 
@@ -152,6 +161,11 @@ public class ChosenDebt extends Fragment {
         db.delete("DEBTS", "_debt_id = " + dId, null);
 
         getActivity().onBackPressed();
+    }
+
+    //Edits the debt we are currently looking at
+    private void EditDebt(View v) {
+        ((MainActivity)getActivity()).changeFragmentToEditDebt(this.dId);
     }
 
 }

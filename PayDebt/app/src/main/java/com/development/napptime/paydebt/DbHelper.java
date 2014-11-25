@@ -33,7 +33,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String FAV = "favorite";
     */
 
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 100;
 
 
     // Used as the context of the MainActivity
