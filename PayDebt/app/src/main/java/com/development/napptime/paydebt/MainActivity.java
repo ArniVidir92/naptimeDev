@@ -55,6 +55,9 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        UnitTest ut = new UnitTest();
+        ut.runAllTests();
+
         //initialize helper
         dbHelper = new DbHelper(this);
         //get database object

@@ -61,7 +61,7 @@ public class Calculator extends Fragment{
     private boolean dotDone = false;
 
     // The string to display
-    private String equationStr = "";
+    public String equationStr = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
