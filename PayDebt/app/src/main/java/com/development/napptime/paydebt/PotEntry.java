@@ -50,6 +50,22 @@ public class PotEntry extends Fragment {
     DbHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
 
+    // Contact name
+    String pName = "";
+
+    //Contact Id
+    private int pId = -1;
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            this.pId = args.getInt("pId");
+            this.pName = args.getString("pName");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,7 +101,7 @@ public class PotEntry extends Fragment {
         numOfContacts = 0;
         HashSet test = new HashSet();
 
-        //go through all the contacts
+        //go through all contacts
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             id = cursor.getInt(1);
@@ -94,14 +110,6 @@ public class PotEntry extends Fragment {
 
             test.add(name);
         }
-
-        //toast message for testing purposes
-        Integer blaff = test.size();
-        String bla= blaff.toString();
-
-        Toast.makeText(getActivity(), bla,
-                Toast.LENGTH_SHORT).show();
-
 
         totalAmount = 0;
 
@@ -117,7 +125,7 @@ public class PotEntry extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.moneyPotNewEntry));
+        ((MainActivity) getActivity()).setActionBarTitle(pName);
 
         return view;
     }
@@ -153,7 +161,7 @@ public class PotEntry extends Fragment {
 
         //create the content values and insert it into the database
         ContentValues contentValues = new ContentValues();
-        contentValues.put("_contact_id",1);
+        contentValues.put("_pot_id", this.pId );
         contentValues.put("name",nameTest);
         contentValues.put("description",description);
         if(entryAmount != -1){contentValues.put("amount", entryAmount);}

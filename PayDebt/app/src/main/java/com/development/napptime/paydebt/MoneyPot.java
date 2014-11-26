@@ -55,6 +55,21 @@ public class MoneyPot extends Fragment {
     List<String> listItemsName=new ArrayList<String>();
     List<String> calculatedPayments=new ArrayList<String>();
 
+    private int pId = -1;
+    private String pName = "";
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //getting the sent variable
+        Bundle args = getArguments();
+        if (args != null) {
+            this.pId = args.getInt("pId");
+            Log.d("koppur",""+this.pId);
+            this.pName = args.getString("pName");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,7 +93,9 @@ public class MoneyPot extends Fragment {
         //only get name and amount of money paid from the database
         String[] columns = {"name", "amount"};
 
-        cursor = db.query("POTS",columns,null,null,null,null,null);
+        String where = "_pot_id = "+pId;
+
+        cursor = db.query("POTS",columns,where,null,null,null,null);
         total_amount = 0;
 
         numOfContacts = 0;
@@ -128,7 +145,7 @@ public class MoneyPot extends Fragment {
 
         //select name, sum(amount) from pots group by name;
         Cursor cursorAmount = db.rawQuery(
-                "SELECT name, sum(amount) FROM POTS GROUP BY name", null);
+                "SELECT name, sum(amount) FROM POTS WHERE _pot_id=" +  this.pId + " GROUP BY name", null);
 
         String[][] array = new String[numOfContacts][3];
         Integer i = 0;
@@ -194,13 +211,13 @@ public class MoneyPot extends Fragment {
 
                 Log.i("While loop check", "Values in array: " + swag);
 
-                for (int k = 1; k < array.length; k++) {
+                for (int k =0; k < array.length; k++) {
 
                     nextSwag = Float.parseFloat(array[k][1]);
                     nextSwagger = array[k][0];
                     nextGetsOrPays = array[k][2];
 
-                    if (swag != 0) {
+                    if (!swaggerOne.equals(nextSwagger)) {
 
                         if (getsOrPays.equals("gets") && nextGetsOrPays.equals("pays")) {
                             array[j][1] = String.valueOf(swag - nextSwag);
@@ -257,13 +274,17 @@ public class MoneyPot extends Fragment {
         ArrayAdapter<String> adapterSplit = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_money_pot_row, R.id.rowEntry, calculatedPayments);
         listSplit.setAdapter(adapterSplit);
+
+        ((MainActivity) getActivity()).setActionBarTitle(pName);
+
+
         return view;
     }
 
     //change the fragment to potEntry
     public void addEntry(View v)
     {
-        ((MainActivity)getActivity()).changeFragmentToPotEntry();
+        ((MainActivity)getActivity()).changeFragmentToPotEntry(pName, pId);
     }
 
     public static Boolean method(String[][] array) {

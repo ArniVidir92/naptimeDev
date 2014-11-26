@@ -7,7 +7,7 @@
     <string name="title_section3">My Debts</string>
     <string name="title_section4">Calculator</string>
     <string name="title_section5">About</string>
-    <string name="title_section6">Money Pot</string>
+    <string name="title_section6">Money Pots</string>
     <string name="title_section7">Add Debt</string>
     <string name="title_section8">Chosen Dept</string>
     <string name="amount">Amount</string>
@@ -56,5 +56,7 @@
     <string name="yourInfo">Your Info:</string>
     <string name="newcomer">This looks like this is the first time you are using the My debts feature. Please fill in some basic informations about yourself to get started.</string>
     <string name="app_description">This application was made as an assignment in hugbúnaðarverkefni 1 (e. Software project 1) in the university of iceland. The creators are 4 friends who are all studying software engineering and call them selves napptime devolopment.</string>
+    <string name="title_section10">Money Pots</string>
+    <string name="bot_name">Money Pot Name</string>
 
 </resources>
