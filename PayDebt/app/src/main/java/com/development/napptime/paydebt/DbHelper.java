@@ -34,7 +34,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String FAV = "favorite";
     */
 
-    private static final int DATABASE_VERSION = 120;
+    private static final int DATABASE_VERSION = 121;
 
 
     // Used as the context of the MainActivity
@@ -71,6 +71,7 @@ class DbHelper extends SQLiteOpenHelper
             "_pot_entry INTEGER PRIMARY KEY AUTOINCREMENT," +
             " _pot_id INTEGER," +
             " _contact_id INTEGER," +
+            " date VARCHAR(255)," +
             " name VARCHAR(255), " +
             " description VARCHAR(255)," +
             " amount REAL);";

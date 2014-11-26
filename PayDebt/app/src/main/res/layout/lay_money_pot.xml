@@ -21,23 +21,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/Money_Pot_Name"
-                android:id="@+id/moneyPotName"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/Money_Pot_Desc"
-                android:id="@+id/moneyPotDsc"
-                android:layout_gravity="center"/>
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Purchases"
                 android:id="@+id/moneyPotDebts"
                 android:layout_gravity="center"/>
@@ -95,12 +78,27 @@
                 android:layout_height="wrap_content">
             </com.development.napptime.paydebt.NonScrollListView>
 
-            <Button
-                android:text="@string/addMoneyPotDebt"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="10dp"
-                android:id="@+id/buttonAddEntry"/>
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:text="@string/addMoneyPotDebt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buttonAddEntry"/>
+
+                <Button
+                    android:text="@string/deletePot"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/deletePotButton"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

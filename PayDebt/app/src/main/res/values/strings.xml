@@ -58,5 +58,8 @@
     <string name="app_description">This application was made as an assignment in hugbúnaðarverkefni 1 (e. Software project 1) in the university of iceland. The creators are 4 friends who are all studying software engineering and call them selves napptime devolopment.</string>
     <string name="title_section10">Money Pots</string>
     <string name="bot_name">Money Pot Name</string>
+    <string name="Descr">Descr.:</string>
+    <string name="deletePot">Delete Money Pot</string>
+    <string name="newEntry">New Entry</string>
 
 </resources>

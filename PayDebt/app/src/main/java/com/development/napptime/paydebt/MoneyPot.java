@@ -12,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +31,7 @@ public class MoneyPot extends Fragment {
     //Initialize variables
     private View view = null;
     private Button addEntry = null;
+    private Button deletePot = null;
 
     private TextView showTotalAmount;
     
@@ -80,6 +79,15 @@ public class MoneyPot extends Fragment {
             @Override
             public void onClick(View v) {
                 addEntry(v);
+            }
+        });
+
+        deletePot = (Button) view.findViewById(R.id.deletePotButton);
+        deletePot.setText("Delete " + pName);
+        deletePot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePot(v);
             }
         });
 
@@ -285,6 +293,14 @@ public class MoneyPot extends Fragment {
     public void addEntry(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToPotEntry(pName, pId);
+    }
+
+    private void deletePot(View v) {
+        //delete the contact from the database
+        db.delete("ALLPOTS", "_pot_id = " + pId, null);
+        db.delete("POTS", "_pot_id = " + pId, null);
+
+        getActivity().onBackPressed();
     }
 
     public static Boolean method(String[][] array) {

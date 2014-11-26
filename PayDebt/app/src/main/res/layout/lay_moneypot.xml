@@ -24,7 +24,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
@@ -44,28 +43,57 @@
                     android:layout_weight="1" />
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/desc"
-                android:id="@+id/entryDesc"
-                android:layout_gravity="center"/>
+                android:layout_height="fill_parent">
 
-            <EditText
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/Descr"
+                    android:id="@+id/Description"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="text"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/description"
+                    android:maxLength="9"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:inputType="textMultiLine"
-                android:lines="15"
-                android:minLines="2"
-                android:gravity="top|start"
-                android:maxLines="15"
-                android:maxLength="255"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:id="@+id/inputDesc" />
+                android:layout_height="fill_parent"
+                android:padding="1dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/date"
+                    android:id="@+id/textViewPotEntryDate"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:inputType="date"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/editPotEntryDate"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"/>
+            </LinearLayout>
 
             <Button
-                android:text="@string/confirm"
+                android:text="@string/newEntry"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/buttonAddEntry"
