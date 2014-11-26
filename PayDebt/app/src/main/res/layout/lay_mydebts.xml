@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:orientation="vertical" android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="15dp">
+android:layout_height="match_parent">
 
 <ScrollView
     android:layout_width="fill_parent"
@@ -13,15 +12,45 @@ android:padding="15dp">
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:id="@+id/image"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:src="@drawable/icon_contact"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="30dp"
+                android:id="@+id/contactName"
+                android:text="Myself"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:inputType="text"/>
+
+
+
+        </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:layout_margin="20dp"
-            android:padding="8dp">
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -33,19 +62,20 @@ android:padding="15dp">
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                style="@style/FieldStyle"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearance"
                 android:id="@+id/myDescriptionContact"
+                android:singleLine="false"
                 android:layout_gravity="center"
                 android:textStyle="italic"
                 android:textAlignment="center"/>
 
+            <View style="@style/Divider" android:id="@+id/descriptionDiv"/>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
+                android:layout_height="fill_parent">
 
 
                 <TextView
@@ -64,13 +94,12 @@ android:padding="15dp">
                     android:id="@+id/myPhoneNumber"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:inputType="phone"
-                    style="@style/FieldStyle"/>
+                    android:inputType="phone"/>
 
 
 
             </LinearLayout>
-
+            <View style="@style/Divider" android:id="@+id/phoneDiv"/>
         </LinearLayout>
         <TextView
             android:layout_width="fill_parent"
@@ -95,6 +124,8 @@ android:padding="15dp">
             android:id="@+id/myButtonAddDebt"
 
             android:clickable="false" />
+
+        <View style="@style/Divider"/>
 
             <Button
                 android:text="Edit"

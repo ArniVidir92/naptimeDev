@@ -196,7 +196,7 @@ public class MoneyPot extends Fragment {
         Boolean again = true;
 
         while (again) {
-            if (array.length<=1) {
+            if(array.length<=1) {
                 break;
             }
             if (method(array)) {

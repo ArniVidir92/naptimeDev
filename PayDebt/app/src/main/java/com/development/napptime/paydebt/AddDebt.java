@@ -3,14 +3,9 @@ package com.development.napptime.paydebt;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.app.TimePickerDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spanned;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -206,6 +200,23 @@ public class AddDebt extends Fragment{
         }
         else{
             reminder = 0;
+        }
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if (amount.equals("") && name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+            return;
+        }
+        else if (amount.equals("")||dbAmount==0)
+        {
+            ((MainActivity) getActivity()).toastIt("You need to specify an amount.");
+            return;
+        }
+        else if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("You can't add a nameless debt.");
+            return;
         }
 
         //Initialize DbHelper and creates a sql database object and puts it into the

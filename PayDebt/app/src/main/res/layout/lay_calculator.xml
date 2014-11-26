@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp">
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
@@ -17,132 +20,232 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
+            <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:layout_margin="20dp"
-                android:padding="8dp">
+                android:inputType="text"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/inputEquation"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:paddingTop="15dp">
-
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="40dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/phoneNumber"
-                        android:id="@+id/contactName"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"/>
-
-                    <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="40dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/name"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:inputType="phone" />
-
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/aboutContact"
-                    android:layout_gravity="center"
-                    android:text="@string/description" />
-
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/descriptionContact"
-                    android:layout_gravity="center"
-                    android:textStyle="italic"
-                    android:textAlignment="center"/>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:paddingTop="15dp">
-
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="40dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/phoneNumber"
-                        android:id="@+id/contactPhone"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"/>
-
-                    <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="40dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/phoneNumber"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:inputType="phone" />
-
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:orientation="horizontal"
+            <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="15dp">
+                android:inputType="text"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/displayResults"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/favorite"
-                    android:id="@+id/textViewFavorite"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"/>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-                <CheckBox
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/checkBoxFavorite"
-                    android:layout_weight="1"
-                    />
-
-
-
-            </LinearLayout>
+        <!-- 2 columns -->
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" >
 
             <Button
-                android:text="Confirm"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/buttonConfirm"
+                android:text="AC"
+                android:id="@+id/calcAC"
+                android:layout_margin="5dp"
+                android:layout_column="0"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ANS"
+                android:id="@+id/calcAns"
+                android:layout_margin="5dp"
+                android:layout_column="0"
                 android:layout_weight="1"/>
 
 
-        </LinearLayout>
-    </ScrollView>
+        </TableRow>
+
+        <!-- just draw a red line -->
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_margin="5dp"
+                android:id="@+id/calc1"
+                android:layout_column="0"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_margin="5dp"
+                android:id="@+id/calc2"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:layout_margin="5dp"
+                android:id="@+id/calc3"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="x"
+                android:layout_margin="5dp"
+                android:id="@+id/calcM"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:layout_margin="5dp"
+                android:id="@+id/calc4"
+                android:layout_column="0"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:layout_margin="5dp"
+                android:id="@+id/calc5"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6"
+                android:layout_margin="5dp"
+                android:id="@+id/calc6"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:layout_margin="5dp"
+                android:id="@+id/calcPlus"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:layout_margin="5dp"
+                android:id="@+id/calc7"
+                android:layout_column="0"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:layout_margin="5dp"
+                android:id="@+id/calc8"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:layout_margin="5dp"
+                android:id="@+id/calc9"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_margin="5dp"
+                android:id="@+id/calcMinus"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_margin="5dp"
+                android:id="@+id/calc0"
+                android:layout_column="0"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="."
+                android:layout_margin="5dp"
+                android:id="@+id/calcDot"
+                android:layout_column="1"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:layout_margin="5dp"
+                android:id="@+id/calcD"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="="
+                android:layout_margin="5dp"
+                android:id="@+id/calcEq"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+        </TableRow>
 
 
 
+    </TableLayout>
 
+
+</LinearLayout>
+</ScrollView>
 </LinearLayout>

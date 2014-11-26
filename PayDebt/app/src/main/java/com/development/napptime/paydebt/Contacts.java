@@ -117,7 +117,7 @@ public class Contacts extends Fragment {
         String[] columns = {"name", "_contact_id"};
 
         // Selects the column name and puts the column in too cursor.
-        cursor = db.query("CONTACTS",columns,null,null,null,null,"name");
+        cursor = db.query("CONTACTS",columns,"_contact_id != 0",null,null,null,"name");
 
         // Moves through each row of the db and adds
         // the name of each contact to the listItem

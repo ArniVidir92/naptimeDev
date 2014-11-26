@@ -142,11 +142,21 @@ public class EditContact extends Fragment{
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.name);
         String name = contactName.getText().toString();
+
+        //cancel operation if contact has no name or amount and notifies the user
+        if(name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("He had a name just a moment ago.");
+            return;
+        }
+
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
         EditText contactDescription = (EditText) view.findViewById(R.id.description);
         String description = contactDescription.getText().toString();
         onCheckboxClicked(view);
+
+
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by napptime on 12/11/14.
@@ -88,11 +89,22 @@ public class AddContact extends Fragment{
         // Get text from name field
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
         String name = contactName.getText().toString();
+
+        //cancel operation if contact has no name or amount and notifies the user
+        if(name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("This person must have a name.");
+            return;
+        }
+
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
         EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
         String description = contactDescription.getText().toString();
         onCheckboxClicked(view);
+
+
+
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
