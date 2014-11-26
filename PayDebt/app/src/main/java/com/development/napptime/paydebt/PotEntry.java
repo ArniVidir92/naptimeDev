@@ -50,7 +50,6 @@ public class PotEntry extends Fragment {
     DbHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
