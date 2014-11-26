@@ -75,15 +75,7 @@ public class ChosenPotEntry extends Fragment {
         DeleteDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteDebt(v);
-            }
-        });
-
-        EditDebt = (Button) view.findViewById(R.id.buttonEditDebt);
-        EditDebt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditDebt(v);
+                deletePotEntry(v);
             }
         });
 
@@ -155,5 +147,5 @@ public class ChosenPotEntry extends Fragment {
     }
 
     //Edits the debt we are currently looking at
-*/
+    */
 }
