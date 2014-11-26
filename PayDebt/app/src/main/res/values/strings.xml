@@ -61,5 +61,6 @@
     <string name="Descr">Descr.:</string>
     <string name="deletePot">Delete Money Pot</string>
     <string name="newEntry">New Entry</string>
+    <string name="confirmNewEntry">Confirm</string>
 
 </resources>

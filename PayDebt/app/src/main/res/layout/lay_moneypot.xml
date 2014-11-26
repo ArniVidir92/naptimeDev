@@ -93,7 +93,7 @@
             </LinearLayout>
 
             <Button
-                android:text="@string/newEntry"
+                android:text="@string/confirmNewEntry"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/buttonAddEntry"
