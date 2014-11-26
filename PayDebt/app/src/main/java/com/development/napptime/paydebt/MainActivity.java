@@ -27,6 +27,7 @@ import java.util.Calendar;
 
 /**
  * Created by Napptime on 10/13/14.
+ *
  * The main Activity of the application. This is the homescreen of the application and acts as a
  * fragment manager for the rest of the application.
  *

@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 /**
  * Created by napptime on 12/11/14.
+ *
  * The EditDebt class serves the purpose of editing a debt in our sql database and
  * provides a user friendly form to do so.
  */

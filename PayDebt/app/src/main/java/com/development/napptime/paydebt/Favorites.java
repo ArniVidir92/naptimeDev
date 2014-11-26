@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by napptime on 10/11/14.
+ *
  *  This class serves the purpose of displaying the most frequently used contacts(if used correctly)
  *  or just the contacts the user chooses to insert into the list for ease of access.
  */

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by Napptime on 10/13/14.
+ *
  * A helper that extends the default SQLiteOpenHelper
  */
 
@@ -116,7 +117,5 @@ class DbHelper extends SQLiteOpenHelper
         //create new tables
         onCreate(db);
 
-        //notify user
-        Message.message(context,"onUpgrade Called");
     }
 }

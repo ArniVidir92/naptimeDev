@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 /**
  * Created by napptime on 5.11.2014.
- * the chosen debts class serves the purpose of showing and working around a
- * single selected debt from a selected user.
+ *
+ * the chosen entry pot serves the purpose of providing user with functionality to
+ * see more details about a specific entry in the money pot as well as to delete it.
  */
 public class ChosenPotEntry extends Fragment {
 
