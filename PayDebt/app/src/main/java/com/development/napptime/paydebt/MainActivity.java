@@ -27,6 +27,7 @@ import java.util.Calendar;
 
 /**
  * Created by Napptime on 10/13/14.
+ *
  * The main Activity of the application. This is the homescreen of the application and acts as a
  * fragment manager for the rest of the application.
  *
@@ -308,6 +309,19 @@ public class MainActivity extends Activity
         Bundle args = new Bundle();
         args.putInt("cId", contactId);
         args.putInt("dId", debtId);
+        fragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void changeFragmentToChosenEntry(int eId, int pId){
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = new ChosenPotEntry();
+        Bundle args = new Bundle();
+        args.putInt("eId", eId);
+        args.putInt("pId", pId);
         fragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

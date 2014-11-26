@@ -30,6 +30,7 @@ import static java.util.Collections.sort;
 
 /**
  * Created by napptime on 10/11/14.
+ *
  * Contact class serves the purpose of showing and managing contacts with a user friendly layout.
  */
 public class Contacts extends Fragment {

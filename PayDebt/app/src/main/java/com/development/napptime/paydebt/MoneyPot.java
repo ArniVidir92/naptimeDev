@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by napptime on 10/11/14.
+ *
  * The money pot class serves the purpose of creating and working with
  * the moneypot feature. The moneypot feature allows users to divide the debts from a selection
  * of payments paid by separate people.
@@ -53,6 +55,7 @@ public class MoneyPot extends Fragment {
 
     List<String> listItemsName=new ArrayList<String>();
     List<String> calculatedPayments=new ArrayList<String>();
+    List<Integer> entryIds = new ArrayList<Integer>();
 
     private int pId = -1;
     private String pName = "";
@@ -93,13 +96,14 @@ public class MoneyPot extends Fragment {
 
         listItemsName=new ArrayList<String>();
         calculatedPayments=new ArrayList<String>();
+        entryIds = new ArrayList<Integer>();
 
         //database variables
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
 
         //only get name and amount of money paid from the database
-        String[] columns = {"name", "amount"};
+        String[] columns = {"name", "amount", "_pot_entry"};
 
         String where = "_pot_id = "+pId;
 
@@ -108,15 +112,17 @@ public class MoneyPot extends Fragment {
 
         numOfContacts = 0;
         HashSet uniqueNames = new HashSet();
+        int eId;
 
         //Sum up the total amount of the moneypot
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             amount = cursor.getInt(1);
+            eId = cursor.getInt(2);
             total_amount += amount;
 
             uniqueNames.add(name);
-
+            entryIds.add(eId);
             listItemsName.add(name + ":   " + amount);
         }
 
@@ -138,6 +144,14 @@ public class MoneyPot extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {goToEntry(position);
+
+            }
+        });
 
         String contact;
         float split = 0;
@@ -285,13 +299,33 @@ public class MoneyPot extends Fragment {
 
         ((MainActivity) getActivity()).setActionBarTitle(pName);
 
-
         return view;
+    }
+
+    private void goToEntry(int position)
+    {
+        ((MainActivity)getActivity()).changeFragmentToChosenEntry(entryIds.get(position), pId);
     }
 
     //change the fragment to potEntry
     public void addEntry(View v)
     {
+        int counter = 0;
+        String[] columns = {"name", "_contact_id"};
+
+        // Selects the column name and puts the column in too cursor.
+        cursor = db.query("CONTACTS",columns,"_contact_id != 0",null,null,null,"name");
+
+        // Moves through each row of the db and adds
+        // the name of each contact to the listItem
+        while(cursor.moveToNext()) {
+            counter++;
+        }
+        if(counter == 0)
+        {
+            ((MainActivity) getActivity()).toastIt("You can't add an entry yet. Please populate your contacts list first.");
+            return;
+        }
         ((MainActivity)getActivity()).changeFragmentToPotEntry(pName, pId);
     }
 

@@ -15,23 +15,23 @@ import android.widget.TextView;
 
 /**
  * Created by napptime on 5.11.2014.
- * the chosen debts class serves the purpose of showing and working around a
- * single selected debt from a selected user.
+ *
+ * the chosen entry pot serves the purpose of providing user with functionality to
+ * see more details about a specific entry in the money pot as well as to delete it.
  */
 public class ChosenPotEntry extends Fragment {
-    /*
+
     //Instance variables
 
-    //Id of the contact we are currently looking at
-    private String cName = "";
-    private int cId=-1;
+    //Id of the pot we are currently looking at
+    private String pName = "";
+    private int pId=-1;
 
-    //Id of the debt we are currently looking at
-    private int dId = -1;
-    private String dName;
+    //Id of the entry we are currently looking at
+    private int eId = -1;
+    private String eName;
 
     private Button DeleteDebt = null;
-    private Button EditDebt = null;
 
     //Variables for our database
     DbHelper dbhelper;
@@ -40,7 +40,6 @@ public class ChosenPotEntry extends Fragment {
     //Our layouts view
     private View view = null;
 
-    //String, Integer and double for debt name, contact Id and amount
     String name;
 
     //Database cursor
@@ -52,8 +51,8 @@ public class ChosenPotEntry extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            this.cId = args.getInt("cId");
-            this.dId = args.getInt("dId");
+            this.pId = args.getInt("pId");
+            this.eId = args.getInt("eId");
         }
     }
 
@@ -75,47 +74,38 @@ public class ChosenPotEntry extends Fragment {
         DeleteDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteDebt(v);
-            }
-        });
-
-        EditDebt = (Button) view.findViewById(R.id.buttonEditDebt);
-        EditDebt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditDebt(v);
+                deletePotEntry(v);
             }
         });
 
         // Change the title in the actionBar
-        ((MainActivity) getActivity()).setActionBarTitle(dName);
+        ((MainActivity) getActivity()).setActionBarTitle(eName);
         return view;
     }
 
     public void setInfo(){
         // Initializing variables
-        dName = "";
-        String dDescription = "", amount = "", date = "", due = "";
+        pName = "";
+        String eDescription = "", amount = "", date = "";
 
-        // Get the contact name that owes you this debt
-        String[] columnsC = {"name"};
-        String where = "_contact_id = "+this.cId;
-        cursor = db.query("CONTACTS",columnsC,where,null,null,null,null);
+        //Get the contact name that paid this entry
+        String[] columnsC = {"pot_name"};
+        String where = "_pot_id = "+this.pId;
+        cursor = db.query("AllPOTS",columnsC,where,null,null,null,null);
         while(cursor.moveToNext()){
-            cName = cursor.getString(0);
+            pName = cursor.getString(0);
         }
         cursor.close();
 
         // Getting the information for this chosen debt
-        String[] columnsD = {"name", "description", "amount","date","due"};
-        where = "_debt_id = "+ this.dId;
-        cursor = db.query("DEBTS",columnsD,where,null,null,null,null);
+        String[] columnsD = {"name", "description", "amount","date"};
+        where = "_pot_entry = "+ this.eId;
+        cursor = db.query("POTS",columnsD,where,null,null,null,null);
         while(cursor.moveToNext()) {
-            dName = cursor.getString(0);
-            dDescription = cursor.getString(1);
+            eName = cursor.getString(0);
+            eDescription = cursor.getString(1);
             amount = cursor.getString(2);
             date = cursor.getString(3);
-            due = cursor.getString(4);
         }
         cursor.close();
 
@@ -127,19 +117,22 @@ public class ChosenPotEntry extends Fragment {
         TextView entryDescription = (TextView) view.findViewById(R.id.Description);
         TextView entryDescriptionText = (TextView) view.findViewById(R.id.DescriptionText);
 
+        TextView header = (TextView) view.findViewById(R.id.entryName);
+
 
         //Give the Textview variables their proper value for information.
-        contact.setText(cName);
+        header.setText(pName);
+        contact.setText(eName);
         entryAmount.setText(amount);
         entryDate.setText(date);
-        entryDescription.setText(dDescription);
+        entryDescription.setText(eDescription);
 
         // Hide date and due only show if they apply
         if( date.equals("") ){
             entryDate.setVisibility(View.GONE);
             entryDateText.setVisibility(View.GONE);
         }
-        if( dDescription.equals("") ){
+        if( eDescription.equals("") ){
             entryDescription.setVisibility(View.GONE);
             entryDescriptionText.setVisibility(View.GONE);
         }
@@ -149,11 +142,11 @@ public class ChosenPotEntry extends Fragment {
     //Deletes the debt we are currently looking at
     private void deletePotEntry(View v) {
         //delete the debt from the database
-        db.delete("POTS", "_pot_id = " + pId, null);
+        db.delete("POTS", "_pot_entry = " + eId, null);
 
         getActivity().onBackPressed();
     }
 
     //Edits the debt we are currently looking at
-*/
+
 }

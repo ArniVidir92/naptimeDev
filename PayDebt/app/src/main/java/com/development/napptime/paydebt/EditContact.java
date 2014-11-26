@@ -17,7 +17,8 @@ import android.widget.EditText;
 
 /**
  * Created by napptime on 12/11/14.
- * The AddContact class serves the purpose of adding a contact to our sql database and
+ *
+ * The Edit contact class serves the purpose of editing a contact in our sql database and
  * provides a user friendly form to do so.
  */
 

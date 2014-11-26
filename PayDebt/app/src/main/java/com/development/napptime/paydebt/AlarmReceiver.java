@@ -16,7 +16,10 @@ import android.widget.CalendarView;
 import java.util.Calendar;
 
 /**
- * Created by arni on 11/26/14.
+ * Created by napptime on 11/26/14.
+ *
+ * This class serves the purpose of receiving alarms uses the android notification service
+ * to notify the user with push notification when appropriatly
  */
 public class AlarmReceiver extends BroadcastReceiver {
 

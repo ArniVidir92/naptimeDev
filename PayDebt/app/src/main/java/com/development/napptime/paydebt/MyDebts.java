@@ -22,6 +22,8 @@ import java.util.List;
 /**
  * Created by napptime on 10/11/14.
  *
+ * My debts serves as a way of managing money that you owe to others and is in a way just a more
+ * friendly way of adding yourself as a contact in our app.
  */
 public class MyDebts extends Fragment{
 

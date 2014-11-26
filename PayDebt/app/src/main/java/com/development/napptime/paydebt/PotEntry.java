@@ -30,6 +30,7 @@ import java.util.Locale;
 
 /**
  * Created by napptime on 30.10.2014.
+ *
  * This class serves the purpose of adding a new entry to an already existing money pot with
  * all the required information and providing a user friendly form to do so
  */

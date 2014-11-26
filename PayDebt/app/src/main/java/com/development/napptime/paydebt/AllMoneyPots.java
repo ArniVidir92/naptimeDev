@@ -24,6 +24,7 @@ import static java.util.Collections.sort;
 
 /**
  * Created by napptime on 10/11/14.
+ *
  * Contact class serves the purpose of showing and managing contacts with a user friendly layout.
  */
 public class AllMoneyPots extends Fragment {
@@ -115,6 +116,12 @@ public class AllMoneyPots extends Fragment {
 
         EditText potName = (EditText) view.findViewById(R.id.newPot);
         String newPot = potName.getText().toString();
+
+        if(newPot.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("Please specify a name.");
+            return;
+        }
 
         //create the content values and insert it into the database
         ContentValues contentValues = new ContentValues();

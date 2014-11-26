@@ -14,8 +14,9 @@ import java.util.List;
 
 /**
  * Created by napptime on 12/11/14.
- * The AddContact class serves the purpose of adding a contact to our sql database and
- * provides a user friendly form to do so.
+ *
+ * The Calculator class handles all the math and button listening needed for an operational
+ * calculator.
  */
 
 public class Calculator extends Fragment{

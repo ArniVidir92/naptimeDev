@@ -12,7 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by arni on 11/26/14.
+ * Created by napptime on 11/26/14.
+ *
+ * This class serves the purpose of providing us with service to send out the push notification
  */
 public class AlarmService {
     private Context context;
