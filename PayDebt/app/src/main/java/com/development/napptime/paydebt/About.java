@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 /**
  * Created by Napptime on 10/11/14.
+ *
+ * This class serves as the host of the fragment that displays information about the
+ * app and it's developers.
  */
 public class About extends Fragment {
     @Override

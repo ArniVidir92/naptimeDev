@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 /**
  * Created by napptime on 12/11/14.
+ *
  * The AddContact class serves the purpose of adding a contact to our sql database and
  * provides a user friendly form to do so.
  */
