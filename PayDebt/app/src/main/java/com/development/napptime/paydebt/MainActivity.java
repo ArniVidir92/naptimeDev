@@ -3,8 +3,12 @@ package com.development.napptime.paydebt;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,6 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -362,6 +368,13 @@ public class MainActivity extends Activity
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+    }
+
+
+    public void createNotification(String pDue, String title, String info) {
+        AlarmService alarm = new AlarmService(getApplicationContext());
+        Log.d("create","maettur");
+        alarm.startAlarm(pDue, title, info);
     }
 }
 

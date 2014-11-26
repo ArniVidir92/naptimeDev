@@ -219,6 +219,10 @@ public class AddDebt extends Fragment{
             return;
         }
 
+        if(reminder == 1){
+            buildNotification(due, "Title", "Info");
+        }
+
         //Initialize DbHelper and creates a sql database object and puts it into the
         //database
         DbHelper dbHelper = new DbHelper(getActivity());
@@ -234,6 +238,10 @@ public class AddDebt extends Fragment{
         long id = sqLiteDatabase.insert("DEBTS",null,contentValues);
 
         getActivity().onBackPressed();
+    }
+
+    public void buildNotification(String due, String title, String info){
+        ((MainActivity) getActivity()).createNotification(due, title, info);
     }
 
 }
