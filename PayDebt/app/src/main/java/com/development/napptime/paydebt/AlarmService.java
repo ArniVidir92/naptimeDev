@@ -53,7 +53,7 @@ public class AlarmService {
     private Date formatDate(String due){
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm-dd-MM-yyyy");
         Date date = new Date();
-        due = "22:15-"+due;
+        due = "12:00-"+due;
         try {
             date = formatter.parse(due);
             Log.d(due,date.toString());
