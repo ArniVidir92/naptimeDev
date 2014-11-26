@@ -116,6 +116,12 @@ public class AllMoneyPots extends Fragment {
         EditText potName = (EditText) view.findViewById(R.id.newPot);
         String newPot = potName.getText().toString();
 
+        if(newPot.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("Please specify a name.");
+            return;
+        }
+
         //create the content values and insert it into the database
         ContentValues contentValues = new ContentValues();
         contentValues.put("pot_name",newPot);

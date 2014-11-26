@@ -292,6 +292,22 @@ public class MoneyPot extends Fragment {
     //change the fragment to potEntry
     public void addEntry(View v)
     {
+        int counter = 0;
+        String[] columns = {"name", "_contact_id"};
+
+        // Selects the column name and puts the column in too cursor.
+        cursor = db.query("CONTACTS",columns,"_contact_id != 0",null,null,null,"name");
+
+        // Moves through each row of the db and adds
+        // the name of each contact to the listItem
+        while(cursor.moveToNext()) {
+            counter++;
+        }
+        if(counter == 0)
+        {
+            ((MainActivity) getActivity()).toastIt("You can't add an entry yet. Please populate your contacts list first.");
+            return;
+        }
         ((MainActivity)getActivity()).changeFragmentToPotEntry(pName, pId);
     }
 
