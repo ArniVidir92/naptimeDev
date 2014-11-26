@@ -40,8 +40,10 @@ public class MainActivity extends Activity
     private CharSequence mTitle;
     DbHelper dbHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

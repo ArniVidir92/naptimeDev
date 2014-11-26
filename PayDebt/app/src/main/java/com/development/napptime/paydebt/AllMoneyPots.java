@@ -44,9 +44,6 @@ public class AllMoneyPots extends Fragment {
     private List<String> listItems=new ArrayList<String>();
     private List<Integer> listIds = new ArrayList<Integer>();
 
-    // Extra variables for the search box
-    private List<String> listItemsCurrent=new ArrayList<String>();
-    private List<Integer> listIdsCurrent = new ArrayList<Integer>();
     //The ArrayAdapter for the listView
     private ArrayAdapter<String> adapter;
 
@@ -54,10 +51,6 @@ public class AllMoneyPots extends Fragment {
                              Bundle savedInstanceState) {
         // Initialize the view
         this.view = inflater.inflate(R.layout.lay_allpots, container, false);
-
-        // Initialize as empty
-        listItems=new ArrayList<String>();
-        listIds = new ArrayList<Integer>();
 
         //Gets the list view from the layout
         listView = (ListView) view.findViewById(R.id.pots_list);
@@ -70,18 +63,15 @@ public class AllMoneyPots extends Fragment {
             }
         });
 
-        if(listItems.isEmpty() ) {
-            addToListView();
-        }else{
-            listView.setAdapter(adapter);
-        }
+        addToListView();
+
         //Button listener for a button that sends the user to Chosen pot if clicked.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Log.d("hallo",""+listItemsCurrent.get(position));
-                ((MainActivity)getActivity()).changeFragmentToMoneyPot(listItemsCurrent.get(position), listIdsCurrent.get(position));
+                Log.d("hallo",""+listItems.get(position));
+                ((MainActivity)getActivity()).changeFragmentToMoneyPot(listItems.get(position), listIds.get(position));
             }
         });
 
@@ -95,6 +85,10 @@ public class AllMoneyPots extends Fragment {
         // Initialize the dbhelper
         dbhelper = new DbHelper(getActivity());
         db = dbhelper.getWritableDatabase();
+
+        // Initialize as empty
+        listItems=new ArrayList<String>();
+        listIds = new ArrayList<Integer>();
 
         //Denotes the columns that we want to fetch from the database
         String[] columns = {"pot_name", "_pot_id"};
@@ -111,12 +105,9 @@ public class AllMoneyPots extends Fragment {
             listIds.add(id);
         }
 
-        listItemsCurrent.addAll(listItems);
-        listIdsCurrent.addAll(listIds);
-
         //Adapts the listItems to our list view using lay_contacts_row
         adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_allmoneypots_row, R.id.listText, listItemsCurrent);
+                R.layout.lay_allmoneypots_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
     }
 
