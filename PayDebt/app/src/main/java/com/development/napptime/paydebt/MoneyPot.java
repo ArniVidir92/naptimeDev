@@ -185,7 +185,7 @@ public class MoneyPot extends Fragment {
                 array[i][1] = String.valueOf(gets);
                 array[i][2] = "gets";
 
-                calculatedPayments.add(contact + " gets:   " + gets);
+                calculatedPayments.add(contact + " gets:   " + Math.round(gets));
             }
             //if you pay less money than the average money paid, you will have to pay to the pot
             if(paid<split) {
@@ -195,14 +195,18 @@ public class MoneyPot extends Fragment {
                 array[i][1] = String.valueOf(pays);
                 array[i][2] = "pays";
 
-                calculatedPayments.add(contact + " pays:   " + pays);
+                calculatedPayments.add(contact + " pays:   " + Math.round(pays));
             }
             //if you paid the exact average of the money paid to the pot, you will neither get
             //money nor have to pay money
             if(paid == split) {
-                calculatedPayments.add(contact + ":   " + paid);
+                calculatedPayments.add(contact + " paid exactly the amount to split: " + Math.round(paid));
             }
             i +=1;
+
+            if(cursorAmount.isLast()) {
+                calculatedPayments.add("");
+            }
         }
 
         float swag;

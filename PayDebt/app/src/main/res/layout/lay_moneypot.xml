@@ -63,7 +63,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/description"
-                    android:maxLength="9"
+                    android:maxLength="20"
                     android:layout_weight="1" />
             </LinearLayout>
 

@@ -30,7 +30,7 @@ public class YourInfo extends Fragment{
     //a editable text field for the phone number
     private EditText phoneNr = null;
 
-    //Our layouts viewm
+    //Our layouts view
     private View view = null;
 
     @Override
