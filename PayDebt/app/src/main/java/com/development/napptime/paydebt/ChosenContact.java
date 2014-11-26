@@ -265,6 +265,7 @@ public class ChosenContact extends Fragment {
     private void DeleteContact(View v) {
         //delete the contact from the database
         db.delete("CONTACTS", "_contact_id = " + cId, null);
+        db.delete("DEBTS", "_contact_id = " + cId, null);
 
         getActivity().onBackPressed();
     }
