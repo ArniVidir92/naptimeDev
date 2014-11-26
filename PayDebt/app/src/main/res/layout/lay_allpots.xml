@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/newPot"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="start"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/bot_name"
+            android:inputType="text"
+            android:imeOptions="actionGo"
+
+            android:singleLine="true" >
+
+        </EditText>
+
+        <ImageButton android:text="Button"
+            android:id="@+id/buttonAddPot"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_action_content_add_circle_outline"/>
+    </LinearLayout>
+
+    <ListView android:id="@+id/pots_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <TextView android:id="@+id/android:empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130px"
+        android:textSize="25px"
+        android:text="@+string/contacts_header"/>
+
+</LinearLayout>
