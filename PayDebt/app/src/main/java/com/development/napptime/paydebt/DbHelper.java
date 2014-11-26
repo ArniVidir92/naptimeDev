@@ -22,6 +22,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String DATABASE_NAME = "napptimedb";
     private static final String TABLE_NAME_C = "CONTACTS";
     private static final String TABLE_NAME_P = "POTS";
+    private static final String TABLE_NAME_P_CONTAINER = "ALLPOTS";
     private static final String TABLE_NAME_D = "DEBTS";
     /*
     private static final String UID = "_contact_id";
@@ -33,7 +34,7 @@ class DbHelper extends SQLiteOpenHelper
     private static final String FAV = "favorite";
     */
 
-    private static final int DATABASE_VERSION = 100;
+    private static final int DATABASE_VERSION = 120;
 
 
     // Used as the context of the MainActivity
@@ -67,11 +68,17 @@ class DbHelper extends SQLiteOpenHelper
 
     public static final String POTS_TABLE = "create table if not exists "
             +TABLE_NAME_P+" (" +
-            "_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "_pot_entry INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " _pot_id INTEGER," +
             " _contact_id INTEGER," +
             " name VARCHAR(255), " +
-            "description VARCHAR(255)," +
-            "amount REAL);";
+            " description VARCHAR(255)," +
+            " amount REAL);";
+
+    public static final String POTS_CONTAINER = "create table if not exists "
+            +TABLE_NAME_P_CONTAINER+" (" +
+            "_pot_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " pot_name VARCHAR(255)); ";
 
     //Called when database is created for the first time,
     // create tables and initial data
@@ -82,6 +89,7 @@ class DbHelper extends SQLiteOpenHelper
         db.execSQL(CONTACTS_TABLE);
         db.execSQL(DEBTS_TABLE);
         db.execSQL(POTS_TABLE);
+        db.execSQL(POTS_CONTAINER);
 
         //notify user
         //Message.message(context, "onCreate called");
@@ -99,6 +107,9 @@ class DbHelper extends SQLiteOpenHelper
         db.execSQL(query);
         //Delete table debts
         query = "DROP TABLE IF EXISTS DEBTS";
+        db.execSQL(query);
+        //Delete table all pots
+        query = "DROP TABLE IF EXISTS ALLPOTS";
         db.execSQL(query);
 
         //create new tables

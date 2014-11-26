@@ -124,6 +124,11 @@ public class MainActivity extends Activity
                 fragment = new About();
                 mTitle = getString(R.string.title_section5);
                 break;
+            case 5:
+                // All pots
+                fragment = new AllMoneyPots();
+                mTitle = getString(R.string.title_section10);
+                break;
         }
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction()
@@ -180,7 +185,26 @@ public class MainActivity extends Activity
                 .commit();
     }
 
-    // Changes the fragment so we can edit a specific contact
+    public void changeFragmentToMoneyPot(String pName, int pId)
+    {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
+        fragment = new MoneyPot();
+        Bundle args = new Bundle();
+        args.putInt("pId", pId);
+        args.putString("pName", pName);
+        fragment.setArguments(args);
+        mTitle = pName;
+        setTitle(mTitle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+
+        // Changes the fragment so we can edit a specific contact
     //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToEditContact(int contactId)
     {
@@ -233,11 +257,15 @@ public class MainActivity extends Activity
 
     //change the fragment so we can access the money pot feature
     //   and add it on the backstack so we can use the back button for navigation
-    public void changeFragmentToPotEntry()
+    public void changeFragmentToPotEntry(String pName, int pId)
     {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         fragment = new PotEntry();
+        Bundle args = new Bundle();
+        args.putInt("pId", pId);
+        args.putString("pName", pName);
+        fragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
