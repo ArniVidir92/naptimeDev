@@ -315,6 +315,19 @@ public class MainActivity extends Activity
                 .commit();
     }
 
+    public void changeFragmentToChosenEntry(int eId, int pId){
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = new ChosenPotEntry();
+        Bundle args = new Bundle();
+        args.putInt("eId", eId);
+        args.putInt("pId", pId);
+        fragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     //change the fragment to the chosendebt to see more about it
     //   and add it on the backstack so we can use the back button for navigation
     public void changeFragmentToMyDebts(){
