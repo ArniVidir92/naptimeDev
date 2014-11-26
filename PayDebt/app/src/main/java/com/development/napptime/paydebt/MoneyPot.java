@@ -142,7 +142,7 @@ public class MoneyPot extends Fragment {
         listView = (ListView) view.findViewById(R.id.mp_nonscroll_list);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_money_pot_row, R.id.rowEntry, listItemsName);
+                R.layout.lay_mp_row, R.id.rowEntry, listItemsName);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -298,7 +298,7 @@ public class MoneyPot extends Fragment {
         listSplit = (ListView) view.findViewById(R.id.calculatedSplit);
 
         ArrayAdapter<String> adapterSplit = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_money_pot_row, R.id.rowEntry, calculatedPayments);
+                R.layout.lay_mp_row, R.id.rowEntry, calculatedPayments);
         listSplit.setAdapter(adapterSplit);
 
         ((MainActivity) getActivity()).setActionBarTitle(pName);

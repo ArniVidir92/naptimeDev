@@ -66,7 +66,7 @@ public class AddDebt extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //inflate the fragment to create the view
-        this.view = inflater.inflate(R.layout.fragment_add_debt, container, false);
+        this.view = inflater.inflate(R.layout.lay_add_debt, container, false);
 
         //Gets our button and the date and due fields
         addDebt = (Button) view.findViewById(R.id.buttonAddDebt);

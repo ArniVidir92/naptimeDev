@@ -108,7 +108,7 @@ public class AllMoneyPots extends Fragment {
 
         //Adapts the listItems to our list view using lay_contacts_row
         adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lay_allmoneypots_row, R.id.listText, listItems);
+                R.layout.lay_amp_row, R.id.listText, listItems);
         listView.setAdapter(adapter);
     }
 
