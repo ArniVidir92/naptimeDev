@@ -364,6 +364,4 @@ public class Calculator extends Fragment{
             }
         });
     }
-
-
 }

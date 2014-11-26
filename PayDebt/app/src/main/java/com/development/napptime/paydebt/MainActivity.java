@@ -371,10 +371,9 @@ public class MainActivity extends Activity
     }
 
 
-    public void createNotification(String pDue, String title, String info) {
+    public void createNotification(String pDue, String title, String info, int alarmNumber) {
         AlarmService alarm = new AlarmService(getApplicationContext());
-        Log.d("create","maettur");
-        alarm.startAlarm(pDue, title, info);
+        alarm.startAlarm(pDue, title, info, alarmNumber);
     }
 }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -220,7 +221,7 @@ public class AddDebt extends Fragment{
         }
 
         if(reminder == 1){
-            buildNotification(due, "Title", "Info");
+            buildNotification(due, name);
         }
 
         //Initialize DbHelper and creates a sql database object and puts it into the
@@ -240,8 +241,32 @@ public class AddDebt extends Fragment{
         getActivity().onBackPressed();
     }
 
-    public void buildNotification(String due, String title, String info){
-        ((MainActivity) getActivity()).createNotification(due, title, info);
+    public void buildNotification(String due, String name){
+        String info = "";
+        //Initializes the database helper with the fragment's parent activity's context
+        DbHelper dbhelper = new DbHelper(getActivity());
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        String contactName ="";
+        if(this.cId == 0){
+            info = "This debt is due today: "+name;
+        }else{
+            //Denotes the columns that we want to fetch from the database
+            String[] columns = {"name"};
+            String where = "_contact_id = "+cId;
+            Cursor cursor = db.query("CONTACTS",columns,where,null,null,null,null);
+
+            // Moves through each row of the db and adds the name
+            // and amount of each debt to the listItemsName
+            if(cursor.moveToNext()) {
+                contactName = cursor.getString(0);
+            }
+            cursor.close();
+            info = contactName + " owes you because of " + name + " and it's due today!";
+        }
+
+        int alarmNumber = (int) Math.ceil(Math.random()*20000);
+
+        ((MainActivity) getActivity()).createNotification(due, name, info, alarmNumber);
     }
 
 }
