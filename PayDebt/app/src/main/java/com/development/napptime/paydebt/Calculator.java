@@ -370,13 +370,13 @@ public class Calculator extends Fragment{
         return a+b;
     }
     public float mult(float a, float b){
-        return a+b;
+        return a*b;
     }
     public float div(float a, float b){
-        return a+b;
+        return a/b;
     }
     public float minus(float a, float b){
-        return a+b;
+        return a-b;
     }
 
     public float strToFloat( String a ){

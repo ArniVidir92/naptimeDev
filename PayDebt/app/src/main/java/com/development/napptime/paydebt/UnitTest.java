@@ -9,11 +9,12 @@ public class UnitTest {
     public boolean runAllTests()
     {
         boolean result = runBooleanTests();
-        Log.d("Unittest","\n =====================================" +
+        Log.d("Unittest",":" +
+                         "\n =====================================" +
                          "\n        Unit Testing Results" +
                          "\n =====================================" +
                          "\n   Ran 5 tests" +
-                         "\n      all unit tests return ="+result);
+                         "\n      all unit tests return "+result);
         return result;
     }
 
@@ -21,15 +22,15 @@ public class UnitTest {
     {
         boolean allIsWell = true;
 
-        if( !minusCheck() ) {allIsWell = false;}
+        if( !minusCheck() ) {allIsWell = false; Log.d("Unittest","minusCheck failed");}
 
-        if( !divCheck() ) {allIsWell = false;}
+        if( !divCheck() ) {allIsWell = false; Log.d("Unittest","divisionCheck failed");}
 
-        if( !plusCheck() ) {allIsWell = false;}
+        if( !plusCheck() ) {allIsWell = false; Log.d("Unittest","plusCheck failed");}
 
-        if( !multCheck() ) {allIsWell = false;}
+        if( !multCheck() ) {allIsWell = false; Log.d("Unittest","multiplicationCheck failed");}
 
-        if( !isUsableCheck() ) {allIsWell = false;}
+        if( !isUsableCheck() ) {allIsWell = false; Log.d("Unittest","isUsableCheck failed");}
 
         return allIsWell;
     }
@@ -43,13 +44,13 @@ public class UnitTest {
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
 
-        if( calc.plus((float) 1.2, (float) 2.5) == 3.7 )
+        if( calc.plus((float) 1.2, (float) 2.5) == (float) 3.7 )
             t1 = true;
 
-        if( calc.plus(-12, 23) == 11.0 )
+        if( calc.plus(-12, 23) == (float )11.0 )
             t2 = true;
 
-        if( calc.plus(0, 0) != 3.7 )
+        if( calc.plus(0, 0) != (float) 3.7 )
             t3 = true;
 
         return t1 && t2 && t3;
@@ -59,13 +60,13 @@ public class UnitTest {
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
 
-        if( calc.minus((float) 1.2, (float) 2.5) == -1.3 )
+        if( calc.minus((float) 1.2, (float) 2.5) == (float) -1.3 )
             t1 = true;
 
-        if( calc.minus(-12, 23) == -35 )
+        if( calc.minus(-12, 23) == (float) -35 )
             t2 = true;
 
-        if( calc.minus(0, 0) != 1.0 )
+        if( calc.minus(0, 0) != (float) 1.0 )
             t3 = true;
 
         return t1 && t2 && t3;
@@ -75,13 +76,13 @@ public class UnitTest {
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
 
-        if( calc.mult((float) 1.2, (float) 2.5) == 3.7 )
+        if( calc.mult((float) 1.2, (float) 2.5) == (float) 3 )
             t1 = true;
 
-        if( calc.mult(-12, 23) == -276 )
+        if( calc.mult(-12, 23) == (float) -276 )
             t2 = true;
 
-        if( calc.mult(0, 0) != 3.7 )
+        if( calc.mult(0, 0) !=  (float) 3.7 )
             t3 = true;
 
         return t1 && t2 && t3;
@@ -91,13 +92,13 @@ public class UnitTest {
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
 
-        if( calc.div((float) 1.2, (float) 2.5) == 2.76 )
+        if(! (calc.div((float) 1.2, (float) 2.5) == (float) 2.76) )
             t1 = true;
 
-        if( calc.div(-1, 2) == -0.5 )
+        if( calc.div(-1, 2) == (float) -0.5 )
             t2 = true;
 
-        if( calc.div(0, 1) != 0 )
+        if( calc.div(0, 1) == (float) 0 )
             t3 = true;
 
         return t1 && t2 && t3;
