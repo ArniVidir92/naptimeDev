@@ -116,7 +116,7 @@ public class Calculator extends Fragment{
         operations.add(b.getText().toString());
         equationStr += b.getText().toString();
         if( !current.equals("Not") ){
-            numbers.add(Float.parseFloat(current));
+            numbers.add(strToFloat(current));
             current = "";
             dotDone = false;
         }
@@ -140,7 +140,7 @@ public class Calculator extends Fragment{
             return;
         }
 
-        numbers.add(Float.parseFloat(current));
+        numbers.add(strToFloat(current));
         current = "Not";
         dotDone = false;
 
@@ -152,12 +152,12 @@ public class Calculator extends Fragment{
         for(int i = 0; i < operations.size(); i++){
             op = operations.get(i);
             if( op.equals("x") ){
-                numbers.set(ni ,numbers.get(ni) * numbers.get(ni+1));
+                numbers.set(ni ,this.mult(numbers.get(ni), numbers.get(ni + 1)));
                 numbers.remove(ni+1);
                 ni--;
             }
             else if( op.equals("/") ){
-                numbers.set(ni ,numbers.get(ni) / numbers.get(ni+1));
+                numbers.set(ni ,this.div(numbers.get(ni), numbers.get(ni + 1)));
                 numbers.remove(ni+1);
                 ni--;
             }
@@ -170,12 +170,12 @@ public class Calculator extends Fragment{
         ni=0;
         for (String ope : cOperations) {
             if( ope.equals("+") ){
-                numbers.set(ni ,numbers.get(ni) + numbers.get(ni+1));
+                numbers.set(ni ,this.plus(numbers.get(ni), numbers.get(ni+1)));
                 numbers.remove(ni+1);
                 ni--;
             }
             else if( ope.equals("-") ){
-                numbers.set(ni ,numbers.get(ni) - numbers.get(ni+1));
+                numbers.set(ni ,this.minus(numbers.get(ni), numbers.get(ni+1)));
                 numbers.remove(ni+1);
                 ni--;
             }
@@ -364,5 +364,28 @@ public class Calculator extends Fragment{
                 clickedNumber(v);
             }
         });
+    }
+
+    public float plus(float a, float b){
+        return a+b;
+    }
+    public float mult(float a, float b){
+        return a+b;
+    }
+    public float div(float a, float b){
+        return a+b;
+    }
+    public float minus(float a, float b){
+        return a+b;
+    }
+
+    public float strToFloat( String a ){
+        float res;
+        try{
+            res = Float.parseFloat(a);
+        }catch(Error e){
+            res = 000;
+        }
+        return res;
     }
 }
