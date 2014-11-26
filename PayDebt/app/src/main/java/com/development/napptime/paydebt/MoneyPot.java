@@ -274,6 +274,10 @@ public class MoneyPot extends Fragment {
         ArrayAdapter<String> adapterSplit = new ArrayAdapter<String>(getActivity(),
                 R.layout.lay_money_pot_row, R.id.rowEntry, calculatedPayments);
         listSplit.setAdapter(adapterSplit);
+
+        ((MainActivity) getActivity()).setActionBarTitle(pName);
+
+
         return view;
     }
 

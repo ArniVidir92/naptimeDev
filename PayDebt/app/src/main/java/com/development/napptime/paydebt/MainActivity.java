@@ -118,18 +118,13 @@ public class MainActivity extends Activity
                 break;
             case 3:
                 // MoneyPot
-                fragment = new MoneyPot();
+                fragment = new AllMoneyPots();
                 mTitle = getString(R.string.title_section6);
                 break;
             case 4:
                 // About
                 fragment = new About();
                 mTitle = getString(R.string.title_section5);
-                break;
-            case 5:
-                // All pots
-                fragment = new AllMoneyPots();
-                mTitle = getString(R.string.title_section10);
                 break;
         }
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
