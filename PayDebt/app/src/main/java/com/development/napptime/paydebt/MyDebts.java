@@ -219,6 +219,7 @@ public class MyDebts extends Fragment{
             listItemsName.add("Congratulations you have no debts!");
             hasDebt=false;
         }
+        else{hasDebt=true;}
 
 
         listView.setAdapter(adapter);

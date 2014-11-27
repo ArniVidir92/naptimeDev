@@ -155,21 +155,8 @@ public class EditDebt extends Fragment{
         String debtDate = date.getText().toString();
 
         //cancel operation if debt has no name or amount and notifies the user
-        if (amount.equals("") && name.equals(""))
-        {
-            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+        if(!validate(debtAmount))
             return;
-        }
-        else if (debtAmount.equals("")||stringToDouble(debtAmount)==0)
-        {
-            ((MainActivity) getActivity()).toastIt("What happened to the amount?");
-            return;
-        }
-        else if (name.equals(""))
-        {
-            ((MainActivity) getActivity()).toastIt("What happened to the name?");
-            return;
-        }
 
         // Initialize dbHelper and adds the contacts name to the database.
         DbHelper dbHelper = new DbHelper(getActivity());
@@ -185,5 +172,25 @@ public class EditDebt extends Fragment{
 
         // Change to fragment Contacts
         getActivity().onBackPressed();
+    }
+
+    private boolean validate(String debtAmount)
+    {
+        if ((debtAmount.equals("")||stringToDouble(debtAmount)==0) && name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+            return false;
+        }
+        else if (debtAmount.equals("")||stringToDouble(debtAmount)==0)
+        {
+            ((MainActivity) getActivity()).toastIt("What happened to the amount?");
+            return false;
+        }
+        else if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("What happened to the name?");
+            return false;
+        }
+        return true;
     }
 }
