@@ -69,6 +69,8 @@ public class ChosenDebt extends Fragment {
         //Adds a description about the contact from db
         setInfo();
 
+        createListeners();
+
         // Change the title in the actionBar
         ((MainActivity) getActivity()).setActionBarTitle(dName);
         return view;

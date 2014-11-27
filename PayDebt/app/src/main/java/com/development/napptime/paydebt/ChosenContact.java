@@ -170,6 +170,8 @@ public class ChosenContact extends Fragment {
             hasDebt = false;
             listItemsName.add("This contact has no debts.");
         }
+        else
+        { hasDebt = true; }
 
 
         listView.setAdapter(adapter);
