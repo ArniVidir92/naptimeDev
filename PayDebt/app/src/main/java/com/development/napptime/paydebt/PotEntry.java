@@ -5,21 +5,16 @@ import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,7 +77,7 @@ public class PotEntry extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Initialize the view
-        this.view = inflater.inflate(R.layout.lay_moneypot, container, false);
+        this.view = inflater.inflate(R.layout.lay_pot_new_entry, container, false);
 
         //gets the entry button from the layout and connects it's functionality
         // to the on click listener
@@ -106,6 +101,22 @@ public class PotEntry extends Fragment {
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        populateSpinnerWidget();
+
+        ((MainActivity) getActivity()).setActionBarTitle(pName);
+
+        return view;
+    }
+
+    //converts a string to double and returns -1 if it's the empty string
+    public static double stringToDouble(String str){
+        if(str.equals(""))
+            return -1;
+
+        return Double.parseDouble(str);
+    }
+
+    public void populateSpinnerWidget() {
         //define what we need
         String[] columns = {"name", "_contact_id"};
         String[] amounts = {"amount"};
@@ -117,18 +128,12 @@ public class PotEntry extends Fragment {
         //get the spinner from the layout
         spinner = (Spinner) view.findViewById(R.id.contactsSpinner);
 
-        //define the hash and set the number of contacts as 0 to begin with
-        numOfContacts = 0;
-        HashSet test = new HashSet();
-
         //go through all contacts
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             id = cursor.getInt(1);
             list.add(name);
             listIds.add(id);
-
-            test.add(name);
         }
 
         totalAmount = 0;
@@ -144,18 +149,6 @@ public class PotEntry extends Fragment {
                 android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
-
-        ((MainActivity) getActivity()).setActionBarTitle(pName);
-
-        return view;
-    }
-
-    //converts a string to double and returns -1 if it's the empty string
-    public static double stringToDouble(String str){
-        if(str.equals(""))
-            return -1;
-
-        return Double.parseDouble(str);
     }
 
     //add the entry we created to the database

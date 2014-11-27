@@ -39,7 +39,7 @@ public class UnitTest {
     {
 
     }
-
+    //Checks if the plus function works
     private boolean plusCheck(){
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
@@ -56,6 +56,7 @@ public class UnitTest {
         return t1 && t2 && t3;
     }
 
+    //Checks if the minus function works
     private boolean minusCheck(){
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
@@ -72,6 +73,7 @@ public class UnitTest {
         return t1 && t2 && t3;
     }
 
+    //Checks if the multiplication function works
     private boolean multCheck(){
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();
@@ -88,6 +90,7 @@ public class UnitTest {
         return t1 && t2 && t3;
     }
 
+    //Checks if the div function works
     private boolean divCheck(){
         boolean t1 = false, t2 = false, t3 = false;
         Calculator calc = new Calculator();

@@ -5,12 +5,10 @@ import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -71,6 +69,13 @@ public class ChosenDebt extends Fragment {
         //Adds a description about the contact from db
         setInfo();
 
+        // Change the title in the actionBar
+        ((MainActivity) getActivity()).setActionBarTitle(dName);
+        return view;
+    }
+
+    public void createListeners()
+    {
         //Gets our button and sets a listener to catch when user clicks it
         DeleteDebt = (Button) view.findViewById(R.id.buttonDeleteDebt);
         DeleteDebt.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +92,6 @@ public class ChosenDebt extends Fragment {
                 EditDebt(v);
             }
         });
-
-        // Change the title in the actionBar
-        ((MainActivity) getActivity()).setActionBarTitle(dName);
-        return view;
     }
 
     public void setInfo(){

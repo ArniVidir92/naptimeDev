@@ -3,16 +3,11 @@ package com.development.napptime.paydebt;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
 
 /**
  * Created by Napptime on 10/13/14.
@@ -63,23 +57,6 @@ public class MainActivity extends Activity
         //get database object
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
-        //add a demo entry
-        /*
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name","yo");
-        contentValues.put("description","fokk mikill peningur");
-        //contentValues.put("favorite", 1);
-        long id = sqLiteDatabase.insert("POTS",null,contentValues);
-        Message.message(this, "Entry: "+id);
-
-        //read from database
-
-        String[] columns = {"name"};
-        Cursor cursor = sqLiteDatabase.query("POTS",
-        columns,null,null,null,null,null);
-        while(cursor.moveToNext())
-            Message.message(this,""+cursor.getString(0));
-        */
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -94,13 +71,11 @@ public class MainActivity extends Activity
         getFragmentManager().addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
-                        Log.d("console","Jeeeeeeeeeeeeeeeeeeeeeeeeeee");
                     }
                 });
         getFragmentManager().removeOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
-                        Log.d("console","ooooooooooooooooooooooooooohh");
                     }
                 });
     }
