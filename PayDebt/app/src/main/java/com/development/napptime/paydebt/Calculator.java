@@ -84,64 +84,48 @@ public class Calculator extends Fragment{
     public void clickedNumber(View v){
         Button b = (Button) v;
         String s = b.getText().toString();
-        if( s.equals(".") && equationStr.length() >= 1 &&  equationStr.substring(equationStr.length()-1).equals(".") ){
-            resText.setText("Don't do that");
-            destroyEquation(v);
-            return;
-        }
         if( s.equals(".") ){
             if( dotDone ){
                 resText.setText("Don't do that");
-                destroyEquation(v);
                 return;
             }
             dotDone = true;
         }
-        if(current.equals("Not")){
-            current = b.getText().toString();
-        }else{
-            current += b.getText().toString();
-        }
+        current += b.getText().toString();
+
         equationStr += b.getText().toString();
         eqText.setText(equationStr);
     }
 
     public void clickedOp(View v){
-        if( current.equals("") ){
+        if( current.equals("") || current.equals(".") ){
             resText.setText("Don't do that");
-            destroyEquation(v);
             return ;
         }
         Button b = (Button) v;
         operations.add(b.getText().toString());
         equationStr += b.getText().toString();
-        if( !current.equals("Not") ){
-            numbers.add(strToFloat(current));
-            current = "";
-            dotDone = false;
-        }
+        numbers.add(strToFloat(current));
+        current = "";
+        dotDone = false;
         eqText.setText(equationStr);
     }
 
     public boolean isUsable(){
-        if(equationStr.equals("") || !((Integer) numbers.size()).equals((Integer) operations.size()) ||
-                equationStr.substring(equationStr.length()-1).equals("+") || equationStr.substring(equationStr.length()-1).equals("-") ||
-                equationStr.substring(equationStr.length()-1).equals("/") || equationStr.substring(equationStr.length()-1).equals("x") ||
-                equationStr.substring(equationStr.length()-1).equals("+")){
-            return false;
-        }
-        return true;
+        return !(equationStr.equals("") || numbers.size() != operations.size() ||
+                equationStr.substring(equationStr.length() - 1).equals("+") || equationStr.substring(equationStr.length() - 1).equals("-") ||
+                equationStr.substring(equationStr.length() - 1).equals("/") || equationStr.substring(equationStr.length() - 1).equals("x") ||
+                equationStr.substring(equationStr.length() - 1).equals("+") || current.equals("."));
     }
 
     public void compute(View v){
         if( ! isUsable() ){
-            resText.setText("NO INPUT OR IDIOT");
-            destroyEquation(v);
+            resText.setText("Something went wrong");
+            destroyEquation(v, false);
             return;
         }
 
         numbers.add(strToFloat(current));
-        current = "Not";
         dotDone = false;
 
         String op;
@@ -182,22 +166,25 @@ public class Calculator extends Fragment{
             ni++;
         }
         resText.setText(""+numbers.get(0));
-        equals(numbers, numb);
+        destroyEquation(v, true);
+
     }
 
-    public void destroyEquation(View v){
+    public void destroyEquation(View v, boolean keep){
         numbers = new ArrayList<Float>();
         operations = new ArrayList<String>();
         equationStr = "";
-        eqText.setText("");
+        if(!keep)
+            eqText.setText("");
         current = "";
     }
 
     public void ans(View v){
-        if( resText.getText().toString().equals("") ){
+        String s = resText.getText().toString();
+        if( resText.getText().toString().equals("") || s.equals("Something went wrong") || s.equals("Don't do that") ){
             return;
         }
-        destroyEquation(v);
+        destroyEquation(v, false);
         equationStr += resText.getText().toString();
         eqText.setText(equationStr);
         current = resText.getText().toString();
@@ -269,7 +256,7 @@ public class Calculator extends Fragment{
         btnAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                destroyEquation(v);
+                destroyEquation(v, false);
             }
         });
         //Listener; catches when the user clicks the button
