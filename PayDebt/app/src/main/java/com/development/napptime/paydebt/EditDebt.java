@@ -155,7 +155,7 @@ public class EditDebt extends Fragment{
         String debtDate = date.getText().toString();
 
         //cancel operation if debt has no name or amount and notifies the user
-        if(!validate(debtAmount))
+        if(!validate(name, debtAmount))
             return;
 
         // Initialize dbHelper and adds the contacts name to the database.
@@ -174,7 +174,7 @@ public class EditDebt extends Fragment{
         getActivity().onBackPressed();
     }
 
-    private boolean validate(String debtAmount)
+    private boolean validate(String name, String debtAmount)
     {
         if ((debtAmount.equals("")||stringToDouble(debtAmount)==0) && name.equals(""))
         {
