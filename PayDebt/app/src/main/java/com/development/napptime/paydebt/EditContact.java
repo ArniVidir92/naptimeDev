@@ -71,24 +71,9 @@ public class EditContact extends Fragment{
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_edit_contact, container, false);
 
-        // Set a phone number listener to the phone number text edit
-        phoneNr = (EditText) view.findViewById(R.id.phoneNumber);
-
-        name = (EditText) view.findViewById(R.id.name);
-
-        description = (EditText) view.findViewById(R.id.description);
+        connectToLayout();
 
         phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
-
-        //Gets our button
-        confirm = (Button) view.findViewById(R.id.buttonConfirm);
-
-        //Checks if the button exists
-        if(confirm == null)
-        {
-            Log.d("debugCheck", "HeadFrag: sendButton is null");
-            return view;
-        }
 
         //Listener; catches when the user clicks the button
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +83,26 @@ public class EditContact extends Fragment{
             }
         });
 
+        populateLayoutsInformation();
+
+        return view;
+    }
+
+    private void connectToLayout()
+    {
+        // Set a phone number listener to the phone number text edit
+        phoneNr = (EditText) view.findViewById(R.id.phoneNumber);
+
+        name = (EditText) view.findViewById(R.id.name);
+
+        description = (EditText) view.findViewById(R.id.description);
+
+        //Gets our button
+        confirm = (Button) view.findViewById(R.id.buttonConfirm);
+    }
+
+    private void populateLayoutsInformation()
+    {
         String[] columns = {"phone","favorite","name", "description"};
         String where = "_contact_id = "+cId;
         //the select query for the database
@@ -117,8 +122,6 @@ public class EditContact extends Fragment{
         }
         //close the database commection
         cursor.close();
-
-        return view;
     }
 
     @Override

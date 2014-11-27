@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82c9729033cbb2cc1d22b486e7576b1bc155438b
 
 /**
  * Created by napptime on 12/11/14.
@@ -43,20 +46,27 @@ public class AddContact extends Fragment{
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_addcontact, container, false);
 
+        connectToLayout();
+
+        createListeners();
+
+        ((MainActivity) getActivity()).setActionBarTitle("Add Contact");
+        return view;
+    }
+
+    private void connectToLayout()
+    {
         // Set a phone number listener to the phone number text edit
         phoneNr = (EditText) view.findViewById(R.id.inputContactPhoneNumber);
 
-        phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
-
         //Gets our button
         addContact = (Button) view.findViewById(R.id.buttonConfirm);
+    }
 
-        //Checks if the button exists
-        if(addContact == null)
-        {
-            Log.d("debugCheck", "HeadFrag: sendButton is null");
-            return view;
-        }
+    private void createListeners()
+    {
+        // listener to watch phone number input
+        phoneNr.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         //Listener; catches when the user clicks the button
         addContact.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +75,6 @@ public class AddContact extends Fragment{
                 addContactToDB(v);
             }
         });
-        ((MainActivity) getActivity()).setActionBarTitle("Add Contact");
-        return view;
     }
 
     @Override
@@ -85,25 +93,24 @@ public class AddContact extends Fragment{
     //Adds the info in the EditText field for inputting contact name
     //to our sql database
     public void addContactToDB(View v){
-        // Get text from phone number
-        String phone = phoneNr.getText().toString();
-        // Get text from name field
+
+        // Get the fields from layout
         EditText contactName = (EditText) view.findViewById(R.id.inputName);
+        EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
+
+        // Get the strings
+        String phone = phoneNr.getText().toString();
         String name = contactName.getText().toString();
+        String description = contactDescription.getText().toString();
 
         //cancel operation if contact has no name or amount and notifies the user
-        if(name.equals(""))
-        {
-            ((MainActivity) getActivity()).toastIt("This person must have a name.");
-            return;
-        }
+        if(!validate(name)){return;}
 
         name = name.substring(0,1).toUpperCase() + name.substring(1);
         // Get text from description field
-        EditText contactDescription = (EditText) view.findViewById(R.id.contactTextDesc);
-        String description = contactDescription.getText().toString();
-        onCheckboxClicked(view);
 
+
+        onCheckboxClicked(view);
 
 
         // Initialize dbHelper and adds the contacts name to the database.
@@ -118,5 +125,15 @@ public class AddContact extends Fragment{
 
         // Change to fragment Contacts
         getActivity().onBackPressed();
+    }
+
+    private boolean validate(String name)
+    {
+        if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("This person must have a name.");
+            return false;
+        }
+        return true;
     }
 }
