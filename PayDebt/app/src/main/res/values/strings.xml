@@ -62,5 +62,7 @@
     <string name="deletePot">Delete Money Pot</string>
     <string name="newEntry">New Entry</string>
     <string name="confirmNewEntry">Confirm</string>
+    <string name="split">Equal split:</string>
+    <string name="splitAmount">split amount</string>
 
 </resources>

@@ -101,6 +101,22 @@ public class PotEntry extends Fragment {
         dbHelper = new DbHelper(getActivity());
         sqLiteDatabase = dbHelper.getWritableDatabase();
 
+        populateSpinnerWidget();
+
+        ((MainActivity) getActivity()).setActionBarTitle(pName);
+
+        return view;
+    }
+
+    //converts a string to double and returns -1 if it's the empty string
+    public static double stringToDouble(String str){
+        if(str.equals(""))
+            return -1;
+
+        return Double.parseDouble(str);
+    }
+
+    public void populateSpinnerWidget() {
         //define what we need
         String[] columns = {"name", "_contact_id"};
         String[] amounts = {"amount"};
@@ -112,18 +128,12 @@ public class PotEntry extends Fragment {
         //get the spinner from the layout
         spinner = (Spinner) view.findViewById(R.id.contactsSpinner);
 
-        //define the hash and set the number of contacts as 0 to begin with
-        numOfContacts = 0;
-        HashSet test = new HashSet();
-
         //go through all contacts
         while(cursor.moveToNext()) {
             name = cursor.getString(0);
             id = cursor.getInt(1);
             list.add(name);
             listIds.add(id);
-
-            test.add(name);
         }
 
         totalAmount = 0;
@@ -139,18 +149,6 @@ public class PotEntry extends Fragment {
                 android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
-
-        ((MainActivity) getActivity()).setActionBarTitle(pName);
-
-        return view;
-    }
-
-    //converts a string to double and returns -1 if it's the empty string
-    public static double stringToDouble(String str){
-        if(str.equals(""))
-            return -1;
-
-        return Double.parseDouble(str);
     }
 
     //add the entry we created to the database
