@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,7 +17,7 @@ import java.util.Date;
  */
 public class AlarmService {
     private Context context;
-    private PendingIntent mAlarmSender;
+
     public AlarmService(Context context) {
         this.context = context;
         Log.d("create","maettur");
@@ -30,26 +29,24 @@ public class AlarmService {
         Intent indent = new Intent(context, AlarmReceiver.class);
         indent.putExtra("title", title);
         indent.putExtra("info", info);
-        mAlarmSender = PendingIntent.getBroadcast(context, alarmNumber, indent, 0);
+
+        PendingIntent mAlarmSender = PendingIntent.getBroadcast(context, alarmNumber, indent, 0);
         Date rem = formatDate(due);
-        //Set the alarm to 10 seconds from now
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.SECOND, 20);
-        long firstTime = c.getTimeInMillis();
         // Schedule the alarm!
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
-        int a = 0;
+        long a = 0;
+        long minute = 60000;
+        String notificationContacts = "This";
 
-        if(info.substring(0,4).equals("This")){
-            a = 60000;
+        if(info.substring(0,4).equals(notificationContacts)){
+            a = minute;
         }
-
-        Log.d("jiiiiiiiiiiiiii"," " + a);
 
         am.set(AlarmManager.RTC_WAKEUP, rem.getTime() + a, mAlarmSender);
     }
 
+    // Returns a Date object from the string due
     private Date formatDate(String due){
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm-dd-MM-yyyy");
         Date date = new Date();

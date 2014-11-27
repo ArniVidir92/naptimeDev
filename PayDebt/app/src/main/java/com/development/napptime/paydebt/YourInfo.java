@@ -73,7 +73,7 @@ public class YourInfo extends Fragment{
 
     //Adds the info in the EditText field for inputting contact name
     //to our sql database
-    public void addYourInfoToDB(View v){
+    private void addYourInfoToDB(View v){
         // Get text from phone number
         String phone = phoneNr.getText().toString();
         // Get text from name field

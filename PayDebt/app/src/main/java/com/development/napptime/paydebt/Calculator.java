@@ -238,104 +238,26 @@ public class Calculator extends Fragment{
     }
 
     public void setClickListeners(){
-        //Listener; catches when the user clicks the button
-        btn0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btn9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btnP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedOp(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btnM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedOp(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedOp(v);
-            }
-        });
-        //Listener; catches when the user clicks the button
-        btnD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedOp(v);
-            }
-        });
+        Button[] btnNumbers = {btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot};
+
+        for (Button num : btnNumbers) {
+            num.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickedNumber(v);
+                }
+            });
+        }
+
+        Button[] btnOps = {btnP, btnM, btnMinus, btnD};
+        for(Button operation : btnOps){
+            operation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickedOp(v);
+                }
+            });
+        }
         //Listener; catches when the user clicks the button
         btnEq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,13 +279,7 @@ public class Calculator extends Fragment{
                 ans(v);
             }
         });
-        //Listener; catches when the user clicks the button
-        btnDot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickedNumber(v);
-            }
-        });
+
     }
 
     public float plus(float a, float b){

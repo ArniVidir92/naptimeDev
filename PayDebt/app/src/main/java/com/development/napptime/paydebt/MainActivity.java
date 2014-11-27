@@ -185,10 +185,7 @@ public class MainActivity extends Activity
         Bundle args = new Bundle();
         args.putInt("cId", contactId);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     public void changeFragmentToMoneyPot(String pName, int pId)
@@ -202,10 +199,7 @@ public class MainActivity extends Activity
         fragment.setArguments(args);
         mTitle = pName;
         setTitle(mTitle);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
 
@@ -220,10 +214,7 @@ public class MainActivity extends Activity
         Bundle args = new Bundle();
         args.putInt("cId", contactId);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     // Changes the fragment so we can edit a debt of a specific contact
@@ -231,15 +222,11 @@ public class MainActivity extends Activity
     public void changeFragmentToEditDebt(int debtId)
     {
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new EditDebt();
+        Fragment fragment = new EditDebt();
         Bundle args = new Bundle();
         args.putInt("dId", debtId);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     // Changes the fragment so we can look at a specific contact a debt to a specific contact
@@ -247,18 +234,14 @@ public class MainActivity extends Activity
     public void changeFragmentToChosenContact( String name, int cId )
     {
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new ChosenContact();
+        Fragment fragment = new ChosenContact();
         Bundle args = new Bundle();
         args.putInt("cId", cId);
         args.putString("cName", name);
         fragment.setArguments(args);
         mTitle = name;
         setTitle(mTitle);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     //change the fragment so we can access the money pot feature
@@ -266,16 +249,12 @@ public class MainActivity extends Activity
     public void changeFragmentToPotEntry(String pName, int pId)
     {
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new PotEntry();
+        Fragment fragment = new PotEntry();
         Bundle args = new Bundle();
         args.putInt("pId", pId);
         args.putString("pName", pName);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     //change the fragment so we can add another contact to the database
@@ -283,12 +262,8 @@ public class MainActivity extends Activity
     public void changeFragmentToAddContact()
     {
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
-        fragment = new AddContact();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        Fragment fragment = new AddContact();
+        moveToFragment(fragmentManager, fragment);
     }
 
     //change the fragment to see the list of favorite contacts in the app
@@ -296,12 +271,9 @@ public class MainActivity extends Activity
     public void changeFragmentToFavorites()
     {
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
+        Fragment fragment;
         fragment = new Favorites();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     //change the fragment to the chosendebt to see more about it
@@ -313,10 +285,7 @@ public class MainActivity extends Activity
         args.putInt("cId", contactId);
         args.putInt("dId", debtId);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     public void changeFragmentToChosenEntry(int eId, int pId){
@@ -326,10 +295,7 @@ public class MainActivity extends Activity
         args.putInt("eId", eId);
         args.putInt("pId", pId);
         fragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
+        moveToFragment(fragmentManager, fragment);
     }
 
     //change the fragment to the chosendebt to see more about it
@@ -357,6 +323,13 @@ public class MainActivity extends Activity
             cursor.close();
             return new YourInfo();
         }
+    }
+
+    private void moveToFragment(FragmentManager FM, Fragment a){
+        FM.beginTransaction()
+                .replace(R.id.container, a)
+                .addToBackStack(null)
+                .commit();
     }
 
     //override the onBackPressed to make it call the same function because of weird implementation

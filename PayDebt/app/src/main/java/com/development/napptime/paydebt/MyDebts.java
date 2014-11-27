@@ -67,7 +67,8 @@ public class MyDebts extends Fragment{
                              Bundle savedInstanceState) {
         //inflate the fragment to create the view
         this.view = inflater.inflate(R.layout.lay_mydebts, container, false);
-        Log.d("Check"," "+1);
+
+        connectToLayout();
 
         //Initializes the database helper with the fragment's parent activity's context
         dbhelper = new DbHelper(getActivity());
@@ -76,15 +77,13 @@ public class MyDebts extends Fragment{
         //Adds a description about the contact from db
         setDescription();
         setPhone();
-        Log.d("Check"," "+3);
 
         // Initialize as empty
         listItemsName=new ArrayList<String>();
         listDebtName = new ArrayList<String>();
         listDebtIds=new ArrayList<Integer>();
 
-        //Gets our button and sets a listener to catch when user clicks it
-        addDebt = (Button) view.findViewById(R.id.myButtonAddDebt);
+        //Sets a listener to catch when user clicks it
         addDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +91,6 @@ public class MyDebts extends Fragment{
             }
         });
 
-        editC = (Button) view.findViewById(R.id.myButtonEdit);
         editC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,37 +124,36 @@ public class MyDebts extends Fragment{
         return view;
     }
 
+    private void connectToLayout(){
+        addDebt = (Button) view.findViewById(R.id.myButtonAddDebt);
+        editC = (Button) view.findViewById(R.id.myButtonEdit);
+        phoneNr = (TextView) view.findViewById(R.id.myPhone);
+        phoneNrInput = (TextView) view.findViewById(R.id.myPhoneNumber);
+        phoneDiv = view.findViewById(R.id.phoneDiv);
+        descrInput = (TextView) view.findViewById(R.id.myDescriptionContact);
+        descr = (TextView) view.findViewById(R.id.myAboutContact);
+        descrDiv = view.findViewById(R.id.descriptionDiv);
+    }
 
-    public void addDebt(View v){
+    private void addDebt(View v){
         ((MainActivity)getActivity()).changeFragmentToAddDebt(this.cId);
     }
 
     //sets the description for the chosen context
-    public void setDescription(){
-
-        // gets the textfield
-        this.descrInput = (TextView) view.findViewById(R.id.myDescriptionContact);
-        this.descr = (TextView) view.findViewById(R.id.myAboutContact);
-        this.descrDiv = view.findViewById(R.id.descriptionDiv);
-
-        Log.d("Check"," "+2);
+    private void setDescription(){
 
         // sets the visibility of the fields
         descr.setVisibility(View.GONE);
         descrInput.setVisibility(View.GONE);
         descrDiv.setVisibility(View.GONE);
 
-        Log.d("Check"," "+2.1);
 
         String description;
         String[] columns = {"description"};
         String where = "_contact_id = "+this.cId+" AND description is not NULL";
         //the select query for the database
-        Log.d("Check"," "+2.2);
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
-        Log.d("Check"," "+2.3);
         while(cursor.moveToNext()) {
-            Log.d("Check"," "+2.4);
             description = cursor.getString(0);
             this.descrInput.setText(description);
             if( !description.equals("") ){
@@ -164,18 +161,14 @@ public class MyDebts extends Fragment{
                 this.descr.setVisibility(View.VISIBLE);
                 this.descrDiv.setVisibility(View.VISIBLE);
             }
-            Log.d("Check"," "+2.2);
         }
         //close the database connection
         cursor.close();
     }
 
     //updates the phone field for the chosen contact
-    public void setPhone(){
-        //gets the textfields
-        this.phoneNr = (TextView) view.findViewById(R.id.myPhone);
-        this.phoneNrInput = (TextView) view.findViewById(R.id.myPhoneNumber);
-        this.phoneDiv = view.findViewById(R.id.phoneDiv);
+    private void setPhone(){
+
 
         //set the visibility of the text fields
         phoneNr.setVisibility(View.GONE);
@@ -189,7 +182,6 @@ public class MyDebts extends Fragment{
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
         while(cursor.moveToNext()) {
             phoneNumber = cursor.getString(0);
-            Log.d("De", phoneNumber);
             phoneNrInput.setText(phoneNumber);
             if( !phoneNumber.equals("") ){
                 phoneNr.setVisibility(View.VISIBLE);
@@ -200,7 +192,7 @@ public class MyDebts extends Fragment{
         cursor.close();
     }
 
-    public void addDebtsForContactFromDb(){
+    private void addDebtsForContactFromDb(){
 
         int debtId;
         double amount;

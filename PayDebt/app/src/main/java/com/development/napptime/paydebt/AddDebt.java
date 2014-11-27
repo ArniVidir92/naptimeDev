@@ -32,9 +32,6 @@ public class AddDebt extends Fragment{
 
     //Instance variables
 
-    // Contact name
-    private String cName = "";
-
     //Button, adds debts to database when used
     private Button addDebt = null;
 
@@ -57,7 +54,6 @@ public class AddDebt extends Fragment{
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
-            this.cName = args.getString("cName");
         }
     }
 
@@ -203,20 +199,8 @@ public class AddDebt extends Fragment{
             reminder = 0;
         }
 
-        //cancel operation if debt has no name or amount and notifies the user
-        if (amount.equals("") && name.equals(""))
-        {
-            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
-            return;
-        }
-        else if (amount.equals("")||dbAmount==0)
-        {
-            ((MainActivity) getActivity()).toastIt("You need to specify an amount.");
-            return;
-        }
-        else if (name.equals(""))
-        {
-            ((MainActivity) getActivity()).toastIt("You can't add a nameless debt.");
+
+        if( !isValid(amount, name, dbAmount) ){
             return;
         }
 
@@ -269,4 +253,28 @@ public class AddDebt extends Fragment{
         ((MainActivity) getActivity()).createNotification(due, name, info, alarmNumber);
     }
 
+
+    public boolean isValid(String amount, String name, double dbAmount){
+
+        boolean results = true;
+
+        //cancel operation if debt has no name or amount and notifies the user
+        if (amount.equals("") && name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("A debt needs amount and name.");
+            results = false;
+        }
+        else if (amount.equals("")||dbAmount==0)
+        {
+            ((MainActivity) getActivity()).toastIt("You need to specify an amount.");
+            results = false;
+        }
+        else if (name.equals(""))
+        {
+            ((MainActivity) getActivity()).toastIt("You can't add a nameless debt.");
+            results = false;
+        }
+
+        return results;
+    }
 }
