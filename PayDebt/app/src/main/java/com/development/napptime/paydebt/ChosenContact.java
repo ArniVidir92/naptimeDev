@@ -2,11 +2,9 @@ package com.development.napptime.paydebt;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +72,6 @@ public class ChosenContact extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             this.cId = args.getInt("cId");
-            Log.d("koppur",""+this.cId);
             this.cName = args.getString("cName");
         }
     }
@@ -202,7 +197,6 @@ public class ChosenContact extends Fragment {
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
         while(cursor.moveToNext()) {
             description = cursor.getString(0);
-            Log.d("De", description);
             descrTV.setText(description);
             if( !description.equals("") ){
                 descrTV.setVisibility(View.VISIBLE);
@@ -239,7 +233,6 @@ public class ChosenContact extends Fragment {
         cursor = db.query("CONTACTS",columns,where,null,null,null,null);
         while(cursor.moveToNext()) {
             phoneNumber = cursor.getString(0);
-            Log.d("De", phoneNumber);
             number.setText(phoneNumber);
             if( !phoneNumber.equals("") ){
                 phone.setVisibility(View.VISIBLE);
@@ -254,7 +247,6 @@ public class ChosenContact extends Fragment {
     public void addDebt(View v)
     {
         ((MainActivity)getActivity()).changeFragmentToAddDebt(this.cId);
-        Log.d("Villa","Hallodrasl");
     }
     @Override
     public void onAttach(Activity activity) {

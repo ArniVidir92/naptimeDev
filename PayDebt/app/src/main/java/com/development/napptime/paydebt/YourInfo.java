@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,6 @@ public class YourInfo extends Fragment{
         //Checks if the button exists
         if(addYourInfo == null)
         {
-            Log.d("debugCheck", "HeadFrag: sendButton is null");
             return view;
         }
 
